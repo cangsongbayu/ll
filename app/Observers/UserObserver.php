@@ -20,6 +20,11 @@ class UserObserver
         if ($user->isDirty('is_enable_tfa') && !$user->is_enable_tfa) {
             $user->tfa_secret = null;
         }
+
+        // 如果用户修改了密码，删除用户的所有 token
+        if ($user->isDirty('password')) {
+            User::deleteTokens($user->id);
+        }
     }
 
     /**
