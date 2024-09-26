@@ -18,9 +18,10 @@ use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
- * Class Agent
+ * Class Merchant
  *
  * @property int $id
+ * @property string $appid
  * @property string $name
  * @property string|null $email
  * @property Carbon|null $email_verified_at
@@ -30,7 +31,11 @@ use Spatie\Activitylog\Traits\LogsActivity;
  * @property bool $is_enable_tfa
  * @property string|null $tfa_secret
  * @property string|null $allowed_ip_addresses
+ * @property bool $is_open_for_business
  * @property float $balance
+ * @property float $deposit
+ * @property float $prepayment
+ * @property int|null $agent_id
  * @property string|null $remember_token
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
@@ -38,16 +43,19 @@ use Spatie\Activitylog\Traits\LogsActivity;
  *
  * @package App\Models
  */
-class Agent extends Authenticatable
+class Merchant extends Authenticatable
 {
     use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable;
 
 	protected $casts = [
 		'email_verified_at' => 'datetime:Y-m-d H:i:s',
-        'password' => 'hashed',
 		'max_token_count' => 'int',
 		'is_enable_tfa' => 'bool',
+		'is_open_for_business' => 'bool',
 		'balance' => 'float',
+		'deposit' => 'float',
+		'prepayment' => 'float',
+		'agent_id' => 'int',
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
         'deleted_at' => 'datetime:Y-m-d H:i:s',
@@ -60,18 +68,21 @@ class Agent extends Authenticatable
 	];
 
 	protected $fillable = [
-		'name',
-		'email',
-		'email_verified_at',
-		'username',
-		'password',
-		'max_token_count',
-		'is_enable_tfa',
-		'allowed_ip_addresses',
+        'name',
+        'email',
+        'email_verified_at',
+        'username',
+        'password',
+        'max_token_count',
+        'is_enable_tfa',
+        'allowed_ip_addresses',
 	];
 
     protected $attributes = [
+        'is_open_for_business' => true,
         'balance' => 0,
+        'deposit' => 0,
+        'prepayment' => 0,
         'max_token_count' => 1,
         'is_enable_tfa' => false,
     ];
@@ -94,7 +105,7 @@ class Agent extends Authenticatable
     public function getDescriptionForEvent(string $eventName): string
     {
         return match ($eventName) {
-            ActivityLogEventEnum::CREATED->value => '创建了代理',
+            ActivityLogEventEnum::CREATED->value => '创建了商户',
             default => $eventName,
         };
     }

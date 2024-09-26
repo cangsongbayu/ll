@@ -54,7 +54,7 @@ class MakeModule extends Command
             ]);
         }
         $this->call('app:make-service', [
-            'name' => $name,
+            'name' => $name . 'Service',
         ]);
         $this->call('make:controller', [
             'name' => $name . 'Controller',

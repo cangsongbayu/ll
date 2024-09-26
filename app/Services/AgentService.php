@@ -72,7 +72,7 @@ class AgentService extends Service
     /**
      * @throws Throwable
      */
-    public function restore(RestoreRequest $request, Agent $agent): User
+    public function restore(RestoreRequest $request, Agent $agent): Agent
     {
         return DB::transaction(function() use ($request, $agent) {
             $agent->restore();

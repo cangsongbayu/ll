@@ -48,6 +48,10 @@ return [
             'driver' => 'sanctum',
             'provider' => 'agents',
         ],
+        'merchant' => [
+            'driver' => 'sanctum',
+            'provider' => 'merchants',
+        ],
     ],
 
     /*
@@ -80,6 +84,11 @@ return [
         'agents' => [
             'driver' => 'eloquent',
             'model' => App\Models\Agent::class,
+            'login_name' => 'username',
+        ],
+        'merchants' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Merchant::class,
             'login_name' => 'username',
         ],
     ],

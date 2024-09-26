@@ -5,6 +5,7 @@ declare(strict_types=1);
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgentController;
+use App\Http\Controllers\MerchantController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\InitializeTenancyByRequestData;
@@ -56,7 +57,7 @@ Route::group([
         Route::put('verify-tfa', 'verifyTFA');
     });
 
-    // 用户模块
+    // 用户
     Route::controller(UserController::class)->group(function() {
         Route::put('user/restore/{user}', 'restore')->withTrashed(); // 恢复
         Route::put('user/batch-restore', 'batchRestore'); // 批量恢复
@@ -64,12 +65,20 @@ Route::group([
         Route::apiResource('user', UserController::class); // 资源路由
     });
 
-    // 代理模块
+    // 代理
     Route::controller(AgentController::class)->group(function() {
         Route::put('agent/restore/{agent}', 'restore')->withTrashed(); // 恢复
         Route::put('agent/batch-restore', 'batchRestore'); // 批量恢复
         Route::delete('agent/batch-destroy', 'batchDestroy'); // 批量删除
         Route::apiResource('agent', AgentController::class); // 资源路由
+    });
+
+    // 商户
+    Route::controller(MerchantController::class)->group(function() {
+        Route::put('merchant/restore/{merchant}', 'restore')->withTrashed(); // 恢复
+        Route::put('merchant/batch-restore', 'batchRestore'); // 批量恢复
+        Route::delete('merchant/batch-destroy', 'batchDestroy'); // 批量删除
+        Route::apiResource('merchant', MerchantController::class); // 资源路由
     });
 });
 
@@ -87,6 +96,31 @@ Route::group([
 Route::group([
     'prefix' => 'api/agent',
     'middleware' => ['api', InitializeTenancyByRequestData::class, 'auth:agent']
+], function () {
+    // 授权模块
+    Route::controller(AuthenticateController::class)->group(function() {
+        Route::get('me', 'me');
+        Route::put('repass', 'repass');
+        Route::delete('logout', 'logout');
+        Route::get('get-tfa-qrcode', 'getTFAQRCode');
+        Route::put('verify-tfa', 'verifyTFA');
+    });
+});
+
+/**
+ * 租户系统中商户用户路由
+ */
+Route::group([
+    'namespace' => 'App\Http\Controllers',
+    'middleware' => ['api', InitializeTenancyByRequestData::class],
+    'prefix' => 'api/merchant',
+], function () {
+    Route::post('login', 'AuthenticateController@login'); // 登录
+});
+
+Route::group([
+    'prefix' => 'api/merchant',
+    'middleware' => ['api', InitializeTenancyByRequestData::class, 'auth:merchant']
 ], function () {
     // 授权模块
     Route::controller(AuthenticateController::class)->group(function() {

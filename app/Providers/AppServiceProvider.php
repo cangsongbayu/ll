@@ -2,11 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\Merchant;
 use App\Models\User;
 use App\Models\Agent;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Support\Facades\Date;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
         Relation::morphMap([
             'user' => User::class,
             'agent' => Agent::class,
+            'merchant' => Merchant::class,
         ]);
     }
 }
