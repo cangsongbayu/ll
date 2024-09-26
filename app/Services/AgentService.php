@@ -22,7 +22,7 @@ class AgentService extends Service
     public function index(IndexRequest $request): array
     {
         $pageSize = $request->input(config('app.page_size_name'), config('app.default_page_size'));
-        $query = Agent::query()->filter($request->input(config('app.filters'), []));
+        $query = Agent::query()->filter($request->all());
         $lengthAwarePaginator = $query->paginate($pageSize, $this->indexColumns, config('app.page_name'));
         $list = new AgentCollection($lengthAwarePaginator);
         return [

@@ -22,7 +22,7 @@ return new class extends Migration
             $table->boolean('is_enable_tfa')->default(0);
             $table->string('tfa_secret')->nullable();
             $table->string('allowed_ip_addresses')->nullable();
-            $table->decimal('balance', 14, 4)->default(0);
+            $table->decimal('balance', 20, 6)->default(0);
             $table->rememberToken();
             $table->timestamps();
             $table->softDeletes();

@@ -116,7 +116,7 @@ class MakeRequest extends RequestMakeCommand
                 if ($isUnique) {
                     $rule[] = $action === 'store'
                         ? 'unique:' . $modelClass . ',' . $column->getName()
-                        : "\"" . 'unique:' . $modelClass . ',' . $column->getName() . ',' . $modelVariableName . '->id' . "\"";
+                        : "\"" . 'unique:' . $modelClass . ',' . $column->getName() . ',$' . $modelVariableName . '->id' . "\"";
                 }
                 // 是否允许为空
                 $rule[] = $column->getNotnull() ? ($action === 'store' ? 'required' : 'filled') : 'nullable';
@@ -158,7 +158,7 @@ class MakeRequest extends RequestMakeCommand
             $fieldName = $this->formatFieldName($field);
             $formattedRules[] = "            $fieldName => [";
             foreach ($fieldRules as $rule) {
-                if (str_contains($rule, 'config(')) {
+                if (str_contains($rule, 'config(') || preg_match('/^".*(?<!\\\\)"$/s', $rule)) {
                     // 对于包含 config() 或特殊字符串连接的规则，不用引号包裹
                     $formattedRules[] = "                $rule,";
                 } else {

@@ -109,7 +109,7 @@ class AuthenticateService
             $user = $request->user();
             $user->password = $request->password;
             $user->save();
-            $user::deleteTokens($user->id);
+//            $user::deleteTokens($user->id);
             return $user;
         });
     }

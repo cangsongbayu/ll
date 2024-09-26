@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\AuthenticateController;
+use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\MerchantController;
@@ -57,6 +58,12 @@ Route::group([
         Route::put('verify-tfa', 'verifyTFA');
     });
 
+    // 货币
+    Route::controller(CurrencyController::class)->group(function() {
+        Route::get('currency/all', 'all'); // 所有
+        Route::apiResource('currency', CurrencyController::class); // 资源路由
+    });
+
     // 用户
     Route::controller(UserController::class)->group(function() {
         Route::put('user/restore/{user}', 'restore')->withTrashed(); // 恢复
@@ -75,6 +82,7 @@ Route::group([
 
     // 商户
     Route::controller(MerchantController::class)->group(function() {
+        Route::get('merchant/all', 'all'); // 所有
         Route::put('merchant/restore/{merchant}', 'restore')->withTrashed(); // 恢复
         Route::put('merchant/batch-restore', 'batchRestore'); // 批量恢复
         Route::delete('merchant/batch-destroy', 'batchDestroy'); // 批量删除

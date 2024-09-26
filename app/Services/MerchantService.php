@@ -9,6 +9,7 @@ use App\Http\Requests\Merchant\UpdateRequest;
 use App\Http\Requests\Merchant\BatchDestroyRequest;
 use App\Http\Requests\Merchant\BatchRestoreRequest;
 use App\Http\Requests\Merchant\RestoreRequest;
+use Illuminate\Http\Request;
 use App\Models\Merchant;
 use App\Http\Resources\MerchantCollection;
 use Illuminate\Support\Facades\DB;
@@ -21,12 +22,20 @@ class MerchantService extends Service
     public function index(IndexRequest $request): array
     {
         $pageSize = $request->input(config('app.page_size_name'), config('app.default_page_size'));
-        $query = Merchant::query()->filter($request->input(config('app.filters'), []));
+        $query = Merchant::query()->filter($request->all());
         $lengthAwarePaginator = $query->paginate($pageSize, $this->indexColumns, config('app.page_name'));
         $list = new MerchantCollection($lengthAwarePaginator);
         return [
             'list' => $list,
             'pagination' => $this->getApiPaginate($lengthAwarePaginator)
+        ];
+    }
+
+    public function all(Request $request): array
+    {
+        $list = Merchant::select(['id', 'name', 'deleted_at'])->filter($request->all())->get();
+        return [
+            'list' => new MerchantCollection($list)
         ];
     }
 

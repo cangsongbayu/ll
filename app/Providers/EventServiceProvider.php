@@ -2,10 +2,12 @@
 
 namespace App\Providers;
 
+use App\Models\Currency;
 use App\Models\Merchant;
 use App\Models\User;
 use App\Models\Agent;
 use App\Observers\AgentObserver;
+use App\Observers\CurrencyObserver;
 use App\Observers\MerchantObserver;
 use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
@@ -29,6 +31,7 @@ class EventServiceProvider extends ServiceProvider
         User::class => [UserObserver::class],
         Agent::class => [AgentObserver::class],
         Merchant::class => [MerchantObserver::class],
+        Currency::class => [CurrencyObserver::class],
     ];
 
     /**

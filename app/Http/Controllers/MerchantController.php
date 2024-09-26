@@ -12,7 +12,7 @@ use App\Http\Requests\Merchant\DestroyRequest;
 use App\Http\Requests\Merchant\IndexRequest;
 use App\Http\Requests\Merchant\StoreRequest;
 use App\Http\Requests\Merchant\UpdateRequest;
-use App\Models\Agent;
+use Illuminate\Http\Request;
 use App\Models\Merchant;
 use App\Services\MerchantService;
 use Throwable;
@@ -35,6 +35,15 @@ class MerchantController extends Controller
         return ApiResponse::success(
             $this->service->index($request),
             ApiMessageEnum::INDEX->getMessage(),
+            ApiMessageShowTypeEnum::SILENT,
+        );
+    }
+
+    public function all(Request $request)
+    {
+        return ApiResponse::success(
+            $this->service->all($request),
+            ApiMessageEnum::GENERAL_SUCCESS->getMessage(),
             ApiMessageShowTypeEnum::SILENT,
         );
     }

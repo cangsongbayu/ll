@@ -24,9 +24,9 @@ return new class extends Migration
             $table->string('tfa_secret')->nullable();
             $table->string('allowed_ip_addresses')->nullable();
             $table->boolean('is_open_for_business')->default(1);
-            $table->decimal('balance', 14, 4)->default(0);
-            $table->decimal('deposit', 14, 4)->default(0);
-            $table->decimal('prepayment', 14, 4)->default(0);
+            $table->decimal('balance', 20, 6)->default(0);
+            $table->decimal('deposit', 20, 6)->default(0);
+            $table->decimal('prepayment', 20, 6)->default(0);
             $table->unsignedBigInteger('agent_id')->nullable();
             $table->rememberToken();
             $table->timestamps();

@@ -163,5 +163,9 @@ return [
         'is_enable_tfa' => '双因素认证',
         'current_password' => '旧密码',
         'tfa_code' => '动态密码',
+        'symbol' => '符号',
+        'is_base_currency' => '基准货币',
+        'code' => '编码',
+        'is_open_for_business' => '营业',
     ],
 ];
