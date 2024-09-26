@@ -193,6 +193,6 @@ return [
     'page_size_name' => 'per_page',
     'default_page_size' => 20,
     'max_page_size' => 100,
-    // 过滤
-    'filters' => 'filters',
+    // 密码的密钥
+    'password_key' => env('PASSWORD_KEY', 'password_key'),
 ];

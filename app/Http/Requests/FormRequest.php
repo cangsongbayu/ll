@@ -6,6 +6,8 @@ use App\Exceptions\InvalidRequestException;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest as IlluminateFormRequest;
 use Vinkla\Hashids\Facades\Hashids;
+use Illuminate\Encryption\Encrypter;
+use Illuminate\Contracts\Encryption\DecryptException;
 
 abstract class FormRequest extends IlluminateFormRequest
 {
@@ -31,13 +33,28 @@ abstract class FormRequest extends IlluminateFormRequest
             'user_id',
             'agent_id',
             'merchant_id',
-            'ids'
+            'ids',
+            'password',
         ];
 
         foreach ($decodeNames as $decodeName) {
             if ($this->has($decodeName)) {
                 if ($decodeName === 'ids') {
                     $this->decodeHashids();
+                } else if ($decodeName === 'password') {
+                    try {
+                        $key = config('app.password_key');
+
+                        // 移除 "base64:" 前缀（如果存在）
+                        if (str_starts_with($key, 'base64:')) {
+                            $key = substr($key, 7);
+                        }
+
+                        $encrypter = new Encrypter(base64_decode($key), 'AES-256-CBC');
+                        $this->merge([$decodeName => $encrypter->decrypt($this->input($decodeName))]);
+                    } catch (DecryptException $e) {
+                        throw new InvalidRequestException();
+                    }
                 } else {
                     $decoded = Hashids::decode($this->input($decodeName));
                     $this->merge([$decodeName => $decoded[0] ?? null]);
