@@ -33,6 +33,7 @@ abstract class FormRequest extends IlluminateFormRequest
             'user_id',
             'agent_id',
             'merchant_id',
+            'currency_id',
             'ids',
             'password',
         ];
