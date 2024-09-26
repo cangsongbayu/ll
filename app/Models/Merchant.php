@@ -49,6 +49,7 @@ class Merchant extends Authenticatable
 
 	protected $casts = [
 		'email_verified_at' => 'datetime:Y-m-d H:i:s',
+        'password' => 'hashed',
 		'max_token_count' => 'int',
 		'is_enable_tfa' => 'bool',
 		'is_open_for_business' => 'bool',
