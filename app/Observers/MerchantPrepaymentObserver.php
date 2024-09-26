@@ -21,6 +21,7 @@ class MerchantPrepaymentObserver
     public function created(MerchantPrepayment $merchantPrepayment): void
     {
         //
+        $merchantPrepayment->merchant()->increment('prepayment', $merchantPrepayment->base_amount);
     }
 
     /**

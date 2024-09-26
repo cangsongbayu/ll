@@ -140,9 +140,10 @@ class MakeRequest extends RequestMakeCommand
                 } else if ($type === 'decimal') {
                     $precision = $column->getPrecision();
                     $scale = $column->getScale();
+                    $unsigned = $column->getUnsigned();
                     $rule[] = 'numeric';
                     $rule[] = "decimal:0,{$scale}";
-                    $rule[] = "db_decimal:{$precision},{$scale}";
+                    $rule[] = "db_decimal:{$precision},{$scale}" . ($unsigned ? ':unsigned' : '');
                 }
                 $rules[$column->getName()] = $rule;
             }

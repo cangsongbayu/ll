@@ -21,6 +21,7 @@ use Carbon\Carbon;
  * @property float $base_amount
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property mixed $merchant
  *
  * @package App\Models
  */
@@ -44,4 +45,9 @@ class MerchantPrepayment extends BaseModel
 		'exchange_rate',
 		'base_currency_id',
 	];
+
+    public function merchant()
+    {
+        return $this->belongsTo(Merchant::class)->withTrashed();
+    }
 }
