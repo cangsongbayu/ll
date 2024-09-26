@@ -2,9 +2,8 @@
 
 namespace App\Http\Requests\User;
 
-use App\Exceptions\InvalidRequestException;
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\FormRequest;
 
 class BatchDestroyRequest extends FormRequest
 {
@@ -22,16 +21,5 @@ class BatchDestroyRequest extends FormRequest
                 'array',
             ],
         ];
-    }
-
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     * @throws InvalidRequestException
-     */
-    protected function prepareForValidation(): void
-    {
-        $this->decodeHashids();
     }
 }

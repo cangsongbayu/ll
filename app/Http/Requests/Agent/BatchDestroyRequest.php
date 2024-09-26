@@ -23,15 +23,4 @@ class BatchDestroyRequest extends FormRequest
             ],
         ];
     }
-
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     * @throws InvalidRequestException
-     */
-    protected function prepareForValidation(): void
-    {
-        $this->decodeHashids();
-    }
 }

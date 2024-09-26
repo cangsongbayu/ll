@@ -25,6 +25,30 @@ abstract class FormRequest extends IlluminateFormRequest
     /**
      * @throws InvalidRequestException
      */
+    protected function prepareForValidation(): void
+    {
+        $decodeNames = [
+            'user_id',
+            'agent_id',
+            'merchant_id',
+            'ids'
+        ];
+
+        foreach ($decodeNames as $decodeName) {
+            if ($this->has($decodeName)) {
+                if ($decodeName === 'ids') {
+                    $this->decodeHashids();
+                } else {
+                    $decoded = Hashids::decode($this->input($decodeName));
+                    $this->merge([$decodeName => $decoded[0] ?? null]);
+                }
+            }
+        }
+    }
+
+    /**
+     * @throws InvalidRequestException
+     */
     protected function decodeHashids(): void
     {
         if ($this->has('ids')) {

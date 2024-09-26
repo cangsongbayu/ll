@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\User;
 
-use App\Exceptions\InvalidRequestException;
 use App\Http\Requests\FormRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 
@@ -23,16 +22,5 @@ class BatchRestoreRequest extends FormRequest
                 'array',
             ],
         ];
-    }
-
-    /**
-     * Prepare the data for validation.
-     *
-     * @return void
-     * @throws InvalidRequestException
-     */
-    protected function prepareForValidation(): void
-    {
-        $this->decodeHashids();
     }
 }
