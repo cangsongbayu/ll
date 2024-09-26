@@ -92,7 +92,7 @@ Route::group([
 
     // 商户预付
     Route::controller(MerchantPrepaymentController::class)->group(function() {
-        Route::apiResource('merchant-prepayment', MerchantPrepaymentController::class)->only(['index', 'store', 'update']); // 资源路由
+        Route::apiResource('merchant-prepayment', MerchantPrepaymentController::class)->only(['index', 'store']); // 资源路由
     });
 });
 

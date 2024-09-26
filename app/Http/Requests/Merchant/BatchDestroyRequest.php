@@ -2,9 +2,14 @@
 
 namespace App\Http\Requests\Merchant;
 
+use App\Exceptions\InvalidRequestException;
 use App\Http\Requests\FormRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Vinkla\Hashids\Facades\Hashids;
 
+/**
+ * @property mixed $ids
+ */
 class BatchDestroyRequest extends FormRequest
 {
     /**
@@ -21,5 +26,16 @@ class BatchDestroyRequest extends FormRequest
                 'array',
             ],
         ];
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     * @throws InvalidRequestException
+     */
+    protected function prepareForValidation(): void
+    {
+        $this->decodeHashids();
     }
 }

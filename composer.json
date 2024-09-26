@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "ext-bcmath": "*",
         "guzzlehttp/guzzle": "^7.2",
         "jenssegers/agent": "^2.6",
         "laravel/framework": "^10.10",
@@ -15,8 +16,8 @@
         "spatie/laravel-activitylog": "^4.8",
         "stancl/tenancy": "^3.8",
         "tucker-eric/eloquentfilter": "^3.4",
-        "zhuzhichao/ip-location-zh": "^2.4",
-        "ext-bcmath": "*"
+        "vinkla/hashids": "^11.0",
+        "zhuzhichao/ip-location-zh": "^2.4"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^3.1",

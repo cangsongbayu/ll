@@ -24,6 +24,7 @@ class MerchantObserver
         // 确保用户关闭双因素认证时，清空双因素认证相关字段
         if ($merchant->isDirty('is_enable_tfa') && !$merchant->is_enable_tfa) {
             $merchant->tfa_secret = null;
+            Merchant::deleteTokens($merchant->id);
         }
 
         // 如果用户修改了密码，删除用户的所有 token

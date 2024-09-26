@@ -19,19 +19,19 @@ class UpdateRequest extends FormRequest
 
         return [
             'appid' => [
-                '"unique:App\Models\Merchant,appid,merchant->id"',
+                "unique:App\Models\Merchant,appid,$merchant->id",
                 'filled',
                 'string',
                 'max:255',
             ],
             'name' => [
-                '"unique:App\Models\Merchant,name,merchant->id"',
+                "unique:App\Models\Merchant,name,$merchant->id",
                 'filled',
                 'string',
                 'max:255',
             ],
             'username' => [
-                '"unique:App\Models\Merchant,username,merchant->id"',
+                "unique:App\Models\Merchant,username,$merchant->id",
                 'filled',
                 'string',
                 'max:255',
@@ -55,7 +55,7 @@ class UpdateRequest extends FormRequest
                 'nullable',
                 'string',
                 'max:255',
-                'regex:^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)(?:,(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))*$',
+                'regex:' . config('regex.allowed_ip_addresses'),
             ],
             'is_open_for_business' => [
                 'filled',

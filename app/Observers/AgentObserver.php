@@ -19,6 +19,7 @@ class AgentObserver
         // 确保用户关闭双因素认证时，清空双因素认证相关字段
         if ($agent->isDirty('is_enable_tfa') && !$agent->is_enable_tfa) {
             $agent->tfa_secret = null;
+            Agent::deleteTokens($agent->id);
         }
 
         // 如果用户修改了密码，删除用户的所有 token

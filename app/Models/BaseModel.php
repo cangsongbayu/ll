@@ -2,10 +2,11 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
+use App\Models\Traits\HasHashID;
 use EloquentFilter\Filterable;
+use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model
 {
-    use Filterable;
+    use Filterable, HasHashID;
 }

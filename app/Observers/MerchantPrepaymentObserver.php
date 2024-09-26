@@ -4,11 +4,13 @@ namespace App\Observers;
 
 use App\Helpers\OrderNumberGenerator;
 use App\Models\MerchantPrepayment;
+use App\Models\Currency;
 
 class MerchantPrepaymentObserver
 {
     public function creating(MerchantPrepayment $merchantPrepayment): void
     {
+        $merchantPrepayment->base_currency_id = Currency::where('is_base_currency', true)->value('id');
         $merchantPrepayment->trade_no = OrderNumberGenerator::generate();
         $merchantPrepayment->base_amount = bcmul($merchantPrepayment->amount, $merchantPrepayment->exchange_rate, 6);
     }

@@ -8,7 +8,8 @@ namespace App\Models;
 
 use App\Enums\ActivityLogEventEnum;
 use App\Enums\ActivityLogNameEnum;
-use App\Traits\HasSanctumPersonalAccessToken;
+use App\Models\Traits\HasHashID;
+use App\Models\Traits\HasSanctumPersonalAccessToken;
 use Carbon\Carbon;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -40,7 +41,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class Agent extends Authenticatable
 {
-    use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable;
+    use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable, HasHashID;
 
 	protected $casts = [
 		'email_verified_at' => 'datetime:Y-m-d H:i:s',

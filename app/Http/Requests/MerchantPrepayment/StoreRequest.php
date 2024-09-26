@@ -39,9 +39,7 @@ class StoreRequest extends FormRequest
                 'db_decimal:20,6,unsigned',
             ],
             'base_currency_id' => [
-                'required',
-                'numeric',
-                'db_bigint:unsigned',
+                'prohibited',
             ],
         ];
     }

@@ -3,9 +3,8 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
-class Currency extends JsonResource
+class Currency extends BaseJsonResource
 {
     /**
      * Transform the resource into an array.

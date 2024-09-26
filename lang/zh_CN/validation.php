@@ -172,5 +172,6 @@ return [
         'amount' => '金额',
         'exchange_rate' => '汇率',
         'base_currency_id' => '基准货币',
+        'allowed_ip_addresses' => 'IP 白名单',
     ],
 ];

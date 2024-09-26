@@ -4,14 +4,15 @@ namespace App\Models;
 
 use App\Enums\ActivityLogEventEnum;
 use App\Enums\ActivityLogNameEnum;
+use App\Models\Traits\HasHashID;
+use App\Models\Traits\HasSanctumPersonalAccessToken;
+use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Traits\HasSanctumPersonalAccessToken;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
-use EloquentFilter\Filterable;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 /**
  * @property mixed $is_enable_tfa
@@ -19,7 +20,7 @@ use EloquentFilter\Filterable;
  */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable;
+    use HasFactory, Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable, HasHashID;
 
     /**
      * The attributes that are mass assignable.
