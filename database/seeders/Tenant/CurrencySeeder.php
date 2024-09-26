@@ -14,21 +14,7 @@ class CurrencySeeder extends Seeder
     public function run(): void
     {
         //
-        $list = [
-            [
-                'code' => 'USD',
-                'name' => '美元',
-                'symbol' => '$',
-                'is_base_currency' => false,
-            ],
-            [
-                'code' => 'CNY',
-                'name' => '人民币',
-                'symbol' => '¥',
-                'is_base_currency' => true,
-            ]
-        ];
-
+        $list = json_decode(file_get_contents(base_path('json/currencies.json')), true);
         foreach ($list as $item) {
             Currency::create($item);
         }

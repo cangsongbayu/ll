@@ -56,7 +56,11 @@ abstract class FormRequest extends IlluminateFormRequest
                         throw new InvalidRequestException();
                     }
                 } else {
-                    $decoded = Hashids::decode($this->input($decodeName));
+                    $id = $this->input($decodeName);
+                    if (!is_string($id)) {
+                        throw new InvalidRequestException();
+                    }
+                    $decoded = Hashids::decode($id);
                     $this->merge([$decodeName => $decoded[0] ?? null]);
                 }
             }
