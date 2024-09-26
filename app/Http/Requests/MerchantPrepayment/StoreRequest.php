@@ -28,9 +28,11 @@ class StoreRequest extends FormRequest
             ],
             'amount' => [
                 'required',
-                'numeric',
-                'decimal:0,6',
-                'db_decimal:20,6',
+                'integer',
+                'db_integer:unsigned',
+//                'numeric',
+//                'decimal:0,6',
+//                'db_decimal:20,6',
             ],
             'exchange_rate' => [
                 'required',

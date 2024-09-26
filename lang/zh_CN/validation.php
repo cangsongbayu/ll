@@ -151,7 +151,7 @@ return [
     'tfa_invalid' => ':Attribute 不正确',
     'db_tinyint' => ':Attribute 必须介于 :min - :max 之间。',
     'db_smallint' => ':Attribute 必须介于 :min - :max 之间。',
-    'db_int' => ':Attribute 必须介于 :min - :max 之间。',
+    'db_integer' => ':Attribute 必须介于 :min - :max 之间。',
     'db_bigint' => ':Attribute 必须是整数，并且必须介于 :min - :max 之间。',
     'db_decimal' => ':Attribute 必须介于 :min - :max 之间。',
     'attributes' => [

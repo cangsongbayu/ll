@@ -28,7 +28,7 @@
     { "code": "CDF", "name": "刚果法郎", "symbol": "Fr" },
     { "code": "CHF", "name": "瑞士法郎", "symbol": "CHF" },
     { "code": "CLP", "name": "智利比索", "symbol": "$" },
-    { "code": "CNY", "name": "人民币", "symbol": "¥", "is_base_currency": false },
+    { "code": "CNY", "name": "人民币", "symbol": "¥", "is_base_currency": true },
     { "code": "COP", "name": "哥伦比亚比索", "symbol": "$" },
     { "code": "CRC", "name": "哥斯达黎加科朗", "symbol": "₡" },
     { "code": "CUP", "name": "古巴比索", "symbol": "$" },
