@@ -11,6 +11,7 @@ use App\Traits\HasSanctumPersonalAccessToken;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
+use EloquentFilter\Filterable;
 
 /**
  * @property mixed $is_enable_tfa
@@ -18,7 +19,7 @@ use Spatie\Activitylog\LogOptions;
  */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity;
+    use HasFactory, Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable;
 
     /**
      * The attributes that are mass assignable.
@@ -52,7 +53,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'is_enable_tfa' => 'boolean',
-        'email_verified_at' => 'datetime',
+        'email_verified_at' => 'datetime:Y-m-d H:i:s',
         'password' => 'hashed',
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',

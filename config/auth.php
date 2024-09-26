@@ -44,6 +44,10 @@ return [
             'driver' => 'sanctum',
             'provider' => 'tenants',
         ],
+        'agent' => [
+            'driver' => 'sanctum',
+            'provider' => 'agents',
+        ],
     ],
 
     /*
@@ -71,6 +75,11 @@ return [
         'tenants' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+            'login_name' => 'username',
+        ],
+        'agents' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Agent::class,
             'login_name' => 'username',
         ],
     ],

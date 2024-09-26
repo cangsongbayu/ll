@@ -8,12 +8,12 @@ use App\Helpers\ApiResponse;
 use App\Http\Requests\User\BatchDestroyRequest;
 use App\Http\Requests\User\BatchRestoreRequest;
 use App\Http\Requests\User\DestroyRequest;
-use App\Http\Requests\User\RestoreRequest;
-use App\Models\User;
-use App\Services\UserService;
 use App\Http\Requests\User\IndexRequest;
+use App\Http\Requests\User\RestoreRequest;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
+use App\Models\User;
+use App\Services\UserService;
 use Throwable;
 
 class UserController extends Controller

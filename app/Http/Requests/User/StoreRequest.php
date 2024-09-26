@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\User;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use App\Http\Requests\FormRequest;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Validation\Rule;
 
 class StoreRequest extends FormRequest
@@ -36,7 +36,7 @@ class StoreRequest extends FormRequest
             'max_token_count' => [
                 'required',
                 'integer',
-                "between:0,{$this->signedTinyIntMax}",
+                'between:1,100'
             ],
             'is_enable_tfa' => [
                 'required',

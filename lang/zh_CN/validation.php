@@ -149,6 +149,11 @@ return [
     'uuid'                 => ':Attribute 必须是有效的 UUID。',
     'tfa_secret_not_generated' => '您的账户尚未生成双因素认证密钥。请先生成密钥',
     'tfa_invalid' => ':Attribute 不正确',
+    'db_tinyint' => ':Attribute 必须介于 :min - :max 之间。',
+    'db_smallint' => ':Attribute 必须介于 :min - :max 之间。',
+    'db_int' => ':Attribute 必须介于 :min - :max 之间。',
+    'db_bigint' => ':Attribute 必须是整数，并且必须介于 :min - :max 之间。',
+    'db_decimal' => ':Attribute 必须介于 :min - :max 之间。',
     'attributes' => [
         'ids' => 'ID 集合',
         'name' => '名称',

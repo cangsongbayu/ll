@@ -1,0 +1,87 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Enums\ApiMessageEnum;
+use App\Enums\ApiMessageShowTypeEnum;
+use App\Helpers\ApiResponse;
+use App\Http\Requests\{{ model }}\DestroyRequest;
+use App\Http\Requests\{{ model }}\IndexRequest;
+use App\Http\Requests\{{ model }}\StoreRequest;
+use App\Http\Requests\{{ model }}\UpdateRequest;
+use {{ namespacedModel }};
+use App\Services\{{ model }}Service;
+use Throwable;
+
+class {{ class }} extends Controller
+{
+    protected {{ model }}Service $service;
+
+    public function __construct({{ model }}Service $service)
+    {
+        $this->service = $service;
+    }
+
+    /**
+     * Display a listing of the resource.
+     */
+    public function index(IndexRequest $request)
+    {
+        //
+        return ApiResponse::success(
+            $this->service->index($request),
+            ApiMessageEnum::INDEX->getMessage(),
+            ApiMessageShowTypeEnum::SILENT,
+        );
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     * @throws Throwable
+     */
+    public function store(StoreRequest $request, {{ model }} ${{ modelVariable }})
+    {
+        //
+        return ApiResponse::success(
+            $this->service->store($request, ${{ modelVariable }}),
+            ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
+            ApiMessageShowTypeEnum::SUCCESS,
+        );
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show({{ model }} ${{ modelVariable }})
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     * @throws Throwable
+     */
+    public function update(UpdateRequest $request, {{ model }} ${{ modelVariable }})
+    {
+        //
+        return ApiResponse::success(
+            $this->service->update($request, ${{ modelVariable }}),
+            ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
+            ApiMessageShowTypeEnum::SUCCESS,
+        );
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     * @throws Throwable
+     */
+    public function destroy(DestroyRequest $request, {{ model }} ${{ modelVariable }})
+    {
+        //
+        return ApiResponse::success(
+            $this->service->destroy($request, ${{ modelVariable }}),
+            ApiMessageEnum::DESTROY->getMessage(),
+            ApiMessageShowTypeEnum::SUCCESS,
+        );
+    }
+}

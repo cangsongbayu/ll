@@ -164,6 +164,7 @@ return [
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
+        App\Providers\ValidationServiceProvider::class,
         // Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         App\Providers\TenancyServiceProvider::class, // <-- here
         App\Providers\AuthServiceProvider::class,
@@ -191,4 +192,7 @@ return [
     'page_name' => 'page',
     'page_size_name' => 'per_page',
     'default_page_size' => 20,
+    'max_page_size' => 100,
+    // 过滤
+    'filters' => 'filters',
 ];

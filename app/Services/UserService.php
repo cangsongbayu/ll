@@ -9,8 +9,8 @@ use App\Http\Requests\User\IndexRequest;
 use App\Http\Requests\User\RestoreRequest;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
-use App\Models\User;
 use App\Http\Resources\UserCollection;
+use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
@@ -21,7 +21,7 @@ class UserService extends Service
     public function index(IndexRequest $request): array
     {
         $pageSize = $request->input(config('app.page_size_name'), config('app.default_page_size'));
-        $query = User::query();
+        $query = User::query()->filter($request->input(config('app.filters'), []));
         $lengthAwarePaginator = $query->paginate($pageSize, $this->indexColumns, config('app.page_name'));
         $list = new UserCollection($lengthAwarePaginator);
         return [
@@ -62,7 +62,7 @@ class UserService extends Service
     public function destroy(DestroyRequest $request, User $user): User
     {
         return DB::transaction(function() use ($request, $user) {
-            User::deleteTokens($user->id);
+            User::deleteTokens($user->id); // 删除用户的所有 token
             $user->delete();
             return $user;
         });
@@ -86,7 +86,7 @@ class UserService extends Service
     {
         return DB::transaction(function() use ($request) {
             $ids = $request->input('ids', []);
-            User::deleteTokens($ids);
+            User::deleteTokens($ids); // 删除用户的所有 token
             return User::whereIn('id', $ids)->delete();
         });
     }

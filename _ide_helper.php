@@ -17233,6 +17233,1001 @@ namespace Illuminate\Support\Facades {
             }
     }
 
+namespace Jenssegers\Agent\Facades {
+            /**
+     * 
+     *
+     */        class Agent {
+                    /**
+         * Get all detection rules. These rules include the additional
+         * platforms and browsers and utilities.
+         *
+         * @return array 
+         * @static 
+         */        public static function getDetectionRulesExtended()
+        {
+                        return \Jenssegers\Agent\Agent::getDetectionRulesExtended();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */        public static function getRules()
+        {
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->getRules();
+        }
+                    /**
+         * 
+         *
+         * @return \Jaybizzle\CrawlerDetect\CrawlerDetect 
+         * @static 
+         */        public static function getCrawlerDetect()
+        {
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->getCrawlerDetect();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */        public static function getBrowsers()
+        {
+                        return \Jenssegers\Agent\Agent::getBrowsers();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */        public static function getOperatingSystems()
+        {
+                        return \Jenssegers\Agent\Agent::getOperatingSystems();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */        public static function getPlatforms()
+        {
+                        return \Jenssegers\Agent\Agent::getPlatforms();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */        public static function getDesktopDevices()
+        {
+                        return \Jenssegers\Agent\Agent::getDesktopDevices();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */        public static function getProperties()
+        {
+                        return \Jenssegers\Agent\Agent::getProperties();
+        }
+                    /**
+         * Get accept languages.
+         *
+         * @param string $acceptLanguage
+         * @return array 
+         * @static 
+         */        public static function languages($acceptLanguage = null)
+        {
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->languages($acceptLanguage);
+        }
+                    /**
+         * Get the browser name.
+         *
+         * @param string|null $userAgent
+         * @return string|bool 
+         * @static 
+         */        public static function browser($userAgent = null)
+        {
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->browser($userAgent);
+        }
+                    /**
+         * Get the platform name.
+         *
+         * @param string|null $userAgent
+         * @return string|bool 
+         * @static 
+         */        public static function platform($userAgent = null)
+        {
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->platform($userAgent);
+        }
+                    /**
+         * Get the device name.
+         *
+         * @param string|null $userAgent
+         * @return string|bool 
+         * @static 
+         */        public static function device($userAgent = null)
+        {
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->device($userAgent);
+        }
+                    /**
+         * Check if the device is a desktop computer.
+         *
+         * @param string|null $userAgent deprecated
+         * @param array $httpHeaders deprecated
+         * @return bool 
+         * @static 
+         */        public static function isDesktop($userAgent = null, $httpHeaders = null)
+        {
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->isDesktop($userAgent, $httpHeaders);
+        }
+                    /**
+         * Check if the device is a mobile phone.
+         *
+         * @param string|null $userAgent deprecated
+         * @param array $httpHeaders deprecated
+         * @return bool 
+         * @static 
+         */        public static function isPhone($userAgent = null, $httpHeaders = null)
+        {
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->isPhone($userAgent, $httpHeaders);
+        }
+                    /**
+         * Get the robot name.
+         *
+         * @param string|null $userAgent
+         * @return string|bool 
+         * @static 
+         */        public static function robot($userAgent = null)
+        {
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->robot($userAgent);
+        }
+                    /**
+         * Check if device is a robot.
+         *
+         * @param string|null $userAgent
+         * @return bool 
+         * @static 
+         */        public static function isRobot($userAgent = null)
+        {
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->isRobot($userAgent);
+        }
+                    /**
+         * Get the device type
+         *
+         * @param null $userAgent
+         * @param null $httpHeaders
+         * @return string 
+         * @static 
+         */        public static function deviceType($userAgent = null, $httpHeaders = null)
+        {
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->deviceType($userAgent, $httpHeaders);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */        public static function version($propertyName, $type = 'text')
+        {
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->version($propertyName, $type);
+        }
+                    /**
+         * Get the current script version.
+         * 
+         * This is useful for the demo.php file,
+         * so people can check on what version they are testing
+         * for mobile devices.
+         *
+         * @return string The version number in semantic version format.
+         * @static 
+         */        public static function getScriptVersion()
+        {            //Method inherited from \Mobile_Detect         
+                        return \Jenssegers\Agent\Agent::getScriptVersion();
+        }
+                    /**
+         * Set the HTTP Headers. Must be PHP-flavored. This method will reset existing headers.
+         *
+         * @param array $httpHeaders The headers to set. If null, then using PHP's _SERVER to extract
+         *                           the headers. The default null is left for backwards compatibility.
+         * @static 
+         */        public static function setHttpHeaders($httpHeaders = null)
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->setHttpHeaders($httpHeaders);
+        }
+                    /**
+         * Retrieves the HTTP headers.
+         *
+         * @return array 
+         * @static 
+         */        public static function getHttpHeaders()
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->getHttpHeaders();
+        }
+                    /**
+         * Retrieves a particular header. If it doesn't exist, no exception/error is caused.
+         * 
+         * Simply null is returned.
+         *
+         * @param string $header The name of the header to retrieve. Can be HTTP compliant such as
+         *                       "User-Agent" or "X-Device-User-Agent" or can be php-esque with the
+         *                       all-caps, HTTP_ prefixed, underscore separated awesomeness.
+         * @return string|null The value of the header.
+         * @static 
+         */        public static function getHttpHeader($header)
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->getHttpHeader($header);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */        public static function getMobileHeaders()
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->getMobileHeaders();
+        }
+                    /**
+         * Get all possible HTTP headers that
+         * can contain the User-Agent string.
+         *
+         * @return array List of HTTP headers.
+         * @static 
+         */        public static function getUaHttpHeaders()
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->getUaHttpHeaders();
+        }
+                    /**
+         * Set CloudFront headers
+         * http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html#header-caching-web-device
+         *
+         * @param array $cfHeaders List of HTTP headers
+         * @return boolean If there were CloudFront headers to be set
+         * @static 
+         */        public static function setCfHeaders($cfHeaders = null)
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->setCfHeaders($cfHeaders);
+        }
+                    /**
+         * Retrieves the cloudfront headers.
+         *
+         * @return array 
+         * @static 
+         */        public static function getCfHeaders()
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->getCfHeaders();
+        }
+                    /**
+         * Set the User-Agent to be used.
+         *
+         * @param string $userAgent The user agent string to set.
+         * @return string|null 
+         * @static 
+         */        public static function setUserAgent($userAgent = null)
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->setUserAgent($userAgent);
+        }
+                    /**
+         * Retrieve the User-Agent.
+         *
+         * @return string|null The user agent if it's set.
+         * @static 
+         */        public static function getUserAgent()
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->getUserAgent();
+        }
+                    /**
+         * Set the detection type. Must be one of self::DETECTION_TYPE_MOBILE or
+         * self::DETECTION_TYPE_EXTENDED. Otherwise, nothing is set.
+         *
+         * @deprecated since version 2.6.9
+         * @param string $type The type. Must be a self::DETECTION_TYPE_* constant. The default
+         *                     parameter is null which will default to self::DETECTION_TYPE_MOBILE.
+         * @static 
+         */        public static function setDetectionType($type = null)
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->setDetectionType($type);
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */        public static function getMatchingRegex()
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->getMatchingRegex();
+        }
+                    /**
+         * 
+         *
+         * @static 
+         */        public static function getMatchesArray()
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->getMatchesArray();
+        }
+                    /**
+         * Retrieve the list of known phone devices.
+         *
+         * @return array List of phone devices.
+         * @static 
+         */        public static function getPhoneDevices()
+        {            //Method inherited from \Mobile_Detect         
+                        return \Jenssegers\Agent\Agent::getPhoneDevices();
+        }
+                    /**
+         * Retrieve the list of known tablet devices.
+         *
+         * @return array List of tablet devices.
+         * @static 
+         */        public static function getTabletDevices()
+        {            //Method inherited from \Mobile_Detect         
+                        return \Jenssegers\Agent\Agent::getTabletDevices();
+        }
+                    /**
+         * Alias for getBrowsers() method.
+         *
+         * @return array List of user agents.
+         * @static 
+         */        public static function getUserAgents()
+        {            //Method inherited from \Mobile_Detect         
+                        return \Jenssegers\Agent\Agent::getUserAgents();
+        }
+                    /**
+         * Retrieve the list of known utilities.
+         *
+         * @return array List of utilities.
+         * @static 
+         */        public static function getUtilities()
+        {            //Method inherited from \Mobile_Detect         
+                        return \Jenssegers\Agent\Agent::getUtilities();
+        }
+                    /**
+         * Method gets the mobile detection rules. This method is used for the magic methods $detect->is*().
+         *
+         * @deprecated since version 2.6.9
+         * @return array All the rules (but not extended).
+         * @static 
+         */        public static function getMobileDetectionRules()
+        {            //Method inherited from \Mobile_Detect         
+                        return \Jenssegers\Agent\Agent::getMobileDetectionRules();
+        }
+                    /**
+         * Method gets the mobile detection rules + utilities.
+         * 
+         * The reason this is separate is because utilities rules
+         * don't necessary imply mobile. This method is used inside
+         * the new $detect->is('stuff') method.
+         *
+         * @deprecated since version 2.6.9
+         * @return array All the rules + extended.
+         * @static 
+         */        public static function getMobileDetectionRulesExtended()
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->getMobileDetectionRulesExtended();
+        }
+                    /**
+         * Check the HTTP headers for signs of mobile.
+         * 
+         * This is the fastest mobile check possible; it's used
+         * inside isMobile() method.
+         *
+         * @return bool 
+         * @static 
+         */        public static function checkHttpHeadersForMobile()
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->checkHttpHeadersForMobile();
+        }
+                    /**
+         * Check if the device is mobile.
+         * 
+         * Returns true if any type of mobile device detected, including special ones
+         *
+         * @param null $userAgent deprecated
+         * @param null $httpHeaders deprecated
+         * @return bool 
+         * @static 
+         */        public static function isMobile($userAgent = null, $httpHeaders = null)
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->isMobile($userAgent, $httpHeaders);
+        }
+                    /**
+         * Check if the device is a tablet.
+         * 
+         * Return true if any type of tablet device is detected.
+         *
+         * @param string $userAgent deprecated
+         * @param array $httpHeaders deprecated
+         * @return bool 
+         * @static 
+         */        public static function isTablet($userAgent = null, $httpHeaders = null)
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->isTablet($userAgent, $httpHeaders);
+        }
+                    /**
+         * This method checks for a certain property in the
+         * userAgent.
+         *
+         * @todo : The httpHeaders part is not yet used.
+         * @param string $key
+         * @param string $userAgent deprecated
+         * @param string $httpHeaders deprecated
+         * @return bool|int|null 
+         * @static 
+         */        public static function is($key, $userAgent = null, $httpHeaders = null)
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->is($key, $userAgent, $httpHeaders);
+        }
+                    /**
+         * Some detection rules are relative (not standard),
+         * because of the diversity of devices, vendors and
+         * their conventions in representing the User-Agent or
+         * the HTTP headers.
+         * 
+         * This method will be used to check custom regexes against
+         * the User-Agent string.
+         *
+         * @param $regex
+         * @param string $userAgent
+         * @return bool 
+         * @todo : search in the HTTP headers too.
+         * @static 
+         */        public static function match($regex, $userAgent = null)
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->match($regex, $userAgent);
+        }
+                    /**
+         * Prepare the version number.
+         *
+         * @todo Remove the error supression from str_replace() call.
+         * @param string $ver The string version, like "2.6.21.2152";
+         * @return float 
+         * @static 
+         */        public static function prepareVersionNo($ver)
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->prepareVersionNo($ver);
+        }
+                    /**
+         * Retrieve the mobile grading, using self::MOBILE_GRADE_* constants.
+         *
+         * @deprecated This is no longer being maintained, it was an experiment at the time.
+         * @return string One of the self::MOBILE_GRADE_* constants.
+         * @static 
+         */        public static function mobileGrade()
+        {            //Method inherited from \Mobile_Detect         
+                        /** @var \Jenssegers\Agent\Agent $instance */
+                        return $instance->mobileGrade();
+        }
+            }
+    }
+
+namespace PragmaRX\Google2FALaravel {
+            /**
+     * 
+     *
+     */        class Facade {
+                    /**
+         * Set the QRCode Backend.
+         *
+         * @param string $qrCodeBackend
+         * @return self 
+         * @static 
+         */        public static function setQrCodeBackend($qrCodeBackend)
+        {
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->setQrCodeBackend($qrCodeBackend);
+        }
+                    /**
+         * Authenticator boot.
+         *
+         * @param $request
+         * @return \Google2FA 
+         * @static 
+         */        public static function boot($request)
+        {
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->boot($request);
+        }
+                    /**
+         * The QRCode Backend.
+         *
+         * @return mixed 
+         * @static 
+         */        public static function getQRCodeBackend()
+        {
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->getQRCodeBackend();
+        }
+                    /**
+         * Check if the 2FA is activated for the user.
+         *
+         * @return bool 
+         * @static 
+         */        public static function isActivated()
+        {
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->isActivated();
+        }
+                    /**
+         * Set current auth as valid.
+         *
+         * @static 
+         */        public static function login()
+        {
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->login();
+        }
+                    /**
+         * OTP logout.
+         *
+         * @static 
+         */        public static function logout()
+        {
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->logout();
+        }
+                    /**
+         * Verify the OTP.
+         *
+         * @param $secret
+         * @param $one_time_password
+         * @return mixed 
+         * @static 
+         */        public static function verifyGoogle2FA($secret, $one_time_password)
+        {
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->verifyGoogle2FA($secret, $one_time_password);
+        }
+                    /**
+         * Generates a QR code data url to display inline.
+         *
+         * @param string $company
+         * @param string $holder
+         * @param string $secret
+         * @param int $size
+         * @param string $encoding Default to UTF-8
+         * @return string 
+         * @static 
+         */        public static function getQRCodeInline($company, $holder, $secret, $size = 200, $encoding = 'utf-8')
+        {            //Method inherited from \PragmaRX\Google2FAQRCode\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->getQRCodeInline($company, $holder, $secret, $size, $encoding);
+        }
+                    /**
+         * Service setter
+         *
+         * @return \PragmaRX\Google2FAQRCode\QRCode\QRCodeServiceContract 
+         * @static 
+         */        public static function getQrCodeService()
+        {            //Method inherited from \PragmaRX\Google2FAQRCode\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->getQrCodeService();
+        }
+                    /**
+         * Service setter
+         *
+         * @return self 
+         * @static 
+         */        public static function setQrCodeService($service)
+        {            //Method inherited from \PragmaRX\Google2FAQRCode\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->setQrCodeService($service);
+        }
+                    /**
+         * Create the QR Code service instance
+         *
+         * @return \PragmaRX\Google2FAQRCode\QRCode\QRCodeServiceContract 
+         * @static 
+         */        public static function qrCodeServiceFactory($imageBackEnd = null)
+        {            //Method inherited from \PragmaRX\Google2FAQRCode\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->qrCodeServiceFactory($imageBackEnd);
+        }
+                    /**
+         * Find a valid One Time Password.
+         *
+         * @param string $secret
+         * @param string $key
+         * @param int|null $window
+         * @param int $startingTimestamp
+         * @param int $timestamp
+         * @param int|null $oldTimestamp
+         * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+         * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+         * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
+         * @return bool|int 
+         * @static 
+         */        public static function findValidOTP($secret, $key, $window, $startingTimestamp, $timestamp, $oldTimestamp = null)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->findValidOTP($secret, $key, $window, $startingTimestamp, $timestamp, $oldTimestamp);
+        }
+                    /**
+         * Generate a digit secret key in base32 format.
+         *
+         * @param int $length
+         * @param string $prefix
+         * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
+         * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+         * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+         * @return string 
+         * @static 
+         */        public static function generateSecretKey($length = 16, $prefix = '')
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->generateSecretKey($length, $prefix);
+        }
+                    /**
+         * Get the current one time password for a key.
+         *
+         * @param string $secret
+         * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+         * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+         * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
+         * @return string 
+         * @static 
+         */        public static function getCurrentOtp($secret)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->getCurrentOtp($secret);
+        }
+                    /**
+         * Get the HMAC algorithm.
+         *
+         * @return string 
+         * @static 
+         */        public static function getAlgorithm()
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->getAlgorithm();
+        }
+                    /**
+         * Get key regeneration.
+         *
+         * @return int 
+         * @static 
+         */        public static function getKeyRegeneration()
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->getKeyRegeneration();
+        }
+                    /**
+         * Get OTP length.
+         *
+         * @return int 
+         * @static 
+         */        public static function getOneTimePasswordLength()
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->getOneTimePasswordLength();
+        }
+                    /**
+         * Get secret.
+         *
+         * @param string|null $secret
+         * @return string 
+         * @static 
+         */        public static function getSecret($secret = null)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->getSecret($secret);
+        }
+                    /**
+         * Returns the current Unix Timestamp divided by the $keyRegeneration
+         * period.
+         *
+         * @return int 
+         * @static 
+         */        public static function getTimestamp()
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->getTimestamp();
+        }
+                    /**
+         * Get the OTP window.
+         *
+         * @param null|int $window
+         * @return int 
+         * @static 
+         */        public static function getWindow($window = null)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->getWindow($window);
+        }
+                    /**
+         * Takes the secret key and the timestamp and returns the one time
+         * password.
+         *
+         * @param string $secret Secret key in binary form.
+         * @param int $counter Timestamp as returned by getTimestamp.
+         * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+         * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+         * @throws Exceptions\IncompatibleWithGoogleAuthenticatorException
+         * @return string 
+         * @static 
+         */        public static function oathTotp($secret, $counter)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->oathTotp($secret, $counter);
+        }
+                    /**
+         * Extracts the OTP from the SHA1 hash.
+         *
+         * @param string $hash
+         * @return string 
+         * @static 
+         */        public static function oathTruncate($hash)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->oathTruncate($hash);
+        }
+                    /**
+         * Remove invalid chars from a base 32 string.
+         *
+         * @param string $string
+         * @return string|null 
+         * @static 
+         */        public static function removeInvalidChars($string)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->removeInvalidChars($string);
+        }
+                    /**
+         * Setter for the enforce Google Authenticator compatibility property.
+         *
+         * @param mixed $enforceGoogleAuthenticatorCompatibility
+         * @return \PragmaRX\Google2FALaravel\Google2FA 
+         * @static 
+         */        public static function setEnforceGoogleAuthenticatorCompatibility($enforceGoogleAuthenticatorCompatibility)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->setEnforceGoogleAuthenticatorCompatibility($enforceGoogleAuthenticatorCompatibility);
+        }
+                    /**
+         * Set the HMAC hashing algorithm.
+         *
+         * @param mixed $algorithm
+         * @throws \PragmaRX\Google2FA\Exceptions\InvalidAlgorithmException
+         * @return \PragmaRX\Google2FA\Google2FA 
+         * @static 
+         */        public static function setAlgorithm($algorithm)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->setAlgorithm($algorithm);
+        }
+                    /**
+         * Set key regeneration.
+         *
+         * @param mixed $keyRegeneration
+         * @static 
+         */        public static function setKeyRegeneration($keyRegeneration)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->setKeyRegeneration($keyRegeneration);
+        }
+                    /**
+         * Set OTP length.
+         *
+         * @param mixed $oneTimePasswordLength
+         * @static 
+         */        public static function setOneTimePasswordLength($oneTimePasswordLength)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->setOneTimePasswordLength($oneTimePasswordLength);
+        }
+                    /**
+         * Set secret.
+         *
+         * @param mixed $secret
+         * @static 
+         */        public static function setSecret($secret)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->setSecret($secret);
+        }
+                    /**
+         * Set the OTP window.
+         *
+         * @param mixed $window
+         * @static 
+         */        public static function setWindow($window)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->setWindow($window);
+        }
+                    /**
+         * Verifies a user inputted key against the current timestamp. Checks $window
+         * keys either side of the timestamp.
+         *
+         * @param string $key User specified key
+         * @param string $secret
+         * @param null|int $window
+         * @param null|int $timestamp
+         * @param null|int $oldTimestamp
+         * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+         * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+         * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
+         * @return bool|int 
+         * @static 
+         */        public static function verify($key, $secret, $window = null, $timestamp = null, $oldTimestamp = null)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->verify($key, $secret, $window, $timestamp, $oldTimestamp);
+        }
+                    /**
+         * Verifies a user inputted key against the current timestamp. Checks $window
+         * keys either side of the timestamp.
+         *
+         * @param string $secret
+         * @param string $key User specified key
+         * @param int|null $window
+         * @param null|int $timestamp
+         * @param null|int $oldTimestamp
+         * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+         * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+         * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
+         * @return bool|int 
+         * @static 
+         */        public static function verifyKey($secret, $key, $window = null, $timestamp = null, $oldTimestamp = null)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->verifyKey($secret, $key, $window, $timestamp, $oldTimestamp);
+        }
+                    /**
+         * Verifies a user inputted key against the current timestamp. Checks $window
+         * keys either side of the timestamp, but ensures that the given key is newer than
+         * the given oldTimestamp. Useful if you need to ensure that a single key cannot
+         * be used twice.
+         *
+         * @param string $secret
+         * @param string $key User specified key
+         * @param int|null $oldTimestamp The timestamp from the last verified key
+         * @param int|null $window
+         * @param int|null $timestamp
+         * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+         * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+         * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
+         * @return bool|int 
+         * @static 
+         */        public static function verifyKeyNewer($secret, $key, $oldTimestamp, $window = null, $timestamp = null)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->verifyKeyNewer($secret, $key, $oldTimestamp, $window, $timestamp);
+        }
+                    /**
+         * Creates a QR code url.
+         *
+         * @param string $company
+         * @param string $holder
+         * @param string $secret
+         * @return string 
+         * @static 
+         */        public static function getQRCodeUrl($company, $holder, $secret)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->getQRCodeUrl($company, $holder, $secret);
+        }
+                    /**
+         * Generate a digit secret key in base32 format.
+         *
+         * @param int $length
+         * @param string $prefix
+         * @throws \Exception
+         * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+         * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+         * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
+         * @return string 
+         * @static 
+         */        public static function generateBase32RandomKey($length = 16, $prefix = '')
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->generateBase32RandomKey($length, $prefix);
+        }
+                    /**
+         * Decodes a base32 string into a binary string.
+         *
+         * @param string $b32
+         * @throws \PragmaRX\Google2FA\Exceptions\InvalidCharactersException
+         * @throws \PragmaRX\Google2FA\Exceptions\SecretKeyTooShortException
+         * @throws \PragmaRX\Google2FA\Exceptions\IncompatibleWithGoogleAuthenticatorException
+         * @return string 
+         * @static 
+         */        public static function base32Decode($b32)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->base32Decode($b32);
+        }
+                    /**
+         * Encode a string to Base32.
+         *
+         * @param string $string
+         * @return string 
+         * @static 
+         */        public static function toBase32($string)
+        {            //Method inherited from \PragmaRX\Google2FA\Google2FA         
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->toBase32($string);
+        }
+                    /**
+         * Get a config value.
+         *
+         * @param $string
+         * @throws \Exception
+         * @return mixed 
+         * @static 
+         */        public static function config($string, $default = null)
+        {
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->config($string, $default);
+        }
+                    /**
+         * Get the request property.
+         *
+         * @return mixed 
+         * @static 
+         */        public static function getRequest()
+        {
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->getRequest();
+        }
+                    /**
+         * Set the request property.
+         *
+         * @param mixed $request
+         * @return \PragmaRX\Google2FALaravel\Google2FA 
+         * @static 
+         */        public static function setRequest($request)
+        {
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->setRequest($request);
+        }
+                    /**
+         * Get a session var value.
+         *
+         * @param null $var
+         * @return mixed 
+         * @static 
+         */        public static function sessionGet($var = null, $default = null)
+        {
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->sessionGet($var, $default);
+        }
+                    /**
+         * 
+         *
+         * @param mixed $stateless
+         * @return \PragmaRX\Google2FALaravel\Authenticator 
+         * @static 
+         */        public static function setStateless($stateless = true)
+        {
+                        /** @var \PragmaRX\Google2FALaravel\Google2FA $instance */
+                        return $instance->setStateless($stateless);
+        }
+            }
+    }
+
 namespace Spatie\LaravelIgnition\Facades {
             /**
      * 
@@ -21429,6 +22424,8 @@ namespace  {
             class Validator extends \Illuminate\Support\Facades\Validator {}
             class View extends \Illuminate\Support\Facades\View {}
             class Vite extends \Illuminate\Support\Facades\Vite {}
+            class Agent extends \Jenssegers\Agent\Facades\Agent {}
+            class Google2FA extends \PragmaRX\Google2FALaravel\Facade {}
             class Flare extends \Spatie\LaravelIgnition\Facades\Flare {}
             class Tenancy extends \Stancl\Tenancy\Facades\Tenancy {}
             class GlobalCache extends \Stancl\Tenancy\Facades\GlobalCache {}

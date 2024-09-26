@@ -2,16 +2,12 @@
 
 namespace App\Http\Requests\User;
 
-use App\Models\User;
 use App\Http\Requests\FormRequest;
+use App\Models\User;
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Validation\Rule;
 
 class UpdateRequest extends FormRequest
 {
-    protected ?User $user = null;
-    protected string $table;
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -19,19 +15,20 @@ class UpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $this->resolveModel();
+        $user = $this->route('user');
+
         return [
             'name' => [
                 'filled',
                 'string',
                 'max:255',
-                Rule::unique($this->table, 'name')->ignore($this->user->id),
+                "unique:App\Models\User,name,{$user->id}",
             ],
             'username' => [
                 'filled',
                 'string',
                 'max:255',
-                Rule::unique($this->table, 'username')->ignore($this->user->id),
+                "unique:App\Models\User,username,{$user->id}",
             ],
             'password' => [
                 'filled',
@@ -41,7 +38,7 @@ class UpdateRequest extends FormRequest
             'max_token_count' => [
                 'filled',
                 'integer',
-                "between:0,{$this->signedTinyIntMax}",
+                'between:1,100'
             ],
             'is_enable_tfa' => [
                 'filled',
@@ -56,19 +53,5 @@ class UpdateRequest extends FormRequest
         return [
             'is_enable_tfa.in' => '禁止手动开启 :attribute，否则会导致用户无法登录',
         ];
-    }
-
-    /**
-     * 解析当前修改的模型
-     */
-    public function resolveModel(): void
-    {
-        if (is_null($this->user)) {
-            $this->user = $this->route('user');
-            if (!($this->user instanceof User)) {
-                abort(404);
-            }
-            $this->table = $this->user->getTable();
-        }
     }
 }

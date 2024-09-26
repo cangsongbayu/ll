@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests\User;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use App\Http\Requests\FormRequest;
+use Illuminate\Contracts\Validation\ValidationRule;
 
 class RestoreRequest extends FormRequest
 {

@@ -3,8 +3,9 @@
 namespace App\Http\Requests\Authenticate;
 
 use App\Exceptions\InvalidRequestException;
-use Illuminate\Contracts\Validation\ValidationRule;
 use App\Http\Requests\FormRequest;
+use Illuminate\Contracts\Validation\ValidationRule;
+
 /**
  * @property mixed $login_type
  */

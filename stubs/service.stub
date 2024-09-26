@@ -1,0 +1,66 @@
+<?php
+
+namespace App\Services;
+
+use App\Http\Requests\{{ model }}\DestroyRequest;
+use App\Http\Requests\{{ model }}\IndexRequest;
+use App\Http\Requests\{{ model }}\StoreRequest;
+use App\Http\Requests\{{ model }}\UpdateRequest;
+use App\Models\{{ model }};
+use App\Http\Resources\{{ model }}Collection;
+use Illuminate\Support\Facades\DB;
+use Throwable;
+
+class {{ class }} extends Service
+{
+    protected array $indexColumns = ['*'];
+
+    public function index(IndexRequest $request): array
+    {
+        $pageSize = $request->input(config('app.page_size_name'), config('app.default_page_size'));
+        $query = {{ model }}::query()->filter($request->input(config('app.filters'), []));
+        $lengthAwarePaginator = $query->paginate($pageSize, $this->indexColumns, config('app.page_name'));
+        $list = new {{ model }}Collection($lengthAwarePaginator);
+        return [
+            'list' => $list,
+            'pagination' => $this->getApiPaginate($lengthAwarePaginator)
+        ];
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function store(StoreRequest $request, {{ model }} ${{ modelVariable }}): {{ model }}
+    {
+        return DB::transaction(function() use ($request, ${{ modelVariable }}) {
+            $validated = $request->validated();
+            ${{ modelVariable }}->fill($validated);
+            ${{ modelVariable }}->save();
+            return ${{ modelVariable }};
+        });
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function update(UpdateRequest $request, {{ model }} ${{ modelVariable }}): {{ model }}
+    {
+        return DB::transaction(function() use ($request, ${{ modelVariable }}) {
+            $validated = $request->validated();
+            ${{ modelVariable }}->fill($validated);
+            ${{ modelVariable }}->save();
+            return ${{ modelVariable }};
+        });
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function destroy(DestroyRequest $request, {{ model }} ${{ modelVariable }}): {{ model }}
+    {
+        return DB::transaction(function() use ($request, ${{ modelVariable }}) {
+            ${{ modelVariable }}->delete();
+            return ${{ modelVariable }};
+        });
+    }
+}

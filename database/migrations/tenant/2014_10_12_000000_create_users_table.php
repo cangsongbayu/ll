@@ -18,7 +18,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('username')->unique();
             $table->string('password');
-            $table->unsignedTinyInteger('max_token_count')->default(1);
+            $table->unsignedSmallInteger('max_token_count')->default(1);
             $table->boolean('is_enable_tfa')->default(0);
             $table->string('tfa_secret')->nullable();
             $table->rememberToken();

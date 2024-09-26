@@ -25,6 +25,7 @@ enum ActivityLogEventEnum: string
             'USERNAME_NOT_FOUND' => '登录失败，用户名不存在',
             'PASSWORD_INCORRECT' => '登录失败，密码错误',
             'TFA_CODE_INCORRECT' => '登录失败，动态密码错误',
+            'IP_NOT_ALLOWED' => '登录失败，IP 地址不允许',
         };
     }
 }

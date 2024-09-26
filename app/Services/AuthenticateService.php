@@ -8,12 +8,11 @@ use App\Enums\LoginFailedReasonEnum;
 use App\Exceptions\LoginFailedException;
 use App\Helpers\Agent;
 use App\Http\Requests\Authenticate\LoginRequest;
-use App\Helpers\IP;
 use App\Http\Requests\Authenticate\RepassRequest;
 use App\Http\Requests\Authenticate\VerifyTFARequest;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Laravel\Sanctum\PersonalAccessToken;
 use Throwable;
 
@@ -59,6 +58,18 @@ class AuthenticateService
                 if (!$request->has('tfa_code') || !$google2fa->verifyKey($user->tfa_secret, $request->tfa_code)) {
                     throw new LoginFailedException(
                         ActivityLogEventEnum::getLoginFailureDescription(LoginFailedReasonEnum::TFA_CODE_INCORRECT->value),
+                        0,
+                        $log,
+                    );
+                }
+            }
+
+            // 检查 IP 白名单
+            if (isset($user->allowed_ip_addresses)) {
+                $allowedIp = explode(',', $user->allowed_ip_addresses);
+                if (!in_array($log['ip'], $allowedIp)) {
+                    throw new LoginFailedException(
+                        ActivityLogEventEnum::getLoginFailureDescription(LoginFailedReasonEnum::IP_NOT_ALLOWED->value),
                         0,
                         $log,
                     );

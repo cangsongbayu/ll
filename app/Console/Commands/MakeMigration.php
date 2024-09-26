@@ -31,12 +31,12 @@ class MakeMigration extends Command
         $tableName = Str::snake(Str::pluralStudly($modelName));
         $migrationName = "create_{$tableName}_table";
 
-        $path = $this->option('path');
+        $path = 'database/migrations/' . $this->option('path');
 
         $this->call('make:migration', [
             'name' => $migrationName,
             '--create' => $tableName,
-            '--path' => "database/migrations/{$path}",
+            '--path' => $path,
         ]);
     }
 }
