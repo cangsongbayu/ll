@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('trade_no')->unique();
             $table->unsignedBigInteger('currency_id')->comment('订单货币');
             $table->decimal('amount', 20, 6)->comment('订单金额');
-            $table->decimal('exchange_rate', 20, 6)->comment('汇率');
+            $table->decimal('exchange_rate', 20, 6)->unsigned()->comment('汇率');
             $table->unsignedBigInteger('base_currency_id')->comment('基准货币');
             $table->decimal('base_amount', 20, 6)->comment('基准货币订单金额');
             $table->timestamps();

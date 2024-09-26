@@ -141,7 +141,7 @@ class MakeRequest extends RequestMakeCommand
                     $precision = $column->getPrecision();
                     $scale = $column->getScale();
                     $rule[] = 'numeric';
-                    $rule[] = "decimal:{$scale}";
+                    $rule[] = "decimal:0,{$scale}";
                     $rule[] = "db_decimal:{$precision},{$scale}";
                 }
                 $rules[$column->getName()] = $rule;

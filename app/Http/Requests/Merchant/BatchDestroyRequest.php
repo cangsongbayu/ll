@@ -16,8 +16,10 @@ class BatchDestroyRequest extends FormRequest
     {
         return [
             //
-            'required',
-            'array',
+            'ids' => [
+                'required',
+                'array',
+            ],
         ];
     }
 }

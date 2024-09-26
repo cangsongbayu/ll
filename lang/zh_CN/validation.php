@@ -167,5 +167,10 @@ return [
         'is_base_currency' => '基准货币',
         'code' => '编码',
         'is_open_for_business' => '营业',
+        'merchant_id' => '商户',
+        'currency_id' => '货币',
+        'amount' => '金额',
+        'exchange_rate' => '汇率',
+        'base_currency_id' => '基准货币',
     ],
 ];

@@ -32,7 +32,9 @@ class MerchantPrepayment extends BaseModel
 		'amount' => 'float',
 		'exchange_rate' => 'float',
 		'base_currency_id' => 'int',
-		'base_amount' => 'float'
+		'base_amount' => 'float',
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
 	];
 
 	protected $fillable = [

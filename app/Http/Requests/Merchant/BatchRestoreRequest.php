@@ -16,8 +16,10 @@ class BatchRestoreRequest extends FormRequest
     {
         return [
             //
-            'required',
-            'array',
+            'ids' => [
+                'required',
+                'array',
+            ],
         ];
     }
 }

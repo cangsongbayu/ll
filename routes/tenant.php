@@ -7,6 +7,7 @@ use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\MerchantController;
+use App\Http\Controllers\MerchantPrepaymentController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\InitializeTenancyByRequestData;
@@ -87,6 +88,11 @@ Route::group([
         Route::put('merchant/batch-restore', 'batchRestore'); // 批量恢复
         Route::delete('merchant/batch-destroy', 'batchDestroy'); // 批量删除
         Route::apiResource('merchant', MerchantController::class); // 资源路由
+    });
+
+    // 商户预付
+    Route::controller(MerchantPrepaymentController::class)->group(function() {
+        Route::apiResource('merchant-prepayment', MerchantPrepaymentController::class)->only(['index', 'store', 'update']); // 资源路由
     });
 });
 

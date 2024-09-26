@@ -14,7 +14,9 @@ class UpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $merchantPrepayment = $this->route('merchantPrepayment');
+        $merchantPrepayment = $this->route('merchant-prepayment');
+
+//        dd($merchantPrepayment);
 
         return [
             'merchant_id' => [
@@ -38,7 +40,7 @@ class UpdateRequest extends FormRequest
                 'filled',
                 'numeric',
                 'decimal:0,6',
-                'db_decimal:20,6',
+                'db_decimal:20,6,unsigned',
             ],
             'base_currency_id' => [
                 'filled',
