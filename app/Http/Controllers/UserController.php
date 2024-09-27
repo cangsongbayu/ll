@@ -70,7 +70,7 @@ class UserController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->update($request, $user),
+            new UserResource($this->service->update($request, $user)),
             ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -84,7 +84,7 @@ class UserController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->destroy($request, $user),
+            new UserResource($this->service->destroy($request, $user)),
             ApiMessageEnum::DESTROY->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -98,7 +98,7 @@ class UserController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->restore($request, $user),
+            new UserResource($this->service->restore($request, $user)),
             ApiMessageEnum::RESTORE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );

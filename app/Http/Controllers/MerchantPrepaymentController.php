@@ -9,6 +9,7 @@ use App\Http\Requests\MerchantPrepayment\DestroyRequest;
 use App\Http\Requests\MerchantPrepayment\IndexRequest;
 use App\Http\Requests\MerchantPrepayment\StoreRequest;
 use App\Http\Requests\MerchantPrepayment\UpdateRequest;
+use App\Http\Resources\MerchantPrepayment as MerchantPrepaymentResource;
 use App\Models\MerchantPrepayment;
 use App\Services\MerchantPrepaymentService;
 use Throwable;
@@ -43,7 +44,7 @@ class MerchantPrepaymentController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->store($request, $merchantPrepayment),
+            new MerchantPrepaymentResource($this->service->store($request, $merchantPrepayment)),
             ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -65,7 +66,7 @@ class MerchantPrepaymentController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->update($request, $merchantPrepayment),
+            new MerchantPrepaymentResource($this->service->update($request, $merchantPrepayment)),
             ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -79,7 +80,7 @@ class MerchantPrepaymentController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->destroy($request, $merchantPrepayment),
+            new MerchantPrepaymentResource($this->service->destroy($request, $merchantPrepayment)),
             ApiMessageEnum::DESTROY->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );

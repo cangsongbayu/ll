@@ -9,6 +9,7 @@ use App\Http\Requests\Setting\DestroyRequest;
 use App\Http\Requests\Setting\IndexRequest;
 use App\Http\Requests\Setting\StoreRequest;
 use App\Http\Requests\Setting\UpdateRequest;
+use App\Http\Resources\Setting as SettingResource;
 use App\Models\Setting;
 use App\Services\SettingService;
 use Throwable;
@@ -43,7 +44,7 @@ class SettingController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->store($request, $setting),
+            new SettingResource($this->service->store($request, $setting)),
             ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -65,7 +66,7 @@ class SettingController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->update($request, $setting),
+            new SettingResource($this->service->update($request, $setting)),
             ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -79,7 +80,7 @@ class SettingController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->destroy($request, $setting),
+            new SettingResource($this->service->destroy($request, $setting)),
             ApiMessageEnum::DESTROY->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );

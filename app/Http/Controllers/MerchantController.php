@@ -12,6 +12,7 @@ use App\Http\Requests\Merchant\DestroyRequest;
 use App\Http\Requests\Merchant\IndexRequest;
 use App\Http\Requests\Merchant\StoreRequest;
 use App\Http\Requests\Merchant\UpdateRequest;
+use App\Http\Resources\Merchant as MerchantResource;
 use Illuminate\Http\Request;
 use App\Models\Merchant;
 use App\Services\MerchantService;
@@ -56,7 +57,7 @@ class MerchantController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->store($request, $merchant),
+            new MerchantResource($this->service->store($request, $merchant)),
             ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -78,7 +79,7 @@ class MerchantController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->update($request, $merchant),
+            new MerchantResource($this->service->update($request, $merchant)),
             ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -92,7 +93,7 @@ class MerchantController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->destroy($request, $merchant),
+            new MerchantResource($this->service->destroy($request, $merchant)),
             ApiMessageEnum::DESTROY->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -106,7 +107,7 @@ class MerchantController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->restore($request, $merchant),
+            new MerchantResource($this->service->restore($request, $merchant)),
             ApiMessageEnum::RESTORE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );

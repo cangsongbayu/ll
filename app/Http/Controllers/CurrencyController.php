@@ -9,6 +9,7 @@ use App\Http\Requests\Currency\DestroyRequest;
 use App\Http\Requests\Currency\IndexRequest;
 use App\Http\Requests\Currency\StoreRequest;
 use App\Http\Requests\Currency\UpdateRequest;
+use App\Http\Resources\Currency as CurrencyResource;
 use Illuminate\Http\Request;
 use App\Models\Currency;
 use App\Services\CurrencyService;
@@ -53,7 +54,7 @@ class CurrencyController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->store($request, $currency),
+            new CurrencyResource($this->service->store($request, $currency)),
             ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -75,7 +76,7 @@ class CurrencyController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->update($request, $currency),
+            new CurrencyResource($this->service->update($request, $currency)),
             ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -89,7 +90,7 @@ class CurrencyController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->destroy($request, $currency),
+            new CurrencyResource($this->service->destroy($request, $currency)),
             ApiMessageEnum::DESTROY->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );

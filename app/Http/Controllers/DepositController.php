@@ -9,6 +9,7 @@ use App\Http\Requests\Deposit\DestroyRequest;
 use App\Http\Requests\Deposit\IndexRequest;
 use App\Http\Requests\Deposit\StoreRequest;
 use App\Http\Requests\Deposit\UpdateRequest;
+use App\Http\Resources\Deposit as DepositResource;
 use App\Models\Deposit;
 use App\Services\DepositService;
 use Throwable;
@@ -43,7 +44,7 @@ class DepositController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->store($request, $deposit),
+            new DepositResource($this->service->store($request, $deposit)),
             ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -65,7 +66,7 @@ class DepositController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->update($request, $deposit),
+            new DepositResource($this->service->update($request, $deposit)),
             ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -79,7 +80,7 @@ class DepositController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->destroy($request, $deposit),
+            new DepositResource($this->service->destroy($request, $deposit)),
             ApiMessageEnum::DESTROY->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );

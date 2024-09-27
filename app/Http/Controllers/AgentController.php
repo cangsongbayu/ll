@@ -12,6 +12,7 @@ use App\Http\Requests\Agent\UpdateRequest;
 use App\Http\Requests\Agent\RestoreRequest;
 use App\Http\Requests\Agent\BatchDestroyRequest;
 use App\Http\Requests\Agent\BatchRestoreRequest;
+use App\Http\Resources\Agent as AgentResource;
 use App\Models\Agent;
 use App\Services\AgentService;
 use Throwable;
@@ -46,7 +47,7 @@ class AgentController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->store($request, $agent),
+            new AgentResource($this->service->store($request, $agent)),
             ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -68,7 +69,7 @@ class AgentController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->update($request, $agent),
+            new AgentResource($this->service->update($request, $agent)),
             ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -82,7 +83,7 @@ class AgentController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->destroy($request, $agent),
+            new AgentResource($this->service->destroy($request, $agent)),
             ApiMessageEnum::DESTROY->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -96,7 +97,7 @@ class AgentController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->restore($request, $agent),
+            new AgentResource($this->service->restore($request, $agent)),
             ApiMessageEnum::RESTORE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
