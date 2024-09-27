@@ -173,5 +173,7 @@ return [
         'exchange_rate' => '汇率',
         'base_currency_id' => '基准货币',
         'allowed_ip_addresses' => 'IP 白名单',
+        'depositable_type' => '用户类型',
+        'depositable_id' => '用户',
     ],
 ];

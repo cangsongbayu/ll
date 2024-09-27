@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('merchant_prepayments', function (Blueprint $table) {
+        Schema::create('deposits', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('merchant_id');
+            $table->morphs('depositable');
             $table->string('trade_no')->unique();
             $table->unsignedBigInteger('currency_id')->comment('订单货币');
             $table->decimal('amount', 20, 6)->comment('订单金额');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('merchant_prepayments');
+        Schema::dropIfExists('deposits');
     }
 };

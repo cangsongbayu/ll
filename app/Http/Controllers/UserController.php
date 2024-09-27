@@ -13,6 +13,7 @@ use App\Http\Requests\User\RestoreRequest;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
+use App\Http\Resources\User as UserResource;
 use App\Services\UserService;
 use Throwable;
 
@@ -47,7 +48,7 @@ class UserController extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->store($request, $user),
+            new UserResource($this->service->store($request, $user)),
             ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );

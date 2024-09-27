@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\MerchantPrepayment;
+namespace App\Http\Requests\Deposit;
 
 use App\Http\Requests\FormRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,33 +14,39 @@ class StoreRequest extends FormRequest
      */
     public function rules(): array
     {
+        $deposit = $this->route('deposit');
+
         return [
-            'merchant_id' => [
-                'required',
+            'depositable_type' => [
+                'filled',
+                'string',
+                'max:255',
+            ],
+            'depositable_id' => [
+                'filled',
                 'numeric',
                 'db_bigint:unsigned',
-                'exists:App\Models\Merchant,id,deleted_at,NULL',
             ],
             'currency_id' => [
-                'required',
+                'filled',
                 'numeric',
                 'db_bigint:unsigned',
                 'exists:App\Models\Currency,id',
             ],
             'amount' => [
-                'required',
+                'filled',
                 'numeric',
                 'decimal:0,6',
                 'db_decimal:20,6',
             ],
             'exchange_rate' => [
-                'required',
+                'filled',
                 'numeric',
                 'decimal:0,6',
-                'db_decimal:20,6,unsigned',
+                'db_decimal:20,6:unsigned',
             ],
             'base_currency_id' => [
-                'prohibited',
+                'prohibited'
             ],
             'note' => [
                 'nullable',

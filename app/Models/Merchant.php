@@ -12,6 +12,7 @@ use App\Models\Traits\HasHashID;
 use App\Models\Traits\HasSanctumPersonalAccessToken;
 use Carbon\Carbon;
 use EloquentFilter\Filterable;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -110,5 +111,10 @@ class Merchant extends Authenticatable
             ActivityLogEventEnum::CREATED->value => '创建了商户',
             default => $eventName,
         };
+    }
+
+    public function deposits(): MorphMany
+    {
+        return $this->morphMany(Deposit::class, 'depositable');
     }
 }

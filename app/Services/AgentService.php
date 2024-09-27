@@ -11,7 +11,6 @@ use App\Http\Requests\Agent\BatchRestoreRequest;
 use App\Http\Requests\Agent\RestoreRequest;
 use App\Models\Agent;
 use App\Http\Resources\AgentCollection;
-use App\Models\User;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 

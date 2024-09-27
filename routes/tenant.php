@@ -8,6 +8,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\MerchantPrepaymentController;
+use App\Http\Controllers\DepositController;
+use App\Http\Controllers\SettingController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\InitializeTenancyByRequestData;
@@ -93,6 +95,16 @@ Route::group([
     // 商户预付
     Route::controller(MerchantPrepaymentController::class)->group(function() {
         Route::apiResource('merchant-prepayment', MerchantPrepaymentController::class)->only(['index', 'store']); // 资源路由
+    });
+
+    // 押金
+    Route::controller(DepositController::class)->group(function() {
+        Route::apiResource('deposit', DepositController::class)->only(['index', 'store']);
+    });
+
+    // 设置
+    Route::controller(SettingController::class)->group(function() {
+        Route::apiResource('setting', SettingController::class)->only(['index']);
     });
 });
 

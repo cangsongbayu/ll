@@ -27,6 +27,7 @@ class UpdateRequest extends FormRequest
                 'filled',
                 'numeric',
                 'db_bigint:unsigned',
+                'exists:App\Models\Currency,id',
             ],
             'amount' => [
                 'filled',
@@ -42,6 +43,11 @@ class UpdateRequest extends FormRequest
             ],
             'base_currency_id' => [
                 'prohibited',
+            ],
+            'note' => [
+                'nullable',
+                'string',
+                'max:255',
             ],
         ];
     }

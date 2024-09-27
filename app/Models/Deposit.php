@@ -7,28 +7,30 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 /**
- * Class MerchantPrepayment
+ * Class Deposit
  *
  * @property int $id
- * @property int $merchant_id
+ * @property string $depositable_type
+ * @property int $depositable_id
  * @property string $trade_no
  * @property int $currency_id
  * @property float $amount
  * @property float $exchange_rate
  * @property int $base_currency_id
  * @property float $base_amount
+ * @property string|null $note
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
- * @property mixed $merchant
  *
  * @package App\Models
  */
-class MerchantPrepayment extends BaseModel
+class Deposit extends BaseModel
 {
 	protected $casts = [
-		'merchant_id' => 'int',
+		'depositable_id' => 'int',
 		'currency_id' => 'int',
 		'amount' => 'float',
 		'exchange_rate' => 'float',
@@ -39,16 +41,18 @@ class MerchantPrepayment extends BaseModel
 	];
 
 	protected $fillable = [
-		'merchant_id',
+		'depositable_type',
+		'depositable_id',
+		'trade_no',
 		'currency_id',
 		'amount',
 		'exchange_rate',
 		'base_currency_id',
-        'note',
+		'note'
 	];
 
-    public function merchant()
+    public function depositable(): MorphTo
     {
-        return $this->belongsTo(Merchant::class)->withTrashed();
+        return $this->morphTo();
     }
 }
