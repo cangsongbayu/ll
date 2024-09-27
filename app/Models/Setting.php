@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use App\Enums\SettingCategoryEnum;
+use App\Enums\SettingKeyEnum;
 use Carbon\Carbon;
 
 /**
@@ -36,4 +37,9 @@ class Setting extends BaseModel
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    public static function getAllowedDepositableTypes()
+    {
+        return Setting::where('key', SettingKeyEnum::ALLOWED_DEPOSITABLE_TYPES->value)->value('value');
+    }
 }

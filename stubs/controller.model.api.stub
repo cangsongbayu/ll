@@ -10,6 +10,7 @@ use App\Http\Requests\{{ model }}\IndexRequest;
 use App\Http\Requests\{{ model }}\StoreRequest;
 use App\Http\Requests\{{ model }}\UpdateRequest;
 use {{ namespacedModel }};
+use App\Http\Resources\{{ model }} as {{ model }}Resource;
 use App\Services\{{ model }}Service;
 use Throwable;
 
@@ -43,7 +44,7 @@ class {{ class }} extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->store($request, ${{ modelVariable }}),
+            new {{ model }}Resource($this->service->store($request, ${{ modelVariable }})),
             ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -65,7 +66,7 @@ class {{ class }} extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->update($request, ${{ modelVariable }}),
+            new {{ model }}Resource($this->service->update($request, ${{ modelVariable }})),
             ApiMessageEnum::STORE_OR_UPDATE->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );
@@ -79,7 +80,7 @@ class {{ class }} extends Controller
     {
         //
         return ApiResponse::success(
-            $this->service->destroy($request, ${{ modelVariable }}),
+            new {{ model }}Resource($this->service->destroy($request, ${{ modelVariable }})),
             ApiMessageEnum::DESTROY->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
         );

@@ -15,7 +15,7 @@ class StoreRequest extends FormRequest
     public function __construct(array $query = [], array $request = [], array $attributes = [], array $cookies = [], array $files = [], array $server = [], $content = null)
     {
         parent::__construct($query, $request, $attributes, $cookies, $files, $server, $content);
-        $this->allowedDepositableTypes = Setting::where('key', SettingKeyEnum::ALLOWED_DEPOSITABLE_TYPES->value)->value('value');
+        $this->allowedDepositableTypes = Setting::getAllowedDepositableTypes();
     }
 
     /**

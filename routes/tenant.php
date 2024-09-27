@@ -99,8 +99,11 @@ Route::group([
 
     // 押金
     Route::controller(DepositController::class)->group(function() {
-        Route::apiResource('deposit', DepositController::class)->only(['index', 'store']);
+        Route::apiResource('deposit', DepositController::class)->only(['index', 'store']); // 资源路由
     });
+
+    // 押金主体列表
+    Route::get('depositable/all', 'App\Http\Controllers\DepositableController@all');
 
     // 设置
     Route::controller(SettingController::class)->group(function() {
