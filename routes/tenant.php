@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\PaymentTypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\MerchantController;
@@ -104,6 +105,12 @@ Route::group([
 
     // 押金主体列表
     Route::get('depositable/all', 'App\Http\Controllers\DepositableController@all');
+
+    // 支付方式
+    Route::controller(PaymentTypeController::class)->group(function() {
+        Route::get('payment-type/all', 'all'); // 所有
+        Route::apiResource('payment-type', PaymentTypeController::class); // 资源路由
+    });
 
     // 设置
     Route::controller(SettingController::class)->group(function() {

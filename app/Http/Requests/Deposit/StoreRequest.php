@@ -18,6 +18,7 @@ class StoreRequest extends FormRequest
         $this->allowedDepositableTypes = Setting::getAllowedDepositableTypes();
     }
 
+
     /**
      * Get the validation rules that apply to the request.
      *

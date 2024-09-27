@@ -175,5 +175,9 @@ return [
         'allowed_ip_addresses' => 'IP 白名单',
         'depositable_type' => '用户类型',
         'depositable_id' => '用户',
+        'slug' => '编码',
+        'valid_amount' => '订单有效金额',
+        'order_ttl' => '订单过期时间',
+        'business_hours' => '营业时间',
     ],
 ];

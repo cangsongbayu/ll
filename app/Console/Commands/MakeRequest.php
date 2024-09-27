@@ -60,8 +60,9 @@ class MakeRequest extends RequestMakeCommand
         $action = $this->option('action');
         $modelName = $this->option('model');
         $modelVariableName = Str::camel($modelName);
+        $routeModelName = Str::snake($modelName);
         if ($action === 'update') {
-            $code = '$' . $modelVariableName . ' = ' . '$this->route(' . "'$modelVariableName'" . ');' . "\n";
+            $code = '$' . $modelVariableName . ' = ' . '$this->route(' . "'$routeModelName'" . ');' . "\n";
             return str_replace('{{ routeModel }}', $code, $stub);
         } else {
             // 删除包含 {{ routeModel }} 的整行，同时调整 return 的缩进
