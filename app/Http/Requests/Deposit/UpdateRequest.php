@@ -43,7 +43,7 @@ class UpdateRequest extends FormRequest
                 'filled',
                 'numeric',
                 'decimal:0,6',
-                'db_decimal:20,6:unsigned',
+                'db_decimal:20,6,unsigned',
             ],
             'base_currency_id' => [
                 'prohibited'

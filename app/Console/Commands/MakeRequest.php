@@ -143,7 +143,7 @@ class MakeRequest extends RequestMakeCommand
                     $unsigned = $column->getUnsigned();
                     $rule[] = 'numeric';
                     $rule[] = "decimal:0,{$scale}";
-                    $rule[] = "db_decimal:{$precision},{$scale}" . ($unsigned ? ':unsigned' : '');
+                    $rule[] = "db_decimal:{$precision},{$scale}" . ($unsigned ? ',unsigned' : '');
                 }
                 $rules[$column->getName()] = $rule;
             }
