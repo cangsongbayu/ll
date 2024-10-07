@@ -6,6 +6,9 @@ use App\Http\Requests\MerchantRate\DestroyRequest;
 use App\Http\Requests\MerchantRate\IndexRequest;
 use App\Http\Requests\MerchantRate\StoreRequest;
 use App\Http\Requests\MerchantRate\UpdateRequest;
+use App\Http\Requests\MerchantRate\RestoreRequest;
+use App\Http\Requests\MerchantRate\BatchDestroyRequest;
+use App\Http\Requests\MerchantRate\BatchRestoreRequest;
 use App\Models\MerchantRate;
 use App\Http\Resources\MerchantRateCollection;
 use Illuminate\Support\Facades\DB;
@@ -61,6 +64,39 @@ class MerchantRateService extends Service
         return DB::transaction(function() use ($request, $merchantRate) {
             $merchantRate->delete();
             return $merchantRate;
+        });
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function restore(RestoreRequest $request, MerchantRate $merchantRate): MerchantRate
+    {
+        return DB::transaction(function() use ($request, $merchantRate) {
+            $merchantRate->restore();
+            return $merchantRate;
+        });
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function batchDestroy(BatchDestroyRequest $request): int
+    {
+        return DB::transaction(function() use ($request) {
+            $ids = $request->input('ids', []);
+            return MerchantRate::whereIn('id', $ids)->delete();
+        });
+    }
+
+    /**
+     * @throws Throwable
+     */
+    public function batchRestore(BatchRestoreRequest $request): int
+    {
+        return DB::transaction(function() use ($request) {
+            $ids = $request->input('ids', []);
+            return MerchantRate::withTrashed()->whereIn('id', $ids)->restore();
         });
     }
 }

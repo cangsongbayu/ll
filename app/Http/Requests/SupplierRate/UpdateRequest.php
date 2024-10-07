@@ -18,15 +18,10 @@ class UpdateRequest extends BaseRequest
 
         $rules = [
             'payment_type_id' => [
-                'filled',
-                'numeric',
-                'db_bigint:unsigned',
+                'prohibited',
             ],
             'supplier_id' => [
-                'filled',
-                'numeric',
-                'db_bigint:unsigned',
-                'exists:App\Models\Supplier,id,deleted_at,NULL',
+                'prohibited',
             ],
             'rate' => [
                 'filled',
@@ -41,7 +36,7 @@ class UpdateRequest extends BaseRequest
         ];
 
         if ($this->has('payment_type_id') && $this->has('supplier_id')) {
-            $rules['payment_type_id'][] = function($attr, $value, $fail) use ($supplierRate) {
+            $rules['payment_type_id'][] = function ($attr, $value, $fail) use ($supplierRate) {
                 $exists = SupplierRate::where('supplier_id', $this->input('supplier_id'))
                     ->where('payment_type_id', $this->input('payment_type_id'))
                     ->where('id', '<>', $supplierRate->id)
@@ -51,6 +46,7 @@ class UpdateRequest extends BaseRequest
                 }
                 return true;
             };
+            $rules['rate'][] = $this->validateRate(...);
         }
 
         return $rules;

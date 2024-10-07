@@ -9,6 +9,9 @@ use App\Http\Requests\MerchantRate\DestroyRequest;
 use App\Http\Requests\MerchantRate\IndexRequest;
 use App\Http\Requests\MerchantRate\StoreRequest;
 use App\Http\Requests\MerchantRate\UpdateRequest;
+use App\Http\Requests\MerchantRate\RestoreRequest;
+use App\Http\Requests\MerchantRate\BatchDestroyRequest;
+use App\Http\Requests\MerchantRate\BatchRestoreRequest;
 use App\Http\Resources\MerchantRate as MerchantRateResource;
 use App\Models\MerchantRate;
 use App\Services\MerchantRateService;
@@ -82,6 +85,50 @@ class MerchantRateController extends Controller
         return ApiResponse::success(
             new MerchantRateResource($this->service->destroy($request, $merchantRate)),
             ApiMessageEnum::DESTROY->getMessage(),
+            ApiMessageShowTypeEnum::SUCCESS,
+        );
+    }
+
+    /**
+     * 恢复
+     * @throws Throwable
+     */
+    public function restore(RestoreRequest $request, MerchantRate $merchantRate)
+    {
+        //
+        return ApiResponse::success(
+            new MerchantRateResource($this->service->restore($request, $merchantRate)),
+            ApiMessageEnum::RESTORE->getMessage(),
+            ApiMessageShowTypeEnum::SUCCESS,
+        );
+    }
+
+    /**
+     * 批量删除
+     * @throws Throwable
+     */
+    public function batchDestroy(BatchDestroyRequest $request)
+    {
+        $count = $this->service->batchDestroy($request);
+        $data = ['count' => $count];
+        return ApiResponse::success(
+            $data,
+            ApiMessageEnum::BATCH_DESTROY->getMessageWithParams(['attribute' => __('attributes.rate'), ...$data]),
+            ApiMessageShowTypeEnum::SUCCESS,
+        );
+    }
+
+    /**
+     * 批量恢复
+     * @throws Throwable
+     */
+    public function batchRestore(BatchRestoreRequest $request)
+    {
+        $count = $this->service->batchRestore($request);
+        $data = ['count' => $count];
+        return ApiResponse::success(
+            $data,
+            ApiMessageEnum::BATCH_RESTORE->getMessageWithParams(['attribute' => __('attributes.rate'), ...$data]),
             ApiMessageShowTypeEnum::SUCCESS,
         );
     }

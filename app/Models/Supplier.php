@@ -86,4 +86,13 @@ class Supplier extends Authenticatable
         'max_token_count' => 1,
         'is_enable_tfa' => false,
     ];
+
+    /**
+     * 获取供应商下级的最高费率
+     */
+    public function getHighestRateForDescendants($paymentTypeId)
+    {
+        $list = $this->descendants->pluck('id');
+        return SupplierRate::whereIn('supplier_id', $list)->where('payment_type_id', $paymentTypeId)->max('rate');
+    }
 }
