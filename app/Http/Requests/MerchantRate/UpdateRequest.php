@@ -3,6 +3,7 @@
 namespace App\Http\Requests\MerchantRate;
 
 use App\Http\Requests\FormRequest;
+use App\Models\MerchantRate;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 class UpdateRequest extends BaseRequest
@@ -16,7 +17,7 @@ class UpdateRequest extends BaseRequest
     {
         $merchantRate = $this->route('merchant_rate');
 
-        return [
+        $rules = [
             'payment_type_id' => [
                 'filled',
                 'numeric',
@@ -46,5 +47,20 @@ class UpdateRequest extends BaseRequest
                 'boolean',
             ],
         ];
+
+        if ($this->has('payment_type_id') && $this->has('merchant_id')) {
+            $rules['payment_type_id'][] = function($attr, $value, $fail) use ($merchantRate) {
+                $exists = MerchantRate::where('merchant_id', $this->input('merchant_id'))
+                    ->where('payment_type_id', $this->input('payment_type_id'))
+                    ->where('id', '<>', $merchantRate->id)
+                    ->exists();
+                if ($exists) {
+                    return $fail('商户费率 已经存在。');
+                }
+                return true;
+            };
+        }
+
+        return $rules;
     }
 }

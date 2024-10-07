@@ -3,6 +3,7 @@
 namespace App\Http\Requests\SupplierRate;
 
 use App\Http\Requests\FormRequest;
+use App\Models\SupplierRate;
 
 class BaseRequest extends FormRequest
 {

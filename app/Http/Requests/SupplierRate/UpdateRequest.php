@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\SupplierRate;
 
-use App\Http\Requests\FormRequest;
+use App\Models\SupplierRate;
 use Illuminate\Contracts\Validation\ValidationRule;
 
-class UpdateRequest extends FormRequest
+class UpdateRequest extends BaseRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -16,7 +16,7 @@ class UpdateRequest extends FormRequest
     {
         $supplierRate = $this->route('supplier_rate');
 
-        return [
+        $rules = [
             'payment_type_id' => [
                 'filled',
                 'numeric',
@@ -26,6 +26,7 @@ class UpdateRequest extends FormRequest
                 'filled',
                 'numeric',
                 'db_bigint:unsigned',
+                'exists:App\Models\Supplier,id,deleted_at,NULL',
             ],
             'rate' => [
                 'filled',
@@ -38,5 +39,20 @@ class UpdateRequest extends FormRequest
                 'boolean',
             ],
         ];
+
+        if ($this->has('payment_type_id') && $this->has('supplier_id')) {
+            $rules['payment_type_id'][] = function($attr, $value, $fail) use ($supplierRate) {
+                $exists = SupplierRate::where('supplier_id', $this->input('supplier_id'))
+                    ->where('payment_type_id', $this->input('payment_type_id'))
+                    ->where('id', '<>', $supplierRate->id)
+                    ->exists();
+                if ($exists) {
+                    return $fail('供应商费率 已经存在。');
+                }
+                return true;
+            };
+        }
+
+        return $rules;
     }
 }

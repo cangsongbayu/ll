@@ -25,7 +25,7 @@ class StoreRequest extends BaseRequest
                 'required',
                 'numeric',
                 'db_bigint:unsigned',
-                'exists:App\Models\Merchant,id,deleted_at,NULL',
+                'exists:App\Models\Supplier,id,deleted_at,NULL',
             ],
             'rate' => [
                 'required',
