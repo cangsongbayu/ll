@@ -7,6 +7,7 @@ use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\MerchantRateController;
 use App\Http\Controllers\PaymentTypeController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\SupplierRateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\MerchantController;
@@ -117,6 +118,11 @@ Route::group([
         Route::put('supplier/batch-restore', 'batchRestore'); // 批量恢复
         Route::delete('supplier/batch-destroy', 'batchDestroy'); // 批量删除
         Route::apiResource('supplier', SupplierController::class);
+    });
+
+    // 供应商费率
+    Route::controller(SupplierRateController::class)->group(function() {
+        Route::apiResource('supplier-rate', SupplierRateController::class); // 资源路由
     });
 
     // 押金

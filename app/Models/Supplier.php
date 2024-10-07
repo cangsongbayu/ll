@@ -12,6 +12,7 @@ use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Traits\HasSanctumPersonalAccessToken;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\HigherOrderCollectionProxy;
 use Kalnoy\Nestedset\NodeTrait;
 
 /**
@@ -36,6 +37,7 @@ use Kalnoy\Nestedset\NodeTrait;
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at
+ * @property HigherOrderCollectionProxy|mixed $parent
  *
  * @package App\Models
  */
@@ -47,6 +49,7 @@ class Supplier extends BaseModel
 		'_lft' => 'int',
 		'_rgt' => 'int',
 		'parent_id' => 'int',
+        'password' => 'hashed',
 		'email_verified_at' => 'datetime:Y-m-d H:i:s',
 		'max_token_count' => 'int',
 		'is_enable_tfa' => 'bool',

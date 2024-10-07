@@ -184,5 +184,6 @@ return [
         'rate' => '费率',
         'payment_type_id' => '支付方式',
         'parent_id' => '上级',
+        'supplier_id' => '供应商',
     ],
 ];

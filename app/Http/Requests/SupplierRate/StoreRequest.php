@@ -4,6 +4,8 @@ namespace App\Http\Requests\SupplierRate;
 
 use Illuminate\Contracts\Validation\ValidationRule;
 use App\Models\SupplierRate;
+use App\Models\MerchantRate;
+use App\Models\Supplier;
 
 class StoreRequest extends BaseRequest
 {
@@ -14,6 +16,8 @@ class StoreRequest extends BaseRequest
      */
     public function rules(): array
     {
+        $maxRate = MerchantRate::min('platform_rate');
+
         $rules = [
             'payment_type_id' => [
                 'required',
@@ -47,6 +51,29 @@ class StoreRequest extends BaseRequest
                 if ($exists) {
                     return $fail('供应商费率 已经存在。');
                 }
+                return true;
+            };
+            $rules['rate'][] = function($attr, $value, $fail) use ($maxRate) {
+                $errors = $this->validator->errors();
+                if ($errors->hasAny('payment_type_id', 'supplier_id')) {
+                    // 跳过检查
+                    return true;
+                }
+
+                if (is_null($maxRate)) {
+                    return $fail('平台实际费率 未设置。');
+                }
+                if (bccomp($value, $maxRate, 6) > 0) {
+                    return $fail('供应商费率 不能大于平台实际费率：' . $maxRate) . '。';
+                }
+
+                // 检查是否高于上级费率
+                $supplier = Supplier::find($this->input('supplier_id'));
+                dd($supplier->parent);
+//                if ($supplier->parent_id) {
+//
+//                }
+
                 return true;
             };
         }
