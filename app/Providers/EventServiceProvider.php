@@ -7,6 +7,7 @@ use App\Models\Deposit;
 use App\Models\Merchant;
 use App\Models\MerchantPrepayment;
 use App\Models\MerchantRate;
+use App\Models\Supplier;
 use App\Models\User;
 use App\Models\Agent;
 use App\Observers\AgentObserver;
@@ -15,6 +16,7 @@ use App\Observers\DepositObserver;
 use App\Observers\MerchantObserver;
 use App\Observers\MerchantPrepaymentObserver;
 use App\Observers\MerchantRateObserver;
+use App\Observers\SupplierObserver;
 use App\Observers\UserObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -41,6 +43,7 @@ class EventServiceProvider extends ServiceProvider
         MerchantPrepayment::class => [MerchantPrepaymentObserver::class],
         Deposit::class => [DepositObserver::class],
         MerchantRate::class => [MerchantRateObserver::class],
+        Supplier::class => [SupplierObserver::class],
     ];
 
     /**

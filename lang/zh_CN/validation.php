@@ -154,6 +154,8 @@ return [
     'db_integer' => ':Attribute 必须介于 :min - :max 之间。',
     'db_bigint' => ':Attribute 必须是整数，并且必须介于 :min - :max 之间。',
     'db_decimal' => ':Attribute 必须介于 :min - :max 之间。',
+    'node_must_not_be_a_self' => ':Attribute 不能是自己。',
+    'node_must_not_be_a_descendant' => ':Attribute 不能是自己的下级。',
     'attributes' => [
         'ids' => 'ID 集合',
         'name' => '名称',
@@ -181,5 +183,6 @@ return [
         'business_hours' => '营业时间',
         'rate' => '费率',
         'payment_type_id' => '支付方式',
+        'parent_id' => '上级',
     ],
 ];

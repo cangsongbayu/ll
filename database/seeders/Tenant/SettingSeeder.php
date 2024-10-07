@@ -18,7 +18,7 @@ class SettingSeeder extends Seeder
             [
                 'category' => SettingCategoryEnum::GENERAL,
                 'key' => 'allowed_depositable_types',
-                'value' => 'merchant',
+                'value' => 'merchant,supplier',
                 'description' => '押金主体类型',
             ]
         ];

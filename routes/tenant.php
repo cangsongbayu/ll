@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\MerchantRateController;
 use App\Http\Controllers\PaymentTypeController;
+use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\MerchantController;
@@ -95,7 +96,6 @@ Route::group([
     Route::controller(MerchantController::class)->group(function() {
         Route::get('merchant/all', 'all'); // 所有
         Route::put('merchant/restore/{merchant}', 'restore')->withTrashed(); // 恢复
-//        Route::put('merchant/restore/{merchant}', 'restore'); // 恢复
         Route::put('merchant/batch-restore', 'batchRestore'); // 批量恢复
         Route::delete('merchant/batch-destroy', 'batchDestroy'); // 批量删除
         Route::apiResource('merchant', MerchantController::class); // 资源路由
@@ -109,6 +109,14 @@ Route::group([
     // 商户费率
     Route::controller(MerchantRateController::class)->group(function() {
         Route::apiResource('merchant-rate', MerchantRateController::class); // 资源路由
+    });
+
+    // 供应商
+    Route::controller(SupplierController::class)->group(function() {
+        Route::put('supplier/restore/{supplier}', 'restore')->withTrashed(); // 恢复
+        Route::put('supplier/batch-restore', 'batchRestore'); // 批量恢复
+        Route::delete('supplier/batch-destroy', 'batchDestroy'); // 批量删除
+        Route::apiResource('supplier', SupplierController::class);
     });
 
     // 押金

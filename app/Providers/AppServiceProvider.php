@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\Merchant;
+use App\Models\Supplier;
 use App\Models\User;
 use App\Models\Agent;
 use Illuminate\Support\ServiceProvider;
@@ -31,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
             'user' => User::class,
             'agent' => Agent::class,
             'merchant' => Merchant::class,
+            'supplier' => Supplier::class,
         ]);
     }
 }
