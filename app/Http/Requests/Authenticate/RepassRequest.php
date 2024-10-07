@@ -3,7 +3,7 @@
 namespace App\Http\Requests\Authenticate;
 
 use Illuminate\Contracts\Validation\ValidationRule;
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\FormRequest;
 
 class RepassRequest extends FormRequest
 {

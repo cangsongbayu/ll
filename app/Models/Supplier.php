@@ -11,6 +11,7 @@ use Carbon\Carbon;
 use EloquentFilter\Filterable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Traits\HasSanctumPersonalAccessToken;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\HigherOrderCollectionProxy;
 use Kalnoy\Nestedset\NodeTrait;
@@ -41,7 +42,7 @@ use Kalnoy\Nestedset\NodeTrait;
  *
  * @package App\Models
  */
-class Supplier extends BaseModel
+class Supplier extends Authenticatable
 {
 	use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, Filterable, HasHashID, NodeTrait;
 

@@ -38,7 +38,7 @@ abstract class FormRequest extends IlluminateFormRequest
                 $this->merge([$key => $decoded[0] ?? null]);
             } else if ($key === 'ids') {
                 $this->decodeHashids();
-            } else if ($key === 'password') {
+            } else if ($key === 'password' || $key === 'current_password') {
                 try {
                     $passwordKey = config('app.password_key');
                     // 移除 "base64:" 前缀（如果存在）
