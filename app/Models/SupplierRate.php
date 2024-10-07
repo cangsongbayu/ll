@@ -7,11 +7,12 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * Class SupplierRate
- * 
+ *
  * @property int $id
  * @property int $payment_type_id
  * @property int $supplier_id
@@ -26,8 +27,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SupplierRate extends BaseModel
 {
 	use SoftDeletes;
-	protected $table = 'supplier_rates';
-	protected $perPage = 20;
 
 	protected $casts = [
 		'payment_type_id' => 'int',
@@ -42,4 +41,9 @@ class SupplierRate extends BaseModel
 		'rate',
 		'is_open_for_business'
 	];
+
+    public function supplier(): BelongsTo
+    {
+        return $this->belongsTo(Supplier::class);
+    }
 }

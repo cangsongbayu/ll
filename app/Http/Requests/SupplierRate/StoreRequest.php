@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests\SupplierRate;
 
-use App\Http\Requests\FormRequest;
 use Illuminate\Contracts\Validation\ValidationRule;
+use App\Models\SupplierRate;
 
-class StoreRequest extends FormRequest
+class StoreRequest extends BaseRequest
 {
     /**
      * Get the validation rules that apply to the request.
@@ -14,16 +14,18 @@ class StoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
+        $rules = [
             'payment_type_id' => [
                 'required',
                 'numeric',
                 'db_bigint:unsigned',
+                'exists:App\Models\PaymentType,id',
             ],
             'supplier_id' => [
                 'required',
                 'numeric',
                 'db_bigint:unsigned',
+                'exists:App\Models\Merchant,id,deleted_at,NULL',
             ],
             'rate' => [
                 'required',
@@ -36,5 +38,19 @@ class StoreRequest extends FormRequest
                 'boolean',
             ],
         ];
+
+        if ($this->has('payment_type_id') && $this->has('supplier_id')) {
+            $rules['payment_type_id'][] = function($attr, $value, $fail) {
+                $exists = SupplierRate::where('supplier_id', $this->input('supplier_id'))
+                    ->where('payment_type_id', $this->input('payment_type_id'))
+                    ->exists();
+                if ($exists) {
+                    return $fail('供应商费率 已经存在。');
+                }
+                return true;
+            };
+        }
+
+        return $rules;
     }
 }

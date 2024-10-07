@@ -182,3 +182,28 @@ Route::group([
         Route::put('verify-tfa', 'verifyTFA');
     });
 });
+
+/**
+ * 租户系统中供应商用户路由
+ */
+Route::group([
+    'namespace' => 'App\Http\Controllers',
+    'middleware' => ['api', InitializeTenancyByRequestData::class],
+    'prefix' => 'api/supplier',
+], function () {
+    Route::post('login', 'AuthenticateController@login'); // 登录
+});
+
+Route::group([
+    'prefix' => 'api/supplier',
+    'middleware' => ['api', InitializeTenancyByRequestData::class, 'auth:supplier']
+], function () {
+    // 授权模块
+    Route::controller(AuthenticateController::class)->group(function() {
+        Route::get('me', 'me');
+        Route::put('repass', 'repass');
+        Route::delete('logout', 'logout');
+        Route::get('get-tfa-qrcode', 'getTFAQRCode');
+        Route::put('verify-tfa', 'verifyTFA');
+    });
+});
