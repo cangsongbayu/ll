@@ -125,6 +125,9 @@ Route::group([
 
     // 供应商费率
     Route::controller(SupplierRateController::class)->group(function() {
+        Route::put('supplier-rate/restore/{supplier_rate}', 'restore')->withTrashed(); // 恢复
+        Route::put('supplier-rate/batch-restore', 'batchRestore'); // 批量恢复
+        Route::delete('supplier-rate/batch-destroy', 'batchDestroy'); // 批量删除
         Route::apiResource('supplier-rate', SupplierRateController::class); // 资源路由
     });
 

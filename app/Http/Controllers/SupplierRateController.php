@@ -9,6 +9,9 @@ use App\Http\Requests\SupplierRate\DestroyRequest;
 use App\Http\Requests\SupplierRate\IndexRequest;
 use App\Http\Requests\SupplierRate\StoreRequest;
 use App\Http\Requests\SupplierRate\UpdateRequest;
+use App\Http\Requests\SupplierRate\RestoreRequest;
+use App\Http\Requests\SupplierRate\BatchRestoreRequest;
+use App\Http\Requests\SupplierRate\BatchDestroyRequest;
 use App\Http\Resources\SupplierRate as SupplierRateResource;
 use App\Models\SupplierRate;
 use App\Services\SupplierRateService;
@@ -82,6 +85,50 @@ class SupplierRateController extends Controller
         return ApiResponse::success(
             new SupplierRateResource($this->service->destroy($request, $supplierRate)),
             ApiMessageEnum::DESTROY->getMessage(),
+            ApiMessageShowTypeEnum::SUCCESS,
+        );
+    }
+
+    /**
+     * 恢复
+     * @throws Throwable
+     */
+    public function restore(RestoreRequest $request, SupplierRate $supplierRate)
+    {
+        //
+        return ApiResponse::success(
+            new SupplierRateResource($this->service->restore($request, $supplierRate)),
+            ApiMessageEnum::RESTORE->getMessage(),
+            ApiMessageShowTypeEnum::SUCCESS,
+        );
+    }
+
+    /**
+     * 批量删除
+     * @throws Throwable
+     */
+    public function batchDestroy(BatchDestroyRequest $request)
+    {
+        $count = $this->service->batchDestroy($request);
+        $data = ['count' => $count];
+        return ApiResponse::success(
+            $data,
+            ApiMessageEnum::BATCH_DESTROY->getMessageWithParams(['attribute' => __('attributes.rate'), ...$data]),
+            ApiMessageShowTypeEnum::SUCCESS,
+        );
+    }
+
+    /**
+     * 批量恢复
+     * @throws Throwable
+     */
+    public function batchRestore(BatchRestoreRequest $request)
+    {
+        $count = $this->service->batchRestore($request);
+        $data = ['count' => $count];
+        return ApiResponse::success(
+            $data,
+            ApiMessageEnum::BATCH_RESTORE->getMessageWithParams(['attribute' => __('attributes.rate'), ...$data]),
             ApiMessageShowTypeEnum::SUCCESS,
         );
     }

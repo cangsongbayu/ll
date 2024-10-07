@@ -9,6 +9,7 @@ namespace App\Models;
 use App\Models\Traits\HasHashID;
 use Carbon\Carbon;
 use EloquentFilter\Filterable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\Traits\HasSanctumPersonalAccessToken;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -87,6 +88,11 @@ class Supplier extends Authenticatable
         'is_enable_tfa' => false,
     ];
 
+    public function rates(): HasMany
+    {
+        return $this->hasMany(SupplierRate::class);
+    }
+
     /**
      * 获取供应商下级的最高费率
      */
@@ -94,5 +100,29 @@ class Supplier extends Authenticatable
     {
         $list = $this->descendants->pluck('id');
         return SupplierRate::whereIn('supplier_id', $list)->where('payment_type_id', $paymentTypeId)->max('rate');
+    }
+
+    public static function deleteRates(...$ids): void
+    {
+        if (blank($ids)) {
+            return;
+        }
+
+        // 展平数组
+        $deletes = collect($ids)->flatten()->unique()->values()->toArray();
+
+        SupplierRate::whereIn('supplier_id', $deletes)->delete();
+    }
+
+    public static function restoreRates(...$ids): void
+    {
+        if (blank($ids)) {
+            return;
+        }
+
+        // 展平数组
+        $restores = collect($ids)->flatten()->unique()->values()->toArray();
+
+        SupplierRate::whereIn('supplier_id', $restores)->restore();
     }
 }

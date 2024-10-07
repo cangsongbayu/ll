@@ -108,7 +108,7 @@ class MerchantService extends Service
         return DB::transaction(function() use ($request) {
             $ids = $request->input('ids', []);
             Merchant::restoreRates($ids); // 恢复用户的所有费率
-            return Merchant::withTrashed()->whereIn('id', $ids)->restore();
+            return Merchant::onlyTrashed()->whereIn('id', $ids)->restore();
         });
     }
 }

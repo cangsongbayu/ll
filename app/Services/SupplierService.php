@@ -86,7 +86,7 @@ class SupplierService extends Service
         return DB::transaction(function() use ($request) {
             $ids = $request->input('ids', []);
             Supplier::deleteTokens($ids); // 删除用户的所有 token
-//            Supplier::deleteRates($ids); // 删除用户的所有费率
+            Supplier::deleteRates($ids); // 删除用户的所有费率
             return Supplier::whereIn('id', $ids)->delete();
         });
     }
@@ -98,7 +98,7 @@ class SupplierService extends Service
     {
         return DB::transaction(function() use ($request) {
             $ids = $request->input('ids', []);
-//            Supplier::restoreRates($ids); // 恢复用户的所有费率
+            Supplier::restoreRates($ids); // 恢复用户的所有费率
             return Supplier::withTrashed()->whereIn('id', $ids)->restore();
         });
     }

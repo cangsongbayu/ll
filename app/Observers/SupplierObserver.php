@@ -43,6 +43,8 @@ class SupplierObserver
     {
         //
         Supplier::deleteTokens($supplier->id);
+        // 删除用户的所有费率
+        $supplier->rates()->delete();
     }
 
     /**
@@ -50,7 +52,8 @@ class SupplierObserver
      */
     public function restored(Supplier $supplier): void
     {
-        //
+        // 恢复用户的所有费率
+        $supplier->rates()->onlyTrashed()->restore();
     }
 
     /**

@@ -96,7 +96,7 @@ class MerchantRateService extends Service
     {
         return DB::transaction(function() use ($request) {
             $ids = $request->input('ids', []);
-            return MerchantRate::withTrashed()->whereIn('id', $ids)->restore();
+            return MerchantRate::onlyTrashed()->whereIn('id', $ids)->restore();
         });
     }
 }
