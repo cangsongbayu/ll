@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\MerchantRateController;
 use App\Http\Controllers\PaymentTypeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgentController;
@@ -62,6 +63,12 @@ Route::group([
         Route::put('verify-tfa', 'verifyTFA');
     });
 
+    // 支付方式
+    Route::controller(PaymentTypeController::class)->group(function() {
+        Route::get('payment-type/all', 'all'); // 所有
+        Route::apiResource('payment-type', PaymentTypeController::class); // 资源路由
+    });
+
     // 货币
     Route::controller(CurrencyController::class)->group(function() {
         Route::get('currency/all', 'all'); // 所有
@@ -88,6 +95,7 @@ Route::group([
     Route::controller(MerchantController::class)->group(function() {
         Route::get('merchant/all', 'all'); // 所有
         Route::put('merchant/restore/{merchant}', 'restore')->withTrashed(); // 恢复
+//        Route::put('merchant/restore/{merchant}', 'restore'); // 恢复
         Route::put('merchant/batch-restore', 'batchRestore'); // 批量恢复
         Route::delete('merchant/batch-destroy', 'batchDestroy'); // 批量删除
         Route::apiResource('merchant', MerchantController::class); // 资源路由
@@ -98,6 +106,11 @@ Route::group([
         Route::apiResource('merchant-prepayment', MerchantPrepaymentController::class)->only(['index', 'store']); // 资源路由
     });
 
+    // 商户费率
+    Route::controller(MerchantRateController::class)->group(function() {
+        Route::apiResource('merchant-rate', MerchantRateController::class); // 资源路由
+    });
+
     // 押金
     Route::controller(DepositController::class)->group(function() {
         Route::apiResource('deposit', DepositController::class)->only(['index', 'store']); // 资源路由
@@ -105,12 +118,6 @@ Route::group([
 
     // 押金主体列表
     Route::get('depositable/all', 'App\Http\Controllers\DepositableController@all');
-
-    // 支付方式
-    Route::controller(PaymentTypeController::class)->group(function() {
-        Route::get('payment-type/all', 'all'); // 所有
-        Route::apiResource('payment-type', PaymentTypeController::class); // 资源路由
-    });
 
     // 设置
     Route::controller(SettingController::class)->group(function() {

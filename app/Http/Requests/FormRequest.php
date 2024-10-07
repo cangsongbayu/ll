@@ -29,42 +29,26 @@ abstract class FormRequest extends IlluminateFormRequest
      */
     protected function prepareForValidation(): void
     {
-        $decodeNames = [
-            'user_id',
-            'agent_id',
-            'merchant_id',
-            'currency_id',
-            'depositable_id',
-            'payment_type_id',
-            'ids',
-            'password',
-        ];
-
-        foreach ($decodeNames as $decodeName) {
-            if ($this->has($decodeName)) {
-                if ($decodeName === 'ids') {
-                    $this->decodeHashids();
-                } else if ($decodeName === 'password') {
-                    try {
-                        $key = config('app.password_key');
-
-                        // 移除 "base64:" 前缀（如果存在）
-                        if (str_starts_with($key, 'base64:')) {
-                            $key = substr($key, 7);
-                        }
-
-                        $encrypter = new Encrypter(base64_decode($key), 'AES-256-CBC');
-                        $this->merge([$decodeName => $encrypter->decrypt($this->input($decodeName))]);
-                    } catch (DecryptException $e) {
-                        throw new InvalidRequestException();
+        foreach ($this->all() as $key => $value) {
+            if (str_ends_with($key, '_id')) {
+                if (!is_string($value)) {
+                    throw new InvalidRequestException();
+                }
+                $decoded = Hashids::decode($value);
+                $this->merge([$key => $decoded[0] ?? null]);
+            } else if ($key === 'ids') {
+                $this->decodeHashids();
+            } else if ($key === 'password') {
+                try {
+                    $passwordKey = config('app.password_key');
+                    // 移除 "base64:" 前缀（如果存在）
+                    if (str_starts_with($passwordKey, 'base64:')) {
+                        $passwordKey = substr($passwordKey, 7);
                     }
-                } else {
-                    $id = $this->input($decodeName);
-                    if (!is_string($id)) {
-                        throw new InvalidRequestException();
-                    }
-                    $decoded = Hashids::decode($id);
-                    $this->merge([$decodeName => $decoded[0] ?? null]);
+                    $encrypter = new Encrypter(base64_decode($passwordKey), 'AES-256-CBC');
+                    $this->merge([$key => $encrypter->decrypt($this->input($key))]);
+                } catch (DecryptException $e) {
+                    throw new InvalidRequestException();
                 }
             }
         }

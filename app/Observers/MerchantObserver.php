@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Merchant;
+use Illuminate\Support\Facades\DB;
 
 class MerchantObserver
 {
@@ -31,6 +32,14 @@ class MerchantObserver
         if ($merchant->isDirty('password')) {
             Merchant::deleteTokens($merchant->id);
         }
+
+        // 如果删除了代理，将商户所有费率的平台费率值修改为与商户费率相同，返点为 0
+        if ($merchant->isDirty('agent_id') && is_null($merchant->agent_id)) {
+            $merchant->rates()->update([
+                'platform_rate' => DB::raw('rate'),
+                'rebate' => 0
+            ]);
+        }
     }
 
     /**
@@ -46,7 +55,9 @@ class MerchantObserver
      */
     public function deleted(Merchant $merchant): void
     {
-        //
+        Merchant::deleteTokens($merchant->id); // 删除用户的所有 token
+        // 删除用户的所有费率
+        $merchant->rates()->delete();
     }
 
     /**
@@ -54,7 +65,8 @@ class MerchantObserver
      */
     public function restored(Merchant $merchant): void
     {
-        //
+        // 恢复用户的所有费率
+        $merchant->rates()->onlyTrashed()->restore();
     }
 
     /**

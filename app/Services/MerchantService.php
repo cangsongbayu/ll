@@ -33,7 +33,7 @@ class MerchantService extends Service
 
     public function all(Request $request): array
     {
-        $list = Merchant::select(['id', 'name', 'deleted_at'])->filter($request->all())->get();
+        $list = Merchant::select(['id', 'name', 'deleted_at'])->filter($request->all())->withTrashed()->get();
         return [
             'list' => new MerchantCollection($list)
         ];
@@ -71,7 +71,6 @@ class MerchantService extends Service
     public function destroy(DestroyRequest $request, Merchant $merchant): Merchant
     {
         return DB::transaction(function() use ($request, $merchant) {
-            Merchant::deleteTokens($merchant->id); // 删除用户的所有 token
             $merchant->delete();
             return $merchant;
         });
@@ -96,6 +95,7 @@ class MerchantService extends Service
         return DB::transaction(function() use ($request) {
             $ids = $request->input('ids', []);
             Merchant::deleteTokens($ids); // 删除用户的所有 token
+            Merchant::deleteRates($ids); // 删除用户的所有费率
             return Merchant::whereIn('id', $ids)->delete();
         });
     }
@@ -107,6 +107,7 @@ class MerchantService extends Service
     {
         return DB::transaction(function() use ($request) {
             $ids = $request->input('ids', []);
+            Merchant::restoreRates($ids); // 恢复用户的所有费率
             return Merchant::withTrashed()->whereIn('id', $ids)->restore();
         });
     }

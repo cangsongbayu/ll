@@ -12,6 +12,8 @@ use App\Models\Traits\HasHashID;
 use App\Models\Traits\HasSanctumPersonalAccessToken;
 use Carbon\Carbon;
 use EloquentFilter\Filterable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -116,5 +118,39 @@ class Merchant extends Authenticatable
     public function deposits(): MorphMany
     {
         return $this->morphMany(Deposit::class, 'depositable');
+    }
+
+    public function agent(): BelongsTo
+    {
+        return $this->belongsTo(Agent::class);
+    }
+
+    public function rates(): HasMany
+    {
+        return $this->hasMany(MerchantRate::class);
+    }
+
+    public static function deleteRates(...$ids): void
+    {
+        if (blank($ids)) {
+            return;
+        }
+
+        // 展平数组
+        $deletes = collect($ids)->flatten()->unique()->values()->toArray();
+
+        MerchantRate::whereIn('merchant_id', $deletes)->delete();
+    }
+
+    public static function restoreRates(...$ids): void
+    {
+        if (blank($ids)) {
+            return;
+        }
+
+        // 展平数组
+        $restores = collect($ids)->flatten()->unique()->values()->toArray();
+
+        MerchantRate::whereIn('merchant_id', $restores)->restore();
     }
 }

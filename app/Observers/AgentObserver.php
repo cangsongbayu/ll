@@ -42,6 +42,7 @@ class AgentObserver
     public function deleted(Agent $agent): void
     {
         //
+        Agent::deleteTokens($agent->id); // 删除用户的所有 token
     }
 
     /**

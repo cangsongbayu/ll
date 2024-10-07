@@ -18,9 +18,13 @@ class BaseJsonResource extends JsonResource
     public function toArray(Request $request): array|JsonSerializable|Arrayable
     {
         $data = parent::toArray($request);
-        if (isset($data['id'])) {
-            $data['id'] = $this->hashId($data['id']);
+
+        foreach ($data as $key => $value) {
+            if (str_ends_with($key, '_id') || $key === 'id') {
+                $data[$key] = $this->hashId($value);
+            }
         }
+
         return $data;
     }
 }

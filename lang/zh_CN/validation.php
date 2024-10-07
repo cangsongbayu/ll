@@ -179,5 +179,7 @@ return [
         'valid_amount' => '订单有效金额',
         'order_ttl' => '订单过期时间',
         'business_hours' => '营业时间',
+        'rate' => '费率',
+        'payment_type_id' => '支付方式',
     ],
 ];

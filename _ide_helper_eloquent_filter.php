@@ -2,9 +2,29 @@
 
 namespace Illuminate\Database\Eloquent {
     /**
-     * @method static \Illuminate\Database\Eloquent\Builder filter($input = null, $filter = null)
+     * @method static Builder filter($input = null, $filter = null)
      */
-    class Builder {}
+    class Builder {
+        /**
+         * Include soft deleted records in the results.
+         *
+         * @return Builder
+         */
+        public function withTrashed(): static
+        {
+            return $this;
+        }
+
+        /**
+         * Get only soft deleted records.
+         *
+         * @return Builder
+         */
+        public function onlyTrashed(): static
+        {
+            return $this;
+        }
+    }
 }
 
 namespace EloquentFilter {

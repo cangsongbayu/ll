@@ -62,7 +62,6 @@ class AgentService extends Service
     public function destroy(DestroyRequest $request, Agent $agent): Agent
     {
         return DB::transaction(function() use ($request, $agent) {
-            Agent::deleteTokens($agent->id); // 删除用户的所有 token
             $agent->delete();
             return $agent;
         });
