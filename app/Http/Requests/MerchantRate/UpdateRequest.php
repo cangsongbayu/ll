@@ -4,6 +4,7 @@ namespace App\Http\Requests\MerchantRate;
 
 use App\Http\Requests\FormRequest;
 use App\Models\MerchantRate;
+use App\Models\SupplierRate;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 class UpdateRequest extends BaseRequest
@@ -19,28 +20,25 @@ class UpdateRequest extends BaseRequest
 
         $rules = [
             'payment_type_id' => [
-                'filled',
-                'numeric',
-                'db_bigint:unsigned',
-                'exists:App\Models\PaymentType,id',
+                'prohibited',
             ],
             'merchant_id' => [
-                'filled',
-                'numeric',
-                'db_bigint:unsigned',
-                'exists:App\Models\Merchant,id,deleted_at,NULL',
+                'prohibited',
             ],
             'rate' => [
                 'filled',
                 'numeric',
                 'decimal:0,6',
                 'between:0,1',
+                'gte:platform_rate',
             ],
             'platform_rate' => [
                 'filled',
                 'numeric',
                 'decimal:0,6',
                 'between:0,1',
+                'lte:rate',
+                $this->validatePlatformRate(...),
             ],
             'is_open_for_business' => [
                 'filled',

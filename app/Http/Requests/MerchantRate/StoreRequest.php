@@ -3,6 +3,7 @@
 namespace App\Http\Requests\MerchantRate;
 
 use App\Models\MerchantRate;
+use App\Models\SupplierRate;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 class StoreRequest extends BaseRequest
@@ -40,6 +41,7 @@ class StoreRequest extends BaseRequest
                 'decimal:0,6',
                 'between:0,1',
                 'lte:rate',
+                $this->validatePlatformRate(...),
             ],
             'is_open_for_business' => [
                 'required',

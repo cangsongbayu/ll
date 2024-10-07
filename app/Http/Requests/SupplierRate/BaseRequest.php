@@ -23,13 +23,13 @@ class BaseRequest extends FormRequest
         $paymentTypeId = $method === 'POST' ? $this->input('payment_type_id') : $supplierRate->payment_type_id;
         $supplierId = $method === 'POST' ? $this->input('supplier_id') : $supplierRate->supplier_id;
 
-        $maxRate = MerchantRate::where('payment_type_id', $paymentTypeId)->min('platform_rate');
-
         $errors = $this->validator->errors();
         if ($method === 'POST' && $errors->hasAny('payment_type_id', 'supplier_id')) {
             // 跳过检查
             return true;
         }
+
+        $maxRate = MerchantRate::where('payment_type_id', $paymentTypeId)->min('platform_rate');
 
         if (bccomp($value, $maxRate, 6) > 0) {
             return $fail('供应商费率 不能大于平台实际费率：' . $maxRate) . '。';

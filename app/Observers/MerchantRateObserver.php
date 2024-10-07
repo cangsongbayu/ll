@@ -8,11 +8,11 @@ class MerchantRateObserver
 {
     public function creating(MerchantRate $merchantRate): void
     {
-        $merchantRate->rebate = bcsub($merchantRate->rate, $merchantRate->platform_rate, 6);
         // 如果商户没有代理，实际费率应 = 商户费率
         if (is_null($merchantRate->merchant->agent_id)) {
             $merchantRate->platform_rate = $merchantRate->rate;
         }
+        $merchantRate->rebate = bcsub($merchantRate->rate, $merchantRate->platform_rate, 6);
     }
 
     /**
