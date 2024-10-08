@@ -39,7 +39,7 @@ abstract class FormRequest extends IlluminateFormRequest
             } else if ($key === 'ids' || str_ends_with($key, '_ids')) {
                 $this->decodeHashids($key);
             } else if ($key === 'password' || $key === 'current_password') {
-                try {
+//                try {
                     $passwordKey = config('app.password_key');
                     // 移除 "base64:" 前缀（如果存在）
                     if (str_starts_with($passwordKey, 'base64:')) {
@@ -47,9 +47,9 @@ abstract class FormRequest extends IlluminateFormRequest
                     }
                     $encrypter = new Encrypter(base64_decode($passwordKey), 'AES-256-CBC');
                     $this->merge([$key => $encrypter->decrypt($this->input($key))]);
-                } catch (DecryptException $e) {
-                    throw new InvalidRequestException();
-                }
+//                } catch (DecryptException $e) {
+//                    throw new InvalidRequestException();
+//                }
             }
         }
     }
