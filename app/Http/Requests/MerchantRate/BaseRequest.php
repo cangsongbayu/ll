@@ -15,7 +15,7 @@ class BaseRequest extends FormRequest
         ];
     }
 
-    public function validatePlatformRate($attribute, $value, $fail): bool
+    public function validatePlatformRate($attribute, $value, $fail)
     {
         $errors = $this->validator->errors();
         if ($errors->hasAny('payment_type_id')) {

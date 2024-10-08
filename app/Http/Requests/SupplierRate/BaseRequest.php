@@ -16,7 +16,7 @@ class BaseRequest extends FormRequest
         ];
     }
 
-    public function validateRate($attribute, $value, $fail): bool
+    public function validateRate($attribute, $value, $fail)
     {
         $method = $this->method();
         $supplierRate = $this->route('supplier_rate');
