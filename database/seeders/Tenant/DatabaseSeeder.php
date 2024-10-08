@@ -2,7 +2,6 @@
 
 namespace Database\Seeders\Tenant;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +18,8 @@ class DatabaseSeeder extends Seeder
             AgentSeeder::class,
             MerchantSeeder::class,
             PaymentTypeSeeder::class,
+            MerchantRateSeeder::class,
+            SupplierSeeder::class,
         ]);
     }
 }

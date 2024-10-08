@@ -13,27 +13,16 @@ class PaymentTypeSeeder extends Seeder
     public function run(): void
     {
         //
-        $list = [
-            [
-                'name' => '测试1',
-                'slug' => 'test1',
+        for ($i = 1; $i <= 10; $i++) {
+            $arr = [
+                'name' => "测试$i",
+                'slug' => "test$i",
                 'valid_amount' => 100,
                 'order_ttl' => 120,
                 'business_hours' => '00:00:00~23:59:59',
                 'is_open_for_business' => 1,
-            ],
-            [
-                'name' => '测试2',
-                'slug' => 'test2',
-                'valid_amount' => 100,
-                'order_ttl' => 120,
-                'business_hours' => '00:00:00~23:59:59',
-                'is_open_for_business' => 1,
-            ]
-        ];
-
-        foreach ($list as $item) {
-            PaymentType::create($item);
+            ];
+            PaymentType::create($arr);
         }
     }
 }
