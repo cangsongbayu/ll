@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 /**
  * Class CollectionMethodType
@@ -36,4 +37,12 @@ class CollectionMethodType extends BaseModel
 		'sort',
 		'data'
 	];
+
+    protected function paymentTypeIds(): Attribute
+    {
+        return Attribute::make(
+            get: fn (string $value) => explode(',', $value),
+            set: fn (array $value) => implode(',', $value),
+        );
+    }
 }

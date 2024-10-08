@@ -22,6 +22,8 @@ class BaseJsonResource extends JsonResource
         foreach ($data as $key => $value) {
             if (str_ends_with($key, '_id') || $key === 'id') {
                 $data[$key] = $this->hashId($value);
+            } else if (str_ends_with($key, '_ids')) {
+                $data[$key] = collect($value)->map(fn($id) => $this->hashId($id));
             }
         }
 

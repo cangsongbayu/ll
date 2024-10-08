@@ -19,9 +19,7 @@ class UpdateRequest extends FormRequest
         return [
             'payment_type_ids' => [
                 'filled',
-                'string',
-                'max:255',
-                'regex:/^(\d+)(,\d+)*$|^$/',
+                'array',
             ],
             'name' => [
                 "unique:App\Models\CollectionMethodType,name,$collectionMethodType->id",
