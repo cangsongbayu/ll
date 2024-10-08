@@ -2,7 +2,6 @@
 
 namespace App\Http\Requests\SupplierRate;
 
-use App\Models\SupplierRate;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 class UpdateRequest extends BaseRequest

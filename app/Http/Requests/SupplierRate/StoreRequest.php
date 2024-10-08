@@ -43,6 +43,7 @@ class StoreRequest extends BaseRequest
             $rules['payment_type_id'][] = function($attr, $value, $fail) {
                 $exists = SupplierRate::where('supplier_id', $this->input('supplier_id'))
                     ->where('payment_type_id', $this->input('payment_type_id'))
+                    ->withTrashed()
                     ->exists();
                 if ($exists) {
                     return $fail('供应商费率 已经存在。');
