@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             PaymentTypeSeeder::class,
             MerchantRateSeeder::class,
             SupplierSeeder::class,
+            CollectionMethodTypeSeeder::class,
         ]);
     }
 }

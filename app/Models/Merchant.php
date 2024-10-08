@@ -81,6 +81,7 @@ class Merchant extends Authenticatable
         'max_token_count',
         'is_enable_tfa',
         'allowed_ip_addresses',
+        'agent_id',
 	];
 
     protected $attributes = [
