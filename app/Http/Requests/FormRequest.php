@@ -36,8 +36,8 @@ abstract class FormRequest extends IlluminateFormRequest
                 }
                 $decoded = Hashids::decode($value);
                 $this->merge([$key => $decoded[0] ?? null]);
-            } else if ($key === 'ids') {
-                $this->decodeHashids();
+            } else if ($key === 'ids' || str_ends_with($key, '_ids')) {
+                $this->decodeHashids($key);
             } else if ($key === 'password' || $key === 'current_password') {
                 try {
                     $passwordKey = config('app.password_key');
@@ -57,30 +57,29 @@ abstract class FormRequest extends IlluminateFormRequest
     /**
      * @throws InvalidRequestException
      */
-    protected function decodeHashids(): void
+    protected function decodeHashids($key): void
     {
-        if ($this->has('ids')) {
-            $ids = $this->input('ids');
-            if (!is_array($ids)) {
+        $ids = $this->input($key);
+
+        if (!is_array($ids)) {
+            throw new InvalidRequestException();
+        }
+
+        foreach ($ids as $id) {
+            if (!is_string($id)) {
                 throw new InvalidRequestException();
             }
-
-            foreach ($ids as $id) {
-                if (!is_string($id)) {
-                    throw new InvalidRequestException();
-                }
-            }
-
-            $this->merge([
-                'ids' => collect($ids)
-                    ->map(function ($hashedId) {
-                        $decoded = Hashids::decode($hashedId);
-                        return $decoded[0] ?? null;
-                    })
-                    ->filter()
-                    ->values()
-                    ->toArray()
-            ]);
         }
+
+        $this->merge([
+            $key => collect($ids)
+                ->map(function ($hashedId) {
+                    $decoded = Hashids::decode($hashedId);
+                    return $decoded[0] ?? null;
+                })
+                ->filter()
+                ->values()
+                ->toArray()
+        ]);
     }
 }

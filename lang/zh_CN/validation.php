@@ -185,5 +185,8 @@ return [
         'payment_type_id' => '支付方式',
         'parent_id' => '上级',
         'supplier_id' => '供应商',
+        'payment_type_ids' => '支付方式',
+        'sort' => '排序',
+        'data' => '数据',
     ],
 ];

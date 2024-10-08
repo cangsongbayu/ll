@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             AgentSeeder::class,
             MerchantSeeder::class,
+            PaymentTypeSeeder::class,
         ]);
     }
 }

@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('collection_method_types', function (Blueprint $table) {
             $table->id();
+            $table->string('payment_type_ids')->comment('对应的付款方式 ID');
+            $table->string('name')->unique();
+            $table->unsignedSmallInteger('sort')->default(0);
+            $table->json('data');
             $table->timestamps();
         });
     }

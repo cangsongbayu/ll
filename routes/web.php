@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Encryption\Encrypter;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/test', function () {
+    $passwordKey = config('app.password_key');
+    // 移除 "base64:" 前缀（如果存在）
+    if (str_starts_with($passwordKey, 'base64:')) {
+        $passwordKey = substr($passwordKey, 7);
+    }
+    $encrypter = new Encrypter(base64_decode($passwordKey), 'AES-256-CBC');
+    echo $encrypter->encrypt('123');
 });

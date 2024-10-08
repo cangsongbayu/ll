@@ -27,7 +27,7 @@ class UpdateRequest extends BaseRequest
                 'filled',
                 'numeric',
                 'decimal:0,6',
-                'db_decimal:7,6,unsigned',
+                'between:0,1'
             ],
             'is_open_for_business' => [
                 'filled',

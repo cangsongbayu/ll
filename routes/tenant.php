@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\AuthenticateController;
+use App\Http\Controllers\CollectionMethodTypeController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\MerchantRateController;
 use App\Http\Controllers\PaymentTypeController;
@@ -138,6 +139,11 @@ Route::group([
 
     // 押金主体列表
     Route::get('depositable/all', 'App\Http\Controllers\DepositableController@all');
+
+    // 收款方式类型
+    Route::controller(CollectionMethodTypeController::class)->group(function() {
+        Route::apiResource('collection-method-type', CollectionMethodTypeController::class);
+    });
 
     // 设置
     Route::controller(SettingController::class)->group(function() {
