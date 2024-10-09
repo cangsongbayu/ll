@@ -30,6 +30,10 @@ abstract class FormRequest extends IlluminateFormRequest
     protected function prepareForValidation(): void
     {
         foreach ($this->all() as $key => $value) {
+            if ($value === null) {
+                continue;
+            }
+
             if (str_ends_with($key, '_id')) {
                 if (!is_string($value)) {
                     throw new InvalidRequestException();
