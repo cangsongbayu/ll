@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
  * @property string $payment_type_ids
  * @property string $name
  * @property int $sort
- * @property string $data
+ * @property array $data
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  *

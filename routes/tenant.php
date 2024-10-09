@@ -3,12 +3,14 @@
 declare(strict_types=1);
 
 use App\Http\Controllers\AuthenticateController;
+use App\Http\Controllers\CollectionMethodController;
 use App\Http\Controllers\CollectionMethodTypeController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\MerchantRateController;
 use App\Http\Controllers\PaymentTypeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\SupplierRateController;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgentController;
 use App\Http\Controllers\MerchantController;
@@ -145,9 +147,19 @@ Route::group([
         Route::apiResource('collection-method-type', CollectionMethodTypeController::class);
     });
 
+    // 收款方式
+    Route::controller(CollectionMethodController::class)->group(function() {
+        Route::apiResource('collection-method', CollectionMethodController::class);
+    });
+
     // 设置
     Route::controller(SettingController::class)->group(function() {
         Route::apiResource('setting', SettingController::class)->only(['index']);
+    });
+
+    // 文件上传
+    Route::controller(UploadController::class)->group(function() {
+        Route::post('upload', 'handle');
     });
 });
 

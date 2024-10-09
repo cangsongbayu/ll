@@ -188,5 +188,12 @@ return [
         'payment_type_ids' => '支付方式',
         'sort' => '排序',
         'data' => '数据',
+        'collection_method_type_id' => '收款方式类型',
+        'daily_limit' => '日限额',
+        'daily_transaction_limit' => '日限笔数',
+        'collection_method_name' => '名称',
+        'collection_method_phone_number' => '手机号码',
+        'file_type' => '文件类型',
+        'file' => '文件',
     ],
 ];

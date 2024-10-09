@@ -18,19 +18,13 @@ class UpdateRequest extends FormRequest
 
         return [
             'collection_method_type_id' => [
-                'filled',
-                'numeric',
-                'db_bigint:unsigned',
+                'prohibited'
             ],
             'payment_type_id' => [
-                'filled',
-                'numeric',
-                'db_bigint:unsigned',
+                'prohibited'
             ],
             'supplier_id' => [
-                'filled',
-                'numeric',
-                'db_bigint:unsigned',
+                'prohibited'
             ],
             'name' => [
                 "unique:App\Models\CollectionMethod,name,$collectionMethod->id",

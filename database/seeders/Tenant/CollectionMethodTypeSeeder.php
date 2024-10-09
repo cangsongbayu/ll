@@ -21,18 +21,34 @@ class CollectionMethodTypeSeeder extends Seeder
                     'fields' => [
                         [
                             'name' => 'collection_method_phone_number',
-                            'rule' => [
+                            'type' => 'string',
+                            'rules' => [
                                 'laravel' => [
-                                    'required',
-                                    'string',
+                                    'store' => [
+                                        'required',
+                                        'string',
+                                    ],
+                                    'update' => [
+                                        'filled',
+                                        'string',
+                                    ],
                                 ],
                             ],
                         ],
                         [
                             'name' => 'collection_method_name',
-                            'rule' => [
-                                'required',
-                                'string',
+                            'type' => 'string',
+                            'rules' => [
+                                'laravel' => [
+                                    'store' => [
+                                        'required',
+                                        'string',
+                                    ],
+                                    'update' => [
+                                        'filled',
+                                        'string',
+                                    ],
+                                ],
                             ],
                         ]
                     ],

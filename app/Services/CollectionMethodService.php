@@ -9,6 +9,7 @@ use App\Http\Requests\CollectionMethod\UpdateRequest;
 use App\Models\CollectionMethod;
 use App\Http\Resources\CollectionMethodCollection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Arr;
 use Throwable;
 
 class CollectionMethodService extends Service
@@ -34,7 +35,18 @@ class CollectionMethodService extends Service
     {
         return DB::transaction(function() use ($request, $collectionMethod) {
             $validated = $request->validated();
-            $collectionMethod->fill($validated);
+            // 获取收款方式类型
+            $collectionMethodType = $request->getCollectionMethodType();
+            // 获取需要处理的动态字段
+            $fields = Arr::get($collectionMethodType->data, 'fields', []);
+            $data = [];
+            foreach ($fields as $field) {
+                $type = Arr::get($field, 'type');
+                if ($type === 'string') {
+                    $data[$field['name']] = $request->input($field['name']);
+                }
+            }
+            $collectionMethod->fill(array_merge($validated, ['data' => $data]));
             $collectionMethod->save();
             return $collectionMethod;
         });

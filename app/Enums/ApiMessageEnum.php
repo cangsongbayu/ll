@@ -5,6 +5,7 @@ namespace App\Enums;
 enum ApiMessageEnum: string
 {
     case GENERAL_SUCCESS = 'GENERAL_SUCCESS';
+    case UPLOAD_SUCCESS = 'UPLOAD_SUCCESS';
     case LOGIN = 'LOGIN';
     case INDEX = 'INDEX';
     case STORE_OR_UPDATE = 'STORE_OR_UPDATE';
@@ -21,6 +22,7 @@ enum ApiMessageEnum: string
     {
         return match ($this) {
             self::GENERAL_SUCCESS => '成功',
+            self::UPLOAD_SUCCESS => '上传成功',
             self::LOGIN => '登录成功',
             self::INDEX => '查询成功',
             self::STORE_OR_UPDATE => '保存成功',
