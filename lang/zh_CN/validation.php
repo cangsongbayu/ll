@@ -195,5 +195,6 @@ return [
         'collection_method_phone_number' => '手机号码',
         'file_type' => '文件类型',
         'file' => '文件',
+        'context' => '上下文',
     ],
 ];

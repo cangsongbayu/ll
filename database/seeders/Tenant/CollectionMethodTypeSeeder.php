@@ -4,6 +4,7 @@ namespace Database\Seeders\Tenant;
 
 use App\Models\CollectionMethodType;
 use Illuminate\Database\Seeder;
+use App\Enums\CollectionMethodFieldTypeEnum;
 
 class CollectionMethodTypeSeeder extends Seeder
 {
@@ -21,7 +22,7 @@ class CollectionMethodTypeSeeder extends Seeder
                     'fields' => [
                         [
                             'name' => 'collection_method_phone_number',
-                            'type' => 'string',
+                            'type' => CollectionMethodFieldTypeEnum::STRING->value,
                             'rules' => [
                                 'laravel' => [
                                     'store' => [
@@ -37,7 +38,7 @@ class CollectionMethodTypeSeeder extends Seeder
                         ],
                         [
                             'name' => 'collection_method_name',
-                            'type' => 'string',
+                            'type' => CollectionMethodFieldTypeEnum::STRING->value,
                             'rules' => [
                                 'laravel' => [
                                     'store' => [
@@ -47,6 +48,20 @@ class CollectionMethodTypeSeeder extends Seeder
                                     'update' => [
                                         'filled',
                                         'string',
+                                    ],
+                                ],
+                            ],
+                        ],
+                        [
+                            'name' => 'context',
+                            'type' => CollectionMethodFieldTypeEnum::QR_FILE->value,
+                            'rules' => [
+                                'laravel' => [
+                                    'store' => [
+                                        'required',
+                                    ],
+                                    'update' => [
+                                        'filled',
                                     ],
                                 ],
                             ],

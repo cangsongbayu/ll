@@ -6,6 +6,7 @@ use App\Enums\ApiErrorCodeEnum;
 use App\Helpers\ApiResponse;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Auth\AuthenticationException;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -27,6 +28,11 @@ class Handler extends ExceptionHandler
      */
     public function register(): void
     {
+        // 登录状态失效
+        $this->renderable(function (AuthenticationException $e) {
+            return $this->renderAuthenticationException($e);
+        });
+
         // 请求方法不允许
         $this->renderable(function (MethodNotAllowedHttpException $e) {
             return $this->renderMethodNotAllowedHttpException($e);
@@ -41,6 +47,18 @@ class Handler extends ExceptionHandler
         $this->renderable(function (ValidationException $e) {
             return $this->renderValidationException($e);
         });
+    }
+
+    // 登录状态失效
+    public function renderAuthenticationException(AuthenticationException $e): bool|\Illuminate\Http\JsonResponse
+    {
+        if (request()->expectsJson()) {
+            return ApiResponse::fail(
+                ApiErrorCodeEnum::AUTHENTICATION_EXCEPTION->getErrorMessage(),
+                ApiErrorCodeEnum::AUTHENTICATION_EXCEPTION,
+            );
+        }
+        return true;
     }
 
     // 请求方法不允许

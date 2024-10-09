@@ -7,6 +7,7 @@ use App\Enums\ApiMessageShowTypeEnum;
 use App\Helpers\ApiResponse;
 use App\Models\TemporaryUploadFile;
 use App\Http\Requests\Upload\HandleRequest;
+use App\Http\Resources\TemporaryUploadFile as TemporaryUploadFileResource;
 use Carbon\Carbon;
 
 class UploadController extends Controller
@@ -20,7 +21,10 @@ class UploadController extends Controller
         $temporaryUploadFile = TemporaryUploadFile::create(['path' => $path, 'data' => $request->input('context')]);
         return ApiResponse::success(
             [
-                'file' => $temporaryUploadFile,
+                'context' => [
+                    'path' => $temporaryUploadFile->path,
+                    ...$temporaryUploadFile->data,
+                ],
             ],
             ApiMessageEnum::UPLOAD_SUCCESS->getMessage(),
             ApiMessageShowTypeEnum::SUCCESS,
