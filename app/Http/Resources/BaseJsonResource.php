@@ -20,6 +20,9 @@ class BaseJsonResource extends JsonResource
         $data = parent::toArray($request);
 
         foreach ($data as $key => $value) {
+            if (is_null($value)) {
+                continue;
+            }
             if (str_ends_with($key, '_id') || $key === 'id') {
                 $data[$key] = $this->hashId($value);
             } else if (str_ends_with($key, '_ids')) {
