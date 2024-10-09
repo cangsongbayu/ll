@@ -17,6 +17,12 @@ class SettingSeeder extends Seeder
         $list = [
             [
                 'category' => SettingCategoryEnum::GENERAL,
+                'key' => 'site_name',
+                'value' => '默认',
+                'description' => '网站名称',
+            ],
+            [
+                'category' => SettingCategoryEnum::GENERAL,
                 'key' => 'allowed_depositable_types',
                 'value' => 'merchant,supplier',
                 'description' => '押金主体类型',

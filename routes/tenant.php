@@ -53,6 +53,7 @@ Route::group([
     'prefix' => 'api/tenant',
 ], function () {
     Route::post('login', 'AuthenticateController@login'); // 登录
+    Route::get('site-name', 'SiteNameController@get'); // 网站名称
 });
 
 Route::group([
