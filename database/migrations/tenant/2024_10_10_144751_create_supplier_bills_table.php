@@ -11,9 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('merchant_bills', function (Blueprint $table) {
+        Schema::create('supplier_bills', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('merchant_id');
+            $table->unsignedBigInteger('supplier_id');
             $table->unsignedSmallInteger('type')->comment('账单类型');
             $table->string('trade_no')->unique();
             $table->unsignedBigInteger('currency_id')->comment('订单货币');
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('merchant_bills');
+        Schema::dropIfExists('supplier_bills');
     }
 };

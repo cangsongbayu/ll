@@ -6,8 +6,10 @@ use App\Http\Controllers\AuthenticateController;
 use App\Http\Controllers\CollectionMethodController;
 use App\Http\Controllers\CollectionMethodTypeController;
 use App\Http\Controllers\CurrencyController;
+use App\Http\Controllers\MerchantBillController;
 use App\Http\Controllers\MerchantRateController;
 use App\Http\Controllers\PaymentTypeController;
+use App\Http\Controllers\SupplierBillController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\SupplierRateController;
 use App\Http\Controllers\UploadController;
@@ -151,6 +153,16 @@ Route::group([
     // 收款方式
     Route::controller(CollectionMethodController::class)->group(function() {
         Route::apiResource('collection-method', CollectionMethodController::class);
+    });
+
+    // 商户账单
+    Route::controller(MerchantBillController::class)->group(function() {
+        Route::apiResource('merchant-bill', MerchantBillController::class)->only(['index', 'store']);
+    });
+
+    // 供应商账单
+    Route::controller(SupplierBillController::class)->group(function() {
+        Route::apiResource('supplier-bill', SupplierBillController::class)->only(['index', 'store']);
     });
 
     // 设置

@@ -196,5 +196,6 @@ return [
         'file_type' => '文件类型',
         'file' => '文件',
         'context' => '上下文',
+        'type' => '类型',
     ],
 ];
