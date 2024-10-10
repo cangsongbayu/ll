@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('merchant_bills', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('merchant_id');
+            $table->unsignedSmallInteger('type')->comment('账单类型');
+            $table->string('trade_no')->unique();
+            $table->unsignedBigInteger('currency_id')->comment('订单货币');
+            $table->decimal('amount', 20, 6)->comment('订单金额');
+            $table->decimal('exchange_rate', 20, 6)->unsigned()->comment('汇率');
+            $table->unsignedBigInteger('base_currency_id')->comment('基准货币');
+            $table->decimal('base_amount', 20, 6)->comment('基准货币订单金额');
+            $table->string('note')->nullable();
             $table->timestamps();
         });
     }
