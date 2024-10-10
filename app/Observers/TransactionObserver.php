@@ -2,16 +2,23 @@
 
 namespace App\Observers;
 
+use App\Helpers\OrderNumberGenerator;
 use App\Models\Transaction;
 
 class TransactionObserver
 {
+    public function creating(Transaction $transaction): void
+    {
+        $transaction->trade_no = OrderNumberGenerator::generate();
+    }
+
     /**
      * Handle the Transaction "created" event.
      */
     public function created(Transaction $transaction): void
     {
         //
+        $transaction->createBills();
     }
 
     /**

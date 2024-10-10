@@ -12,6 +12,7 @@ use App\Http\Controllers\PaymentTypeController;
 use App\Http\Controllers\SupplierBillController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\SupplierRateController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AgentController;
@@ -165,6 +166,11 @@ Route::group([
     // 供应商账单
     Route::controller(SupplierBillController::class)->group(function() {
         Route::apiResource('supplier-bill', SupplierBillController::class)->only(['index', 'store']);
+    });
+
+    // 转账
+    Route::controller(TransactionController::class)->group(function() {
+        Route::apiResource('transaction', TransactionController::class)->only(['index', 'store']);
     });
 
     // 设置
