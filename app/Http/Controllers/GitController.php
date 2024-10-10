@@ -8,7 +8,6 @@ use Symfony\Component\Process\Process;
 
 class GitController extends Controller
 {
-    const WORKING_DIR = '/var/www/ll';
 
     // 需要用户登录的中间件
     public function __construct()
@@ -19,10 +18,11 @@ class GitController extends Controller
     // 执行 git pull 和 composer install 的方法
     public function updateProject(Request $request)
     {
+        $workingDir = config('app.working_dir');
         try {
             // git pull
             $gitProcess = new Process(['sudo', 'git', 'pull']);
-            $gitProcess->setWorkingDirectory(self::WORKING_DIR);
+            $gitProcess->setWorkingDirectory($workingDir);
             $gitProcess->run();
 
             // 检查 git pull 是否成功
@@ -32,18 +32,18 @@ class GitController extends Controller
             $gitOutput = $gitProcess->getOutput();
 
             // 判断是否执行 composer install
-            if ($request->input('run_composer', false)) {
+            if ($request->input('run_composer') === true) {
                 $composerProcess = new Process(['sudo', 'composer', 'install']);
-                $composerProcess->setWorkingDirectory(self::WORKING_DIR);
+                $composerProcess->setWorkingDirectory($workingDir);
                 $composerProcess->run();
 
                 // 检查 composer install 是否成功
                 if (!$composerProcess->isSuccessful()) {
                     throw new ProcessFailedException($composerProcess);
                 }
-                $composerOutput = true;
+                $composerOutput = 'Composer install executed successfully.';
             } else {
-                $composerOutput = 'Composer install skipped.';
+                $composerOutput = 'Composer install not executed.';
             }
 
             // 返回成功信息
