@@ -11,10 +11,10 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class MerchantBill
+ * Class SupplierBill
  *
  * @property int $id
- * @property int $merchant_id
+ * @property int $supplier_id
  * @property int $type
  * @property string $trade_no
  * @property int $currency_id
@@ -28,11 +28,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  *
  * @package App\Models
  */
-class MerchantBill extends BaseModel
+class SupplierBill extends BaseModel
 {
 	protected $casts = [
-		'merchant_id' => 'int',
-		'type' => BillTypeEnum::class,
+		'supplier_id' => 'int',
+        'type' => BillTypeEnum::class,
 		'currency_id' => 'int',
 		'amount' => 'float',
 		'exchange_rate' => 'float',
@@ -43,7 +43,7 @@ class MerchantBill extends BaseModel
 	];
 
 	protected $fillable = [
-		'merchant_id',
+		'supplier_id',
 		'type',
 		'trade_no',
 		'currency_id',
@@ -54,8 +54,8 @@ class MerchantBill extends BaseModel
 		'note'
 	];
 
-    public function merchant(): BelongsTo
+    public function supplier(): BelongsTo
     {
-        return $this->belongsTo(Merchant::class);
+        return $this->belongsTo(Supplier::class);
     }
 }
