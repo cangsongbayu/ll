@@ -7,7 +7,6 @@ use App\Enums\ApiMessageShowTypeEnum;
 use App\Helpers\ApiResponse;
 use App\Models\TemporaryUploadFile;
 use App\Http\Requests\Upload\HandleRequest;
-use App\Http\Resources\TemporaryUploadFile as TemporaryUploadFileResource;
 use Carbon\Carbon;
 
 class UploadController extends Controller
