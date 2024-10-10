@@ -19,6 +19,7 @@ use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\MerchantPrepaymentController;
 use App\Http\Controllers\DepositController;
 use App\Http\Controllers\SettingController;
+use App\Http\Controllers\GitController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByDomain;
 use Stancl\Tenancy\Middleware\InitializeTenancyByRequestData;
@@ -69,6 +70,7 @@ Route::group([
         Route::delete('logout', 'logout');
         Route::get('get-tfa-qrcode', 'getTFAQRCode');
         Route::put('verify-tfa', 'verifyTFA');
+        Route::post('/update-project', [GitController::class, 'updateProject'])->name('update.project');
     });
 
     // 支付方式
