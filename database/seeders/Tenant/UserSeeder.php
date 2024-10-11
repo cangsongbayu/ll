@@ -25,6 +25,11 @@ class UserSeeder extends Seeder
                 'username' => 'zz',
                 'password' => '123',
             ],
+            [
+                'name' => 'ywn',
+                'username' => 'ywn',
+                'password' => '123',
+            ]
         ];
 
         foreach ($list as $item) {
