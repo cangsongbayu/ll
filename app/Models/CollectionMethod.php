@@ -35,8 +35,6 @@ class CollectionMethod extends BaseModel
 		'daily_transaction_limit' => 'int',
 		'is_open_for_business' => 'bool',
         'data' => 'array',
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'updated_at' => 'datetime:Y-m-d H:i:s',
 	];
 
 	protected $fillable = [

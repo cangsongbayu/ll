@@ -30,8 +30,6 @@ class Transaction extends BaseModel
 		'payer_id' => 'int',
 		'payee_id' => 'int',
 		'amount' => 'float',
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'updated_at' => 'datetime:Y-m-d H:i:s',
 	];
 
 	protected $fillable = [

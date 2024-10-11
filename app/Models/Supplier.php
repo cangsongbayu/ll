@@ -16,6 +16,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\HigherOrderCollectionProxy;
 use Kalnoy\Nestedset\NodeTrait;
+use App\Models\Traits\DateSerializableTrait;
 
 /**
  * Class Supplier
@@ -45,22 +46,18 @@ use Kalnoy\Nestedset\NodeTrait;
  */
 class Supplier extends Authenticatable
 {
-	use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, Filterable, HasHashID, NodeTrait;
+	use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, Filterable, HasHashID, NodeTrait, DateSerializableTrait;
 
 	protected $casts = [
 		'_lft' => 'int',
 		'_rgt' => 'int',
 		'parent_id' => 'int',
         'password' => 'hashed',
-		'email_verified_at' => 'datetime:Y-m-d H:i:s',
 		'max_token_count' => 'int',
 		'is_enable_tfa' => 'bool',
 		'is_open_for_business' => 'bool',
 		'balance' => 'float',
 		'deposit' => 'float',
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'updated_at' => 'datetime:Y-m-d H:i:s',
-        'deleted_at' => 'datetime:Y-m-d H:i:s',
 	];
 
 	protected $hidden = [

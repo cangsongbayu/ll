@@ -23,8 +23,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
-
-
+use App\Models\Traits\DateSerializableTrait;
 
 /**
  * Class Merchant
@@ -54,10 +53,9 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
  */
 class Merchant extends Authenticatable implements HasMedia
 {
-    use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable, HasHashID, InteractsWithMedia;
+    use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable, HasHashID, DateSerializableTrait, InteractsWithMedia;
 
 	protected $casts = [
-		'email_verified_at' => 'datetime:Y-m-d H:i:s',
         'password' => 'hashed',
 		'max_token_count' => 'int',
 		'is_enable_tfa' => 'bool',
@@ -66,12 +64,9 @@ class Merchant extends Authenticatable implements HasMedia
 		'deposit' => 'float',
 		'prepayment' => 'float',
 		'agent_id' => 'int',
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'updated_at' => 'datetime:Y-m-d H:i:s',
-        'deleted_at' => 'datetime:Y-m-d H:i:s',
 	];
 
-	protected $hidden = [
+    protected $hidden = [
 		'password',
 		'tfa_secret',
 		'remember_token'

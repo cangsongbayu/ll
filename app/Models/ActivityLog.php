@@ -4,14 +4,13 @@ namespace App\Models;
 
 use App\Models\Traits\HasHashID;
 use Spatie\Activitylog\Models\Activity;
+use App\Models\Traits\DateSerializableTrait;
 
 class ActivityLog extends Activity
 {
-    use HasHashID;
+    use HasHashID, DateSerializableTrait;
 
     protected $casts = [
         'properties' => 'array',
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 }
