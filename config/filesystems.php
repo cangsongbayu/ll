@@ -1,5 +1,4 @@
 <?php
-
 return [
 
     /*
@@ -55,7 +54,12 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
         ],
-
+        'media' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/tenants'),  // 静态路径到 tenants 目录
+            'url' => env('APP_URL') . '/storage/tenants',
+            'visibility' => 'public',
+        ],
     ],
 
     /*

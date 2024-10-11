@@ -20,6 +20,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
+
+
 
 /**
  * Class Merchant
@@ -47,9 +52,9 @@ use Spatie\Activitylog\Traits\LogsActivity;
  *
  * @package App\Models
  */
-class Merchant extends Authenticatable
+class Merchant extends Authenticatable implements HasMedia
 {
-    use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable, HasHashID;
+    use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable, HasHashID, InteractsWithMedia;
 
 	protected $casts = [
 		'email_verified_at' => 'datetime:Y-m-d H:i:s',

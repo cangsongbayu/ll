@@ -256,5 +256,11 @@ Route::group([
         Route::delete('logout', 'logout');
         Route::get('get-tfa-qrcode', 'getTFAQRCode');
         Route::put('verify-tfa', 'verifyTFA');
+        Route::put('verify-tfa', 'verifyTFA');
+    });
+
+    // 文件上传
+    Route::controller(UploadController::class)->group(function() {
+        Route::post('upload', 'handle');
     });
 });

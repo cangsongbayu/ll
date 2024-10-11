@@ -126,7 +126,6 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
-    'working_dir' => '/var/www/ll',
     /*
     |--------------------------------------------------------------------------
     | Maintenance Mode Driver
