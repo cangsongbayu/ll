@@ -18,7 +18,8 @@ use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
 use App\Models\Traits\DateSerializableTrait;
-
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 /**
  * Class Agent
  *
@@ -40,9 +41,9 @@ use App\Models\Traits\DateSerializableTrait;
  *
  * @package App\Models
  */
-class Agent extends Authenticatable
+class Agent extends Authenticatable implements HasMedia
 {
-    use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable, HasHashID, DateSerializableTrait;
+    use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable, HasHashID, DateSerializableTrait, InteractsWithMedia;
 
 	protected $casts = [
         'password' => 'hashed',
