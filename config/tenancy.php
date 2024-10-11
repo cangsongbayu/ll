@@ -19,6 +19,9 @@ return [
         '127.0.0.1',
         'localhost',
     ],
+    'media' => [
+        'disk' => 'tenant',
+    ],
 
     /**
      * Tenancy bootstrappers are executed when tenancy is initialized.

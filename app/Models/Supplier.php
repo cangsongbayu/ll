@@ -17,6 +17,8 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\HigherOrderCollectionProxy;
 use Kalnoy\Nestedset\NodeTrait;
 use App\Models\Traits\DateSerializableTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 /**
  * Class Supplier
@@ -44,9 +46,9 @@ use App\Models\Traits\DateSerializableTrait;
  *
  * @package App\Models
  */
-class Supplier extends Authenticatable
+class Supplier extends Authenticatable implements HasMedia
 {
-	use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, Filterable, HasHashID, NodeTrait, DateSerializableTrait;
+	use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, Filterable, HasHashID, NodeTrait, DateSerializableTrait, InteractsWithMedia;
 
 	protected $casts = [
 		'_lft' => 'int',

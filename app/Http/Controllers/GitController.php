@@ -23,8 +23,7 @@ class GitController extends Controller
     public function updateProject(Request $request)
     {
         // 获取工作目录配置
-        $workingDir = config('app.working_dir');
-
+        $workingDir = base_path();
         try {
             //git pull
             $gitProcess = Process::path($workingDir)->run(['sudo', 'git', 'pull']);

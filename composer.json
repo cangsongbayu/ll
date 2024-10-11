@@ -16,6 +16,7 @@
         "laravel/tinker": "^2.8",
         "pragmarx/google2fa-laravel": "^2.2",
         "spatie/laravel-activitylog": "^4.8",
+        "spatie/laravel-medialibrary": "^11.5",
         "stancl/tenancy": "^3.8",
         "tucker-eric/eloquentfilter": "^3.4",
         "vinkla/hashids": "^11.0",

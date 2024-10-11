@@ -13,15 +13,17 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use App\Models\Traits\DateSerializableTrait;
 
 /**
  * @property mixed $is_enable_tfa
  * @property mixed|null $tfa_secret
  */
-class User extends Authenticatable
+class User extends Authenticatable implements HasMedia
 {
-    use HasFactory, Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable, HasHashID, DateSerializableTrait;
+    use HasFactory, Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable, HasHashID, DateSerializableTrait, InteractsWithMedia;
 
     /**
      * The attributes that are mass assignable.

@@ -20,6 +20,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use App\Models\Traits\DateSerializableTrait;
 
 /**
@@ -48,9 +51,9 @@ use App\Models\Traits\DateSerializableTrait;
  *
  * @package App\Models
  */
-class Merchant extends Authenticatable
+class Merchant extends Authenticatable implements HasMedia
 {
-    use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable, HasHashID, DateSerializableTrait;
+    use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable, HasHashID, DateSerializableTrait, InteractsWithMedia;
 
 	protected $casts = [
         'password' => 'hashed',
