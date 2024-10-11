@@ -77,6 +77,7 @@ class Merchant extends Authenticatable
         'password',
         'max_token_count',
         'is_enable_tfa',
+        'is_open_for_business',
         'allowed_ip_addresses',
         'agent_id',
 	];
