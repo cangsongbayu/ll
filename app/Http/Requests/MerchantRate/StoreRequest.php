@@ -53,6 +53,7 @@ class StoreRequest extends BaseRequest
             $rules['payment_type_id'][] = function($attr, $value, $fail) {
                 $exists = MerchantRate::where('merchant_id', $this->input('merchant_id'))
                     ->where('payment_type_id', $this->input('payment_type_id'))
+                    ->withTrashed()
                     ->exists();
                 if ($exists) {
                     return $fail('商户费率 已经存在。');
