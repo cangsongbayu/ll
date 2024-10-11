@@ -17,6 +17,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use App\Models\Traits\DateSerializableTrait;
 
 /**
  * Class Agent
@@ -41,17 +42,13 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class Agent extends Authenticatable
 {
-    use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable, HasHashID;
+    use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable, HasHashID, DateSerializableTrait;
 
 	protected $casts = [
-		'email_verified_at' => 'datetime:Y-m-d H:i:s',
         'password' => 'hashed',
 		'max_token_count' => 'int',
 		'is_enable_tfa' => 'bool',
 		'balance' => 'float',
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'updated_at' => 'datetime:Y-m-d H:i:s',
-        'deleted_at' => 'datetime:Y-m-d H:i:s',
 	];
 
 	protected $hidden = [

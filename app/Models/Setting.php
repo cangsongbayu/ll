@@ -34,8 +34,6 @@ class Setting extends BaseModel
 
     protected $casts = [
         'category' => SettingCategoryEnum::class,
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
     public static function getAllowedDepositableTypes()

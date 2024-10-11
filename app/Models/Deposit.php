@@ -36,8 +36,6 @@ class Deposit extends BaseModel
 		'exchange_rate' => 'float',
 		'base_currency_id' => 'int',
 		'base_amount' => 'float',
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'updated_at' => 'datetime:Y-m-d H:i:s',
 	];
 
 	protected $fillable = [

@@ -27,8 +27,6 @@ class CollectionMethodType extends BaseModel
 	protected $casts = [
 		'sort' => 'int',
         'data' => 'array',
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'updated_at' => 'datetime:Y-m-d H:i:s',
 	];
 
 	protected $fillable = [

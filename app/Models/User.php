@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Spatie\Activitylog\LogOptions;
 use Spatie\Activitylog\Traits\LogsActivity;
+use App\Models\Traits\DateSerializableTrait;
 
 /**
  * @property mixed $is_enable_tfa
@@ -20,7 +21,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
  */
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable, HasHashID;
+    use HasFactory, Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, LogsActivity, Filterable, HasHashID, DateSerializableTrait;
 
     /**
      * The attributes that are mass assignable.
@@ -54,11 +55,7 @@ class User extends Authenticatable
      */
     protected $casts = [
         'is_enable_tfa' => 'boolean',
-        'email_verified_at' => 'datetime:Y-m-d H:i:s',
         'password' => 'hashed',
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'updated_at' => 'datetime:Y-m-d H:i:s',
-        'deleted_at' => 'datetime:Y-m-d H:i:s',
     ];
 
     /**

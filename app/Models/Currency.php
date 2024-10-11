@@ -25,8 +25,6 @@ class Currency extends BaseModel
 {
 	protected $casts = [
 		'is_base_currency' => 'bool',
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'updated_at' => 'datetime:Y-m-d H:i:s',
 	];
 
 	protected $fillable = [

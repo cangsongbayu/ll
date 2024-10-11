@@ -38,9 +38,6 @@ class MerchantRate extends BaseModel
 		'platform_rate' => 'float',
 		'rebate' => 'float',
 		'is_open_for_business' => 'bool',
-        'created_at' => 'datetime:Y-m-d H:i:s',
-        'updated_at' => 'datetime:Y-m-d H:i:s',
-        'deleted_at' => 'datetime:Y-m-d H:i:s'
 	];
 
 	protected $fillable = [
