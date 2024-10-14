@@ -96,6 +96,7 @@ Route::group([
 
     // 代理
     Route::controller(AgentController::class)->group(function() {
+        Route::get('merchant/all', 'all'); // 所有
         Route::put('agent/restore/{agent}', 'restore')->withTrashed(); // 恢复
         Route::put('agent/batch-restore', 'batchRestore'); // 批量恢复
         Route::delete('agent/batch-destroy', 'batchDestroy'); // 批量删除

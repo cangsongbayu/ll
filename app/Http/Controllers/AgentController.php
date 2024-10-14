@@ -15,6 +15,7 @@ use App\Http\Requests\Agent\BatchRestoreRequest;
 use App\Http\Resources\Agent as AgentResource;
 use App\Models\Agent;
 use App\Services\AgentService;
+use Illuminate\Http\Request;
 use Throwable;
 
 class AgentController extends Controller
@@ -35,6 +36,15 @@ class AgentController extends Controller
         return ApiResponse::success(
             $this->service->index($request),
             ApiMessageEnum::INDEX->getMessage(),
+            ApiMessageShowTypeEnum::SILENT,
+        );
+    }
+
+    public function all(Request $request)
+    {
+        return ApiResponse::success(
+            $this->service->all($request),
+            ApiMessageEnum::GENERAL_SUCCESS->getMessage(),
             ApiMessageShowTypeEnum::SILENT,
         );
     }

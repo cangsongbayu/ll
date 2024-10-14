@@ -9,8 +9,10 @@ use App\Http\Requests\Agent\UpdateRequest;
 use App\Http\Requests\Agent\BatchDestroyRequest;
 use App\Http\Requests\Agent\BatchRestoreRequest;
 use App\Http\Requests\Agent\RestoreRequest;
+use App\Http\Resources\MerchantCollection;
 use App\Models\Agent;
 use App\Http\Resources\AgentCollection;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
@@ -27,6 +29,14 @@ class AgentService extends Service
         return [
             'list' => $list,
             'pagination' => $this->getApiPaginate($lengthAwarePaginator)
+        ];
+    }
+
+    public function all(Request $request): array
+    {
+        $list = Agent::select(['id', 'name', 'deleted_at'])->filter($request->all())->withTrashed()->get();
+        return [
+            'list' => new AgentCollection($list)
         ];
     }
 
