@@ -7,36 +7,36 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
- * Class PaymentType
+ * Class PaymentServiceProvider
  *
  * @property int $id
  * @property string $name
- * @property string $slug
- * @property string $valid_amount
- * @property int $order_ttl
- * @property string $business_hours
  * @property bool $is_open_for_business
+ * @property float $balance
+ * @property float $deposit
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
+ * @property string|null $deleted_at
  *
  * @package App\Models
  */
-class PaymentType extends BaseModel
+class PaymentServiceProvider extends BaseModel
 {
+	use SoftDeletes;
 
 	protected $casts = [
-		'order_ttl' => 'int',
 		'is_open_for_business' => 'bool',
+		'balance' => 'float',
+		'deposit' => 'float'
 	];
 
 	protected $fillable = [
 		'name',
-		'code',
-		'valid_amount',
-		'order_ttl',
-		'business_hours',
-		'is_open_for_business'
+		'is_open_for_business',
+		'balance',
+		'deposit'
 	];
 }

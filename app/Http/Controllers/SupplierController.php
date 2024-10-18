@@ -13,6 +13,7 @@ use App\Http\Requests\Supplier\RestoreRequest;
 use App\Http\Requests\Supplier\BatchDestroyRequest;
 use App\Http\Requests\Supplier\BatchRestoreRequest;
 use App\Http\Resources\Supplier as SupplierResource;
+use Illuminate\Http\Request;
 use App\Models\Supplier;
 use App\Services\SupplierService;
 use Throwable;
@@ -35,6 +36,15 @@ class SupplierController extends Controller
         return ApiResponse::success(
             $this->service->index($request),
             ApiMessageEnum::INDEX->getMessage(),
+            ApiMessageShowTypeEnum::SILENT,
+        );
+    }
+
+    public function all(Request $request)
+    {
+        return ApiResponse::success(
+            $this->service->all($request),
+            ApiMessageEnum::GENERAL_SUCCESS->getMessage(),
             ApiMessageShowTypeEnum::SILENT,
         );
     }

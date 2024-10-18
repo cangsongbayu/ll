@@ -47,6 +47,12 @@ class StoreRequest extends BaseRequest
                 'required',
                 'boolean',
             ],
+            'valid_amount' => [
+                'required',
+                'string',
+                'max:255',
+                'regex:' . config('regex.valid_amount'),
+            ],
         ];
 
         if ($this->has('payment_type_id') && $this->has('merchant_id')) {

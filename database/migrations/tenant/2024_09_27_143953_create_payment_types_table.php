@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('payment_types', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique()->comment('名称');
-            $table->string('slug')->unique()->comment('标识');
+            $table->string('code')->unique()->comment('标识');
             $table->string('valid_amount')->comment('订单有效金额');
             $table->unsignedMediumInteger('order_ttl')->comment('订单有效时长');
             $table->string('business_hours')->comment('营业时间');

@@ -25,6 +25,7 @@ class MerchantRateSeeder extends Seeder
                     'merchant_id' => $merchant->id,
                     'rate' => '0.5',
                     'is_open_for_business' => 1,
+                    'valid_amount' => 100,
                 ];
                 MerchantRate::create($arr);
             }

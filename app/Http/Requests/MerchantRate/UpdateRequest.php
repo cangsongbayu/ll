@@ -44,6 +44,12 @@ class UpdateRequest extends BaseRequest
                 'filled',
                 'boolean',
             ],
+            'valid_amount' => [
+                'filled',
+                'string',
+                'max:255',
+                'regex:' . config('regex.valid_amount'),
+            ],
         ];
 
         if ($this->has('payment_type_id') && $this->has('merchant_id')) {

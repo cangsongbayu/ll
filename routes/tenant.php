@@ -58,6 +58,7 @@ Route::group([
 ], function () {
     Route::post('login', 'AuthenticateController@login'); // 登录
     Route::get('site-name', 'SiteNameController@get'); // 网站名称
+    Route::any('open/store', 'OpenApiController@store'); // 下单
 });
 
 Route::group([
@@ -127,6 +128,7 @@ Route::group([
 
     // 供应商
     Route::controller(SupplierController::class)->group(function() {
+        Route::get('supplier/all', 'all'); // 所有
         Route::put('supplier/restore/{supplier}', 'restore')->withTrashed(); // 恢复
         Route::put('supplier/batch-restore', 'batchRestore'); // 批量恢复
         Route::delete('supplier/batch-destroy', 'batchDestroy'); // 批量删除

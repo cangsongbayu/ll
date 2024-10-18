@@ -17,7 +17,6 @@ use Illuminate\Http\Request;
 use App\Models\Merchant;
 use App\Services\MerchantService;
 use Throwable;
-use Illuminate\Support\Facades\DB;
 
 class MerchantController extends Controller
 {

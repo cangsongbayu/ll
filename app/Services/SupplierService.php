@@ -11,6 +11,7 @@ use App\Http\Requests\Supplier\StoreRequest;
 use App\Http\Requests\Supplier\UpdateRequest;
 use App\Models\Supplier;
 use App\Http\Resources\SupplierCollection;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
@@ -27,6 +28,14 @@ class SupplierService extends Service
         return [
             'list' => $list,
             'pagination' => $this->getApiPaginate($lengthAwarePaginator)
+        ];
+    }
+
+    public function all(Request $request): array
+    {
+        $list = Supplier::select(['id', 'name', 'deleted_at'])->filter($request->all())->withTrashed()->get();
+        return [
+            'list' => new SupplierCollection($list)
         ];
     }
 

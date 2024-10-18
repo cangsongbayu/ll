@@ -16,7 +16,7 @@ class PaymentTypeSeeder extends Seeder
         for ($i = 1; $i <= 10; $i++) {
             $arr = [
                 'name' => "测试$i",
-                'slug' => "test$i",
+                'code' => "test$i",
                 'valid_amount' => 100,
                 'order_ttl' => 120,
                 'business_hours' => '00:00:00~23:59:59',

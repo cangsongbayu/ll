@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  * @property float $platform_rate
  * @property float $rebate
  * @property bool $is_open_for_business
+ * @property string $valid_amount
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property string|null $deleted_at

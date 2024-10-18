@@ -22,8 +22,8 @@ class UpdateRequest extends BaseRequest
                 'string',
                 'max:255',
             ],
-            'slug' => [
-                "unique:App\Models\PaymentType,slug,$paymentType->id",
+            'code' => [
+                "unique:App\Models\PaymentType,code,$paymentType->id",
                 'filled',
                 'string',
                 'max:255',

@@ -20,8 +20,8 @@ class StoreRequest extends BaseRequest
                 'string',
                 'max:255',
             ],
-            'slug' => [
-                'unique:App\Models\PaymentType,slug',
+            'code' => [
+                'unique:App\Models\PaymentType,code',
                 'required',
                 'string',
                 'max:255',
