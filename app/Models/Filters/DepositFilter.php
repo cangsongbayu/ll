@@ -13,4 +13,14 @@ class DepositFilter extends BaseModelFilter
     {
         $this->where('depositable_type', $value);
     }
+
+    public function currency($value): void
+    {
+        $this->where('currency_id', $value);
+    }
+
+    public function baseCurrency($value): void
+    {
+        $this->where('base_currency_id', $value);
+    }
 }

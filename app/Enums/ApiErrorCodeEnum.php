@@ -19,7 +19,7 @@ enum ApiErrorCodeEnum: string
             self::METHOD_NOT_ALLOWED_HTTP_EXCEPTION => '请求方法不允许',
             self::NOT_FOUND_HTTP_EXCEPTION => '请求的资源不存在',
             self::VALIDATION_EXCEPTION => '提交的数据有误，请检查',
-            self::AUTHENTICATION_EXCEPTION => '未授权',
+            self::AUTHENTICATION_EXCEPTION => '登录状态已失效，请重新登录。',
         };
     }
 }
