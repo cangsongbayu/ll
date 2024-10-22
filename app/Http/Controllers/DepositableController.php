@@ -16,6 +16,11 @@ class DepositableController extends Controller
     //
     public function all()
     {
+        $typeNames = [
+            'merchant' => '商户',
+            'supplier' => '供应商',
+        ];
+
         $allowedDepositableTypes = Setting::getAllowedDepositableTypes();
         $allowedDepositableTypes = explode(',', $allowedDepositableTypes);
         $morphMap = Relation::morphMap();
@@ -30,7 +35,7 @@ class DepositableController extends Controller
 
             $result[] = [
                 'type' => $type,
-                'type_name' => $type,
+                'type_name' => $typeNames[$type],
                 'items' => new DepositableCollection($items),
             ];
         }
