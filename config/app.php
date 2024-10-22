@@ -189,8 +189,10 @@ return [
         // 'Example' => App\Facades\Example::class,
     ])->toArray(),
     // 分页
-    'page_name' => 'page',
-    'page_size_name' => 'per_page',
+//    'page_name' => 'page',
+    'page_name' => 'current',
+//    'page_size_name' => 'per_page',
+    'page_size_name' => 'page_size',
     'default_page_size' => 20,
     'max_page_size' => 100,
     // 密码的密钥

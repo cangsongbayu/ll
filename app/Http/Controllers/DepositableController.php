@@ -30,6 +30,7 @@ class DepositableController extends Controller
 
             $result[] = [
                 'type' => $type,
+                'type_name' => $type,
                 'items' => new DepositableCollection($items),
             ];
         }
