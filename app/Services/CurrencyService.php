@@ -30,7 +30,7 @@ class CurrencyService extends Service
 
     public function all(Request $request): array
     {
-        $list = Currency::select(['id', 'code', 'symbol', 'name'])->filter($request->all())->get();
+        $list = Currency::select(['id', 'code', 'symbol', 'name', 'is_base_currency'])->filter($request->all())->get();
         return [
             'list' => new CurrencyCollection($list)
         ];

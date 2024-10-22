@@ -18,7 +18,7 @@ class DepositService extends Service
     public function index(IndexRequest $request): array
     {
         $pageSize = $request->input(config('app.page_size_name'), config('app.default_page_size'));
-        $query = Deposit::query()->filter($request->all());
+        $query = Deposit::query()->filter($request->all())->with(['currency']);
         $lengthAwarePaginator = $query->paginate($pageSize, $this->indexColumns, config('app.page_name'));
         $list = new DepositCollection($lengthAwarePaginator);
         return [
