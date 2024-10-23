@@ -46,7 +46,8 @@ class MerchantRate extends BaseModel
 		'merchant_id',
 		'rate',
 		'platform_rate',
-		'is_open_for_business'
+		'is_open_for_business',
+		'valid_amount'
 	];
 
     public function merchant(): BelongsTo
