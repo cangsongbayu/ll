@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Enums\ApiMessageEnum;
 use App\Enums\ApiMessageShowTypeEnum;
 use App\Helpers\ApiResponse;
+use App\Http\Requests\MerchantRate\AllRequest;
 use App\Http\Requests\MerchantRate\DestroyRequest;
 use App\Http\Requests\MerchantRate\IndexRequest;
 use App\Http\Requests\MerchantRate\StoreRequest;
@@ -40,7 +41,7 @@ class MerchantRateController extends Controller
         );
     }
 
-    public function all(Request $request)
+    public function all(AllRequest $request)
     {
         return ApiResponse::success(
             $this->service->all($request),

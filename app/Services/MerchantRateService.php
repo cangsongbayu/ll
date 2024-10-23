@@ -9,6 +9,7 @@ use App\Http\Requests\MerchantRate\UpdateRequest;
 use App\Http\Requests\MerchantRate\RestoreRequest;
 use App\Http\Requests\MerchantRate\BatchDestroyRequest;
 use App\Http\Requests\MerchantRate\BatchRestoreRequest;
+use App\Http\Requests\MerchantRate\AllRequest;
 use Illuminate\Http\Request;
 use App\Models\MerchantRate;
 use App\Http\Resources\MerchantRateCollection;
@@ -31,14 +32,13 @@ class MerchantRateService extends Service
         ];
     }
 
-    public function all(Request $request): array
+    public function all(AllRequest $request): array
     {
-        $list = MerchantRate::select(['id', 'payment_type_id', 'merchant_id', 'rate', 'platform_rate', 'rebate', 'is_open_for_business','valid_amount','deleted_at'])->filter($request->all())->withTrashed()->get();
-        // $query = MerchantRate::select(['id', 'payment_type_id', 'merchant_id', 'rate', 'platform_rate', 'rebate', 'is_open_for_business', 'valid_amount', 'deleted_at'])
-        //     ->filter($request->all())
-        //     ->withTrashed();
 
-        // dd($query->toSql(), $query->getBindings());
+        $list = MerchantRate::select(['id', 'payment_type_id',  'rate', 'platform_rate', 'rebate', 'is_open_for_business','valid_amount','deleted_at'])
+            ->where('merchant_id',$request->merchant_id)
+            ->withTrashed()
+            ->get();
 
         return [
             'list' => new MerchantRateCollection($list)
