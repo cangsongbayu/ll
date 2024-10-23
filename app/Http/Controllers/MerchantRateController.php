@@ -13,6 +13,7 @@ use App\Http\Requests\MerchantRate\RestoreRequest;
 use App\Http\Requests\MerchantRate\BatchDestroyRequest;
 use App\Http\Requests\MerchantRate\BatchRestoreRequest;
 use App\Http\Resources\MerchantRate as MerchantRateResource;
+use Illuminate\Http\Request;
 use App\Models\MerchantRate;
 use App\Services\MerchantRateService;
 use Throwable;
@@ -38,6 +39,16 @@ class MerchantRateController extends Controller
             ApiMessageShowTypeEnum::SILENT,
         );
     }
+
+    public function all(Request $request)
+    {
+        return ApiResponse::success(
+            $this->service->all($request),
+            ApiMessageEnum::GENERAL_SUCCESS->getMessage(),
+            ApiMessageShowTypeEnum::SILENT,
+        );
+    }
+
 
     /**
      * Store a newly created resource in storage.

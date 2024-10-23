@@ -9,6 +9,7 @@ use App\Http\Requests\MerchantRate\UpdateRequest;
 use App\Http\Requests\MerchantRate\RestoreRequest;
 use App\Http\Requests\MerchantRate\BatchDestroyRequest;
 use App\Http\Requests\MerchantRate\BatchRestoreRequest;
+use Illuminate\Http\Request;
 use App\Models\MerchantRate;
 use App\Http\Resources\MerchantRateCollection;
 use Illuminate\Support\Facades\DB;
@@ -27,6 +28,20 @@ class MerchantRateService extends Service
         return [
             'list' => $list,
             'pagination' => $this->getApiPaginate($lengthAwarePaginator)
+        ];
+    }
+
+    public function all(Request $request): array
+    {
+        $list = MerchantRate::select(['id', 'payment_type_id', 'merchant_id', 'rate', 'platform_rate', 'rebate', 'is_open_for_business','valid_amount','deleted_at'])->filter($request->all())->withTrashed()->get();
+        // $query = MerchantRate::select(['id', 'payment_type_id', 'merchant_id', 'rate', 'platform_rate', 'rebate', 'is_open_for_business', 'valid_amount', 'deleted_at'])
+        //     ->filter($request->all())
+        //     ->withTrashed();
+
+        // dd($query->toSql(), $query->getBindings());
+
+        return [
+            'list' => new MerchantRateCollection($list)
         ];
     }
 

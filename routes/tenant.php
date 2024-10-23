@@ -120,6 +120,7 @@ Route::group([
 
     // 商户费率
     Route::controller(MerchantRateController::class)->group(function() {
+        Route::get('merchant-rate/all', 'all'); // 所有
         Route::put('merchant-rate/restore/{merchant_rate}', 'restore')->withTrashed(); // 恢复
         Route::put('merchant-rate/batch-restore', 'batchRestore'); // 批量恢复
         Route::delete('merchant-rate/batch-destroy', 'batchDestroy'); // 批量删除
