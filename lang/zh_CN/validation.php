@@ -198,5 +198,7 @@ return [
         'context' => '上下文',
         'type' => '类型',
         'appid' => '商户号',
+        'payer_id' => '付款人',
+        'payee_id' => '收款人',
     ],
 ];
