@@ -21,8 +21,13 @@ class DepositService extends Service
         $query = Deposit::query()->filter($request->all());
         $lengthAwarePaginator = $query->paginate($pageSize, $this->indexColumns, config('app.page_name'));
         $list = new DepositCollection($lengthAwarePaginator);
+        // 计算统计数据
+        $statistics = [
+            'total_base_amount' => $query->sum('base_amount'),
+        ];
         return [
             'list' => $list,
+            'statistics' => $statistics,
             'pagination' => $this->getApiPaginate($lengthAwarePaginator)
         ];
     }

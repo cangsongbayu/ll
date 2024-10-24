@@ -19,12 +19,6 @@ class AllRequest extends FormRequest
     {
         return [
             //
-            'merchant_id' => [
-                'required',
-                'numeric',
-                'db_bigint:unsigned',
-                'exists:App\Models\Merchant,id',
-            ],
         ];
     }
 }

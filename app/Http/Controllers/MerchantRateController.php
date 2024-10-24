@@ -14,7 +14,6 @@ use App\Http\Requests\MerchantRate\RestoreRequest;
 use App\Http\Requests\MerchantRate\BatchDestroyRequest;
 use App\Http\Requests\MerchantRate\BatchRestoreRequest;
 use App\Http\Resources\MerchantRate as MerchantRateResource;
-use Illuminate\Http\Request;
 use App\Models\MerchantRate;
 use App\Services\MerchantRateService;
 use Throwable;

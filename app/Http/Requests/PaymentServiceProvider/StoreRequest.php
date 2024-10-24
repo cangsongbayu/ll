@@ -25,18 +25,6 @@ class StoreRequest extends FormRequest
                 'required',
                 'boolean',
             ],
-            'balance' => [
-                'required',
-                'numeric',
-                'decimal:0,6',
-                'db_decimal:20,6',
-            ],
-            'deposit' => [
-                'required',
-                'numeric',
-                'decimal:0,6',
-                'db_decimal:20,6',
-            ],
         ];
     }
 }

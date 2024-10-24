@@ -2,12 +2,12 @@
 
 namespace App\Services;
 
-use App\Http\Requests\PaymentProvider\DestroyRequest;
-use App\Http\Requests\PaymentProvider\IndexRequest;
-use App\Http\Requests\PaymentProvider\StoreRequest;
-use App\Http\Requests\PaymentProvider\UpdateRequest;
-use App\Models\PaymentProvider;
-use App\Http\Resources\PaymentProviderCollection;
+use App\Http\Requests\PaymentServiceProvider\DestroyRequest;
+use App\Http\Requests\PaymentServiceProvider\IndexRequest;
+use App\Http\Requests\PaymentServiceProvider\StoreRequest;
+use App\Http\Requests\PaymentServiceProvider\UpdateRequest;
+use App\Models\PaymentServiceProvider;
+use App\Http\Resources\PaymentServiceProviderCollection;
 use Illuminate\Support\Facades\DB;
 use Throwable;
 
@@ -18,9 +18,9 @@ class PaymentServiceProviderService extends Service
     public function index(IndexRequest $request): array
     {
         $pageSize = $request->input(config('app.page_size_name'), config('app.default_page_size'));
-        $query = PaymentProvider::query()->filter($request->all());
+        $query = PaymentServiceProvider::query()->filter($request->all());
         $lengthAwarePaginator = $query->paginate($pageSize, $this->indexColumns, config('app.page_name'));
-        $list = new PaymentProviderCollection($lengthAwarePaginator);
+        $list = new PaymentServiceProviderCollection($lengthAwarePaginator);
         return [
             'list' => $list,
             'pagination' => $this->getApiPaginate($lengthAwarePaginator)
@@ -30,37 +30,37 @@ class PaymentServiceProviderService extends Service
     /**
      * @throws Throwable
      */
-    public function store(StoreRequest $request, PaymentProvider $paymentProvider): PaymentProvider
+    public function store(StoreRequest $request, PaymentServiceProvider $paymentServiceProvider): PaymentServiceProvider
     {
-        return DB::transaction(function() use ($request, $paymentProvider) {
+        return DB::transaction(function() use ($request, $paymentServiceProvider) {
             $validated = $request->validated();
-            $paymentProvider->fill($validated);
-            $paymentProvider->save();
-            return $paymentProvider;
+            $paymentServiceProvider->fill($validated);
+            $paymentServiceProvider->save();
+            return $paymentServiceProvider;
         });
     }
 
     /**
      * @throws Throwable
      */
-    public function update(UpdateRequest $request, PaymentProvider $paymentProvider): PaymentProvider
+    public function update(UpdateRequest $request, PaymentServiceProvider $paymentServiceProvider): PaymentServiceProvider
     {
-        return DB::transaction(function() use ($request, $paymentProvider) {
+        return DB::transaction(function() use ($request, $paymentServiceProvider) {
             $validated = $request->validated();
-            $paymentProvider->fill($validated);
-            $paymentProvider->save();
-            return $paymentProvider;
+            $paymentServiceProvider->fill($validated);
+            $paymentServiceProvider->save();
+            return $paymentServiceProvider;
         });
     }
 
     /**
      * @throws Throwable
      */
-    public function destroy(DestroyRequest $request, PaymentProvider $paymentProvider): PaymentProvider
+    public function destroy(DestroyRequest $request, PaymentServiceProvider $paymentServiceProvider): PaymentServiceProvider
     {
-        return DB::transaction(function() use ($request, $paymentProvider) {
-            $paymentProvider->delete();
-            return $paymentProvider;
+        return DB::transaction(function() use ($request, $paymentServiceProvider) {
+            $paymentServiceProvider->delete();
+            return $paymentServiceProvider;
         });
     }
 }

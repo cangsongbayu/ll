@@ -8,6 +8,7 @@ use App\Http\Controllers\CollectionMethodTypeController;
 use App\Http\Controllers\CurrencyController;
 use App\Http\Controllers\MerchantBillController;
 use App\Http\Controllers\MerchantRateController;
+use App\Http\Controllers\PaymentServiceProviderController;
 use App\Http\Controllers\PaymentTypeController;
 use App\Http\Controllers\SupplierBillController;
 use App\Http\Controllers\SupplierController;
@@ -111,6 +112,11 @@ Route::group([
         Route::put('merchant/batch-restore', 'batchRestore'); // 批量恢复
         Route::delete('merchant/batch-destroy', 'batchDestroy'); // 批量删除
         Route::apiResource('merchant', MerchantController::class); // 资源路由
+    });
+
+    // 三方
+    Route::controller(PaymentServiceProviderController::class)->group(function() {
+        Route::apiResource('payment-service-provider', PaymentServiceProviderController::class); // 资源路由
     });
 
     // 商户预付

@@ -3,7 +3,6 @@
 namespace App\Http\Requests\MerchantRate;
 
 use App\Models\MerchantRate;
-use App\Models\SupplierRate;
 use Illuminate\Contracts\Validation\ValidationRule;
 
 class StoreRequest extends BaseRequest
