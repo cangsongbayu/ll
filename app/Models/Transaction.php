@@ -7,6 +7,7 @@
 namespace App\Models;
 
 use App\Enums\BillTypeEnum;
+use App\Helpers\OrderNumberGenerator;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
@@ -61,11 +62,15 @@ class Transaction extends BaseModel
             'supplier_id' => $this->payer_id,
             'amount' => bcmul($this->amount, -1, 6),
             'type' => BillTypeEnum::TRANSFER_OUT,
+            'base_currency_id' => $currencyId,
+            'base_amount' => bcmul($this->amount, -1, 6),
         ];
         $payeeArr = [
             'supplier_id' => $this->payee_id,
             'amount' => $this->amount,
             'type' => BillTypeEnum::TRANSFER_IN,
+            'base_currency_id' => $currencyId,
+            'base_amount' => $this->amount,
         ];
         SupplierBill::create(array_merge($arr, $payerArr));
         SupplierBill::create(array_merge($arr, $payeeArr));

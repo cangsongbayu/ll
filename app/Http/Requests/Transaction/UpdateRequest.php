@@ -17,11 +17,6 @@ class UpdateRequest extends FormRequest
         $transaction = $this->route('transaction');
 
         return [
-            'trade_no' => [
-                'filled',
-                'string',
-                'max:255',
-            ],
             'payer_id' => [
                 'filled',
                 'numeric',

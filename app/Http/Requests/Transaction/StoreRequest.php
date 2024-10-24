@@ -15,11 +15,6 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'trade_no' => [
-                'required',
-                'string',
-                'max:255',
-            ],
             'payer_id' => [
                 'required',
                 'numeric',

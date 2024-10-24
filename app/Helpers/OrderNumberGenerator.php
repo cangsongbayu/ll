@@ -6,6 +6,11 @@ class OrderNumberGenerator
 {
     public static function generate($prefix = ''): string
     {
-        return $prefix . mt_rand(100000000000, 999999999999);
+        // 获取当前日期信息
+        $date = date('ymdHis');
+        // 获取一个随机数
+        $random = mt_rand(1000, 9999);
+        // 组合订单号
+        return $prefix . $date . $random;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Requests\FormRequest;
 use App\Http\Requests\MerchantRate\DestroyRequest;
 use App\Http\Requests\MerchantRate\IndexRequest;
 use App\Http\Requests\MerchantRate\StoreRequest;
@@ -32,7 +33,7 @@ class MerchantRateService extends Service
         ];
     }
 
-    public function all(AllRequest $request): array
+    public function all(Request $request): array
     {
 
         $list = MerchantRate::select(['id', 'payment_type_id',  'rate', 'platform_rate', 'rebate', 'is_open_for_business','valid_amount','deleted_at'])
