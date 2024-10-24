@@ -156,11 +156,4 @@ class Merchant extends Authenticatable implements HasMedia
         MerchantRate::whereIn('merchant_id', $restores)->restore();
     }
 
-    
-    // 定义与 personal access tokens 的关系
-    public function personalAccessTokens()
-    {
-        return $this->morphMany(PersonalAccessToken::class, 'tokenable');
-    }
-
 }
