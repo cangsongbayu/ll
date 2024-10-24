@@ -5,11 +5,13 @@ namespace App\Services;
 use App\Enums\ActivityLogEventEnum;
 use App\Enums\ActivityLogNameEnum;
 use App\Enums\LoginFailedReasonEnum;
+use App\Enums\SettingKeyEnum;
 use App\Exceptions\LoginFailedException;
 use App\Helpers\Agent;
 use App\Http\Requests\Authenticate\LoginRequest;
 use App\Http\Requests\Authenticate\RepassRequest;
 use App\Http\Requests\Authenticate\VerifyTFARequest;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -94,9 +96,11 @@ class AuthenticateService
     public function me(Request $request): array
     {
         $user = $request->user();
+        $siteName = Setting::where('key', SettingKeyEnum::SITE_NAME->value)->value('value');
         return [
             'name' => $user->name,
             'avatar' => 'https://gw.alipayobjects.com/zos/antfincdn/XAosXuNZyF/BiazfanxmamNRoxxVxka.png',
+            'site_name' => $siteName,
         ];
     }
 

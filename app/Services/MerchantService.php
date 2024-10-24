@@ -53,7 +53,7 @@ class MerchantService extends Service
 
     public function all(Request $request): array
     {
-        $list = Merchant::select(['id', 'name', 'deleted_at'])->filter($request->all())->withTrashed()->get();
+        $list = Merchant::select(['id', 'name', 'username', 'agent_id', 'deleted_at'])->filter($request->all())->withTrashed()->get();
         return [
             'list' => new MerchantCollection($list)
         ];
