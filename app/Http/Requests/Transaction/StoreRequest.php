@@ -20,6 +20,11 @@ class StoreRequest extends FormRequest
                 'numeric',
                 'db_bigint:unsigned',
                 'exists:App\Models\Supplier,id,deleted_at,NULL',
+                function ($attribute, $value, $fail) {
+                    if ($value === request('payee_id')) {
+                        $fail('付款人 与收款人不能相同。');
+                    }
+                },
             ],
             'payee_id' => [
                 'required',
@@ -28,7 +33,7 @@ class StoreRequest extends FormRequest
                 'exists:App\Models\Supplier,id,deleted_at,NULL',
                 function ($attribute, $value, $fail) {
                     if ($value === request('payer_id')) {
-                        $fail('付款人 与 收款人 不可相同.');
+                        $fail('收款人 与付款人不能相同。');
                     }
                 },
             ],
