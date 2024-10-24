@@ -47,9 +47,9 @@ class Agent extends Authenticatable implements HasMedia
 
 	protected $casts = [
         'password' => 'hashed',
-		'max_token_count' => 'int',
+		// 'max_token_count' => 'int',
 		'is_enable_tfa' => 'bool',
-		'balance' => 'float',
+		// 'balance' => 'float',
 	];
 
 	protected $hidden = [

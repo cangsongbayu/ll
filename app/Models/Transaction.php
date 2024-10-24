@@ -28,9 +28,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Transaction extends BaseModel
 {
 	protected $casts = [
-		'payer_id' => 'int',
-		'payee_id' => 'int',
-		'amount' => 'float',
+		// 'payer_id' => 'int',
+		// 'payee_id' => 'int',
+		// 'amount' => 'float',
 	];
 
 	protected $fillable = [

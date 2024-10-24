@@ -29,8 +29,8 @@ class PaymentServiceProvider extends BaseModel
 
 	protected $casts = [
 		'is_open_for_business' => 'bool',
-		'balance' => 'float',
-		'deposit' => 'float'
+		// 'balance' => 'float',
+		// 'deposit' => 'float'
 	];
 
 	protected $fillable = [

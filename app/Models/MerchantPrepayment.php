@@ -28,12 +28,12 @@ use Carbon\Carbon;
 class MerchantPrepayment extends BaseModel
 {
 	protected $casts = [
-		'merchant_id' => 'int',
-		'currency_id' => 'int',
-		'amount' => 'float',
-		'exchange_rate' => 'float',
-		'base_currency_id' => 'int',
-		'base_amount' => 'float',
+		// 'merchant_id' => 'int',
+		// 'currency_id' => 'int',
+		// 'amount' => 'float',
+		// 'exchange_rate' => 'float',
+		// 'base_currency_id' => 'int',
+		// 'base_amount' => 'float',
 	];
 
 	protected $fillable = [

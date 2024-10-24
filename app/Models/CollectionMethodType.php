@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Casts\Attribute;
 class CollectionMethodType extends BaseModel
 {
 	protected $casts = [
-		'sort' => 'int',
+		// 'sort' => 'int',
         'data' => 'array',
 	];
 

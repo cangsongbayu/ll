@@ -30,9 +30,9 @@ class SupplierRate extends BaseModel
 	use SoftDeletes;
 
 	protected $casts = [
-		'payment_type_id' => 'int',
-		'supplier_id' => 'int',
-		'rate' => 'float',
+		// 'payment_type_id' => 'int',
+		// 'supplier_id' => 'int',
+		// 'rate' => 'float',
 		'is_open_for_business' => 'bool',
 	];
 

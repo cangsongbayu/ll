@@ -31,12 +31,12 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 class Deposit extends BaseModel
 {
 	protected $casts = [
-		'depositable_id' => 'int',
-		'currency_id' => 'int',
-		'amount' => 'float',
-		'exchange_rate' => 'float',
-		'base_currency_id' => 'int',
-		'base_amount' => 'float',
+		// 'depositable_id' => 'int',
+		// 'currency_id' => 'int',
+		// 'amount' => 'float',
+		// 'exchange_rate' => 'float',
+		// 'base_currency_id' => 'int',
+		// 'base_amount' => 'float',
 	];
 
 	protected $fillable = [

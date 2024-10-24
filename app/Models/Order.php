@@ -32,14 +32,14 @@ use Carbon\Carbon;
 class Order extends BaseModel
 {
 	protected $casts = [
-		'payment_type_id' => 'int',
-		'payment_channel_id' => 'int',
-		'merchant_id' => 'int',
-		'supplier_id' => 'int',
-		'collection_method_id' => 'int',
-		'status' => 'int',
-		'amount' => 'float',
-		'paid_amount' => 'float',
+		// 'payment_type_id' => 'int',
+		// 'payment_channel_id' => 'int',
+		// 'merchant_id' => 'int',
+		// 'supplier_id' => 'int',
+		// 'collection_method_id' => 'int',
+		// 'status' => 'int',
+		// 'amount' => 'float',
+		// 'paid_amount' => 'float',
 		'paid_at' => 'datetime',
 		'cancel_at' => 'datetime'
 	];

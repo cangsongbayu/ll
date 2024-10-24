@@ -27,7 +27,7 @@ class PaymentType extends BaseModel
 {
 
 	protected $casts = [
-		'order_ttl' => 'int',
+		// 'order_ttl' => 'int',
 		'is_open_for_business' => 'bool',
 	];
 

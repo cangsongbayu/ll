@@ -31,13 +31,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class MerchantBill extends BaseModel
 {
 	protected $casts = [
-		'merchant_id' => 'int',
+		// 'merchant_id' => 'int',
 		'type' => BillTypeEnum::class,
-		'currency_id' => 'int',
-		'amount' => 'float',
-		'exchange_rate' => 'float',
-		'base_currency_id' => 'int',
-		'base_amount' => 'float',
+		// 'currency_id' => 'int',
+		// 'amount' => 'float',
+		// 'exchange_rate' => 'float',
+		// 'base_currency_id' => 'int',
+		// 'base_amount' => 'float',
 	];
 
 	protected $fillable = [

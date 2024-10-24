@@ -31,13 +31,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class SupplierBill extends BaseModel
 {
 	protected $casts = [
-		'supplier_id' => 'int',
+		// 'supplier_id' => 'int',
         'type' => BillTypeEnum::class,
-		'currency_id' => 'int',
-		'amount' => 'float',
-		'exchange_rate' => 'float',
-		'base_currency_id' => 'int',
-		'base_amount' => 'float',
+		// 'currency_id' => 'int',
+		// 'amount' => 'float',
+		// 'exchange_rate' => 'float',
+		// 'base_currency_id' => 'int',
+		// 'base_amount' => 'float',
 	];
 
 	protected $fillable = [

@@ -28,11 +28,11 @@ use Carbon\Carbon;
 class CollectionMethod extends BaseModel
 {
 	protected $casts = [
-		'collection_method_type_id' => 'int',
-		'payment_type_id' => 'int',
-		'supplier_id' => 'int',
-		'daily_limit' => 'float',
-		'daily_transaction_limit' => 'int',
+		// 'collection_method_type_id' => 'int',
+		// 'payment_type_id' => 'int',
+		// 'supplier_id' => 'int',
+		// 'daily_limit' => 'float',
+		// 'daily_transaction_limit' => 'int',
 		'is_open_for_business' => 'bool',
         'data' => 'array',
 	];

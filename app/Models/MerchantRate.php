@@ -33,11 +33,11 @@ class MerchantRate extends BaseModel
 	use SoftDeletes;
 
 	protected $casts = [
-		'payment_type_id' => 'int',
-		'merchant_id' => 'int',
-		'rate' => 'float',
-		'platform_rate' => 'float',
-		'rebate' => 'float',
+		// 'payment_type_id' => 'int',
+		// 'merchant_id' => 'int',
+		// 'rate' => 'float',
+		// 'platform_rate' => 'float',
+		// 'rebate' => 'float',
 		'is_open_for_business' => 'bool',
 	];
 

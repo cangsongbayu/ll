@@ -57,13 +57,13 @@ class Merchant extends Authenticatable implements HasMedia
 
 	protected $casts = [
         'password' => 'hashed',
-		'max_token_count' => 'int',
+		// 'max_token_count' => 'int',
 		'is_enable_tfa' => 'bool',
 		'is_open_for_business' => 'bool',
-		'balance' => 'float',
-		'deposit' => 'float',
-		'prepayment' => 'float',
-		'agent_id' => 'int',
+		// 'balance' => 'float',
+		// 'deposit' => 'float',
+		// 'prepayment' => 'float',
+		// 'agent_id' => 'int',
 	];
 
     protected $hidden = [

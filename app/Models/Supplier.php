@@ -51,15 +51,15 @@ class Supplier extends Authenticatable implements HasMedia
 	use Notifiable, SoftDeletes, HasSanctumPersonalAccessToken, Filterable, HasHashID, NodeTrait, DateSerializableTrait, InteractsWithMedia;
 
 	protected $casts = [
-		'_lft' => 'int',
-		'_rgt' => 'int',
-		'parent_id' => 'int',
+		// '_lft' => 'int',
+		// '_rgt' => 'int',
+		// 'parent_id' => 'int',
         'password' => 'hashed',
-		'max_token_count' => 'int',
+		// 'max_token_count' => 'int',
 		'is_enable_tfa' => 'bool',
 		'is_open_for_business' => 'bool',
-		'balance' => 'float',
-		'deposit' => 'float',
+		// 'balance' => 'float',
+		// 'deposit' => 'float',
 	];
 
 	protected $hidden = [
