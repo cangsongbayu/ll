@@ -37,9 +37,11 @@ class BaseRequest extends FormRequest
             $merchantRate = $this->route('merchant_rate');
             $merchantId = is_null($merchantRate) ? $this->input('merchant_id') : $merchantRate->merchant_id;
 
+
+            
             if ($merchantId) {
                 $merchant = Merchant::find($merchantId);
-                if (!$merchant->agent()->exists()) {
+                if (!is_null($merchant) && !$merchant->agent()->exists()) {
                     if ($this->has('platform_rate') && $this->has('rate')) {
                         if (bccomp($this->input('platform_rate'), $this->input('rate'), 6) !== 0) {
                             // 如果商户没有代理，则不能设置回扣
