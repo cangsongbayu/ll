@@ -29,6 +29,7 @@ abstract class FormRequest extends IlluminateFormRequest
      */
     protected function prepareForValidation(): void
     {
+        // dd($this->all());
         foreach ($this->all() as $key => $value) {
             if ($value === null) {
                 continue;
@@ -54,7 +55,11 @@ abstract class FormRequest extends IlluminateFormRequest
                 } catch (DecryptException $e) {
                     throw new InvalidRequestException();
                 }
+            }else if ($key === 'exchange_rate'){
+                $value = number_format($value, 6, '.', '');
+                $this->merge([$key => $value]);
             }
+
         }
     }
 
